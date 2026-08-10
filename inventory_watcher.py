@@ -271,20 +271,13 @@ def generate_data():
 
 
 def embed_data_into_html(data):
-    """Embed a lightweight version of data into HTML (no daily_customers to keep size small)"""
+    """Embed full data into HTML"""
     if not os.path.exists(HTML_FILE):
         return False
     try:
-        # Create lightweight copy without daily_customers
-        light = json.loads(json.dumps(data))
-        if 'invoices' in light and 'items' in light['invoices']:
-            for item in light['invoices']['items']:
-                item.pop('daily_customers', None)
-
         with open(HTML_FILE, 'r', encoding='utf-8') as f:
             html = f.read()
-
-        json_str = json.dumps(light, ensure_ascii=False)
+        json_str = json.dumps(data, ensure_ascii=False)
         marker_start = '/*__EMBEDDED_DATA__*/'
         marker_end = '/*__END_EMBEDDED_DATA__*/'
         start_idx = html.find(marker_start)
