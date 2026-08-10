@@ -2,13 +2,15 @@
 # -*- coding: utf-8 -*-
 """
 inventory_watcher.py — مراقب مخزون النور
-يقرأ ملف "تقارير  ارصدة المخازن.xlsx" كل دقيقة ويحدث ملف JSON + HTML
+يقرأ ملف "تقارير  ارصدة المخازن.xlsx" كل دقيقة
+يحدّث HTML + JSON + يرفع على GitHub تلقائياً
 """
 
 import os
 import sys
 import json
 import time
+import subprocess
 import traceback
 from datetime import datetime
 
@@ -17,12 +19,12 @@ sys.stderr.reconfigure(encoding='utf-8')
 
 INVENTORY_DIR = r'D:\Mostafa Ibrahim\جرد يومي'
 INVENTORY_FILE = os.path.join(INVENTORY_DIR, 'تقارير  ارصدة المخازن.xlsx')
-OUTPUT_DIR = r'C:\Users\GoldenTech\.openclaw-autoclaw\workspace\.cluster\DELIVERY'
-OUTPUT_FILE = os.path.join(OUTPUT_DIR, 'inventory_data.json')
-HTML_FILE = os.path.join(OUTPUT_DIR, 'index.html')
-LOG_FILE = os.path.join(OUTPUT_DIR, 'watcher.log')
+REPO_DIR = r'C:\Users\GoldenTech\inventory-nour'
+HTML_FILE = os.path.join(REPO_DIR, 'index.html')
+JSON_FILE = os.path.join(REPO_DIR, 'inventory_data.json')
+LOG_FILE = os.path.join(REPO_DIR, 'watcher.log')
 
-os.makedirs(OUTPUT_DIR, exist_ok=True)
+os.makedirs(REPO_DIR, exist_ok=True)
 
 import warnings
 warnings.filterwarnings('ignore')
@@ -101,7 +103,7 @@ def read_inventory():
         return [], ''
 
 
-def generate_json():
+def generate_data():
     log('Reading inventory data...')
     items, print_date = read_inventory()
 
@@ -109,7 +111,6 @@ def generate_json():
     total_balance = sum(i['balance'] for i in items)
     low_stock = sum(1 for i in items if 0 < i['balance'] < 50)
     out_of_stock = sum(1 for i in items if i['balance'] <= 0)
-    detained_total = sum(i['detained'] for i in items)
 
     groups = {}
     for item in items:
@@ -129,27 +130,17 @@ def generate_json():
             'total_balance': round(total_balance, 3),
             'low_stock': low_stock,
             'out_of_stock': out_of_stock,
-            'detained_total': round(detained_total, 3),
             'groups': groups,
         }
     }
-
-    # Write JSON
-    with open(OUTPUT_FILE, 'w', encoding='utf-8') as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
-
-    # Also embed data into HTML
-    embed_data_into_html(data)
-
-    log(f'JSON + HTML updated. Items: {total_items}, Balance: {total_balance}')
     return data
 
 
 def embed_data_into_html(data):
-    """Embed JSON data directly into the HTML file so it works with file:// protocol"""
+    """Embed JSON data into the HTML file"""
     if not os.path.exists(HTML_FILE):
         log(f'HTML file not found: {HTML_FILE}')
-        return
+        return False
 
     try:
         with open(HTML_FILE, 'r', encoding='utf-8') as f:
@@ -157,7 +148,6 @@ def embed_data_into_html(data):
 
         json_str = json.dumps(data, ensure_ascii=False)
 
-        # Replace the EMBEDDED_DATA marker
         marker_start = '/*__EMBEDDED_DATA__*/'
         marker_end = '/*__END_EMBEDDED_DATA__*/'
 
@@ -170,16 +160,67 @@ def embed_data_into_html(data):
 
             with open(HTML_FILE, 'w', encoding='utf-8') as f:
                 f.write(html)
-            log('Data embedded into HTML')
+            return True
         else:
             log('WARNING: Embedded data markers not found in HTML')
+            return False
     except Exception as e:
         log(f'ERROR embedding HTML: {e}')
+        return False
+
+
+def git_push():
+    """Push changes to GitHub"""
+    try:
+        os.chdir(REPO_DIR)
+
+        # Add all changes
+        result = subprocess.run(['git', 'add', '-A'], capture_output=True, text=True, encoding='utf-8')
+        if result.returncode != 0:
+            log(f'git add failed: {result.stderr}')
+            return False
+
+        # Check if there are changes to commit
+        result = subprocess.run(['git', 'diff', '--cached', '--quiet'], capture_output=True, text=True)
+        if result.returncode == 0:
+            log('No changes to commit')
+            return True
+
+        # Commit
+        timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        result = subprocess.run(['git', 'commit', '-m', f'Auto-update inventory {timestamp}'], capture_output=True, text=True, encoding='utf-8')
+        if result.returncode != 0:
+            log(f'git commit failed: {result.stderr}')
+            return False
+
+        # Push
+        result = subprocess.run(['git', 'push'], capture_output=True, text=True, encoding='utf-8')
+        if result.returncode != 0:
+            log(f'git push failed: {result.stderr}')
+            return False
+
+        log('Pushed to GitHub successfully')
+        return True
+    except Exception as e:
+        log(f'ERROR git push: {e}')
+        return False
 
 
 def run_once():
     try:
-        generate_json()
+        data = generate_data()
+
+        # Write JSON
+        with open(JSON_FILE, 'w', encoding='utf-8') as f:
+            json.dump(data, f, ensure_ascii=False, indent=2)
+
+        # Embed into HTML
+        embed_data_into_html(data)
+
+        # Push to GitHub
+        git_push()
+
+        log(f'Update complete. Items: {data["stats"]["total_items"]}, Balance: {data["stats"]["total_balance"]}')
         return True
     except Exception as e:
         log(f'FATAL: {e}')
@@ -190,8 +231,7 @@ def run_once():
 def run_loop(interval_seconds=60):
     log(f'=== Inventory Watcher Started ===')
     log(f'Source: {INVENTORY_FILE}')
-    log(f'Output: {OUTPUT_FILE}')
-    log(f'HTML: {HTML_FILE}')
+    log(f'Repo: {REPO_DIR}')
     log(f'Interval: {interval_seconds}s')
 
     while True:
