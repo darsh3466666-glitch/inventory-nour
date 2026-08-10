@@ -26,6 +26,9 @@ HTML_FILE = os.path.join(REPO_DIR, 'index.html')
 JSON_FILE = os.path.join(REPO_DIR, 'inventory_data.json')
 LOG_FILE = os.path.join(REPO_DIR, 'watcher.log')
 
+# الأصناف المستبعدة (تصنيع / عمال / نقل)
+EXCLUDED_KEYWORDS = ['تصنيع', 'عمال', 'نقل', 'مصاريف نقل', 'أجور عمال', 'أجور تصنيع', 'مصنعية', 'أجور نقل']
+
 os.makedirs(REPO_DIR, exist_ok=True)
 
 import warnings
@@ -58,6 +61,15 @@ def safe_float(val):
         return 0
 
 
+def is_excluded(name, group=''):
+    """Check if item should be excluded based on name or group"""
+    text = f"{name} {group}".strip()
+    for kw in EXCLUDED_KEYWORDS:
+        if kw in text:
+            return True
+    return False
+
+
 def read_inventory():
     if not os.path.exists(INVENTORY_FILE):
         return [], ''
@@ -87,6 +99,7 @@ def read_inventory():
                 'supplier': str(row[8] or '').strip(),
             })
         wb.close()
+        items = [i for i in items if not is_excluded(i['name'], i['group'])]
         items.sort(key=lambda x: (x['group'], x['name']))
         return items, print_date
     except Exception as e:
@@ -118,6 +131,11 @@ def read_invoices():
 
             code = str(row[0] or '').strip()
             name = str(row[1] or '').strip()
+            
+            # Skip excluded items
+            if is_excluded(name):
+                continue
+                
             unit = str(row[2] or '').strip()
             qty_in = safe_float(row[3])
             qty_out = safe_float(row[4])
