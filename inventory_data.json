@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-10T13:58:40.810038",
+  "generated_at": "2026-08-10T14:09:05.198346",
   "print_date": "2026-08-10 11:14:40",
   "store_name": "النور لتجارة الأعلاف",
   "inventory": [
@@ -394,7 +394,6 @@
     "total_balance": 115057.255,
     "low_stock": 10,
     "out_of_stock": 0,
-    "detained_total": 0.0,
     "groups": {
       "مجموعة أعلاف النور": {
         "count": 2,
