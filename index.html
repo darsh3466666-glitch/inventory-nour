@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title>النور — مخزون لايف</title>
+<style>
+  :root {
+    --bg: #f0f4ff;
+    --bg-card: #ffffff;
+    --bg-soft: #e8eef9;
+    --bg-hover: #dde6f5;
+    --ink: #1a2151;
+    --ink-2: #4a5578;
+    --ink-3: #8895b3;
+    --line: #d8e0f0;
+    --line-soft: #edf1fa;
+    --accent: #5b6ef5;
+    --accent-light: #7d8ffa;
+    --accent-soft: #eaeefc;
+    --accent-ink: #3a47c7;
+    --success: #22c55e;
+    --success-bg: #d4f7e0;
+    --warning: #f59e0b;
+    --warning-bg: #fef0d0;
+    --danger: #ef4444;
+    --danger-bg: #fde0e0;
+    --info: #0ea5e9;
+    --info-bg: #d6f0fb;
+    --radius-sm: 10px;
+    --radius-md: 14px;
+    --radius-lg: 20px;
+    --shadow-xs: 0 1px 3px rgba(30,40,90,0.05);
+    --shadow-sm: 0 3px 12px rgba(30,40,90,0.07);
+    --shadow-md: 0 6px 24px rgba(30,40,90,0.09);
+    --shadow-lg: 0 12px 40px rgba(30,40,90,0.12);
+    --transition: 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Cairo", "Segoe UI", "Tahoma", -apple-system, sans-serif;
+    font-size: 17px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  .app { max-width: 1400px; margin: 0 auto; padding: 0 14px 80px; }
+
+  .header {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(240,244,255,0.9);
+    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    padding: 14px; border-bottom: 1.5px solid var(--line);
+    margin: 0 -14px 20px;
+  }
+  .header-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+  .header-title { display: flex; align-items: center; gap: 10px; }
+  .header-logo {
+    width: 44px; height: 44px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-light));
+    border-radius: var(--radius-sm);
+    display: grid; place-items: center; color: #fff;
+    box-shadow: var(--shadow-sm); flex-shrink: 0;
+  }
+  .header-logo svg { width: 24px; height: 24px; }
+  .header-text h1 { font-size: 19px; font-weight: 800; letter-spacing: -0.02em; color: var(--ink); line-height: 1.2; }
+  .header-text p { font-size: 12px; color: var(--ink-3); font-weight: 600; }
+
+  .live-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 7px 14px; border-radius: 999px;
+    font-size: 13px; font-weight: 700; transition: var(--transition); flex-shrink: 0;
+  }
+  .live-pill.live { background: var(--success-bg); color: #15803d; }
+  .live-pill.syncing { background: var(--info-bg); color: #075985; }
+  .live-pill.stale { background: var(--warning-bg); color: #92400e; }
+  .live-dot { width: 9px; height: 9px; border-radius: 50%; animation: pulse 2s infinite; }
+  .live-pill.live .live-dot { background: var(--success); }
+  .live-pill.syncing .live-dot { background: var(--info); }
+  .live-pill.stale .live-dot { background: var(--warning); animation: none; }
+  @keyframes pulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(1.4); } }
+
+  .update-bar {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 10px; padding: 12px 16px; background: var(--bg-card);
+    border-radius: var(--radius-md); margin-bottom: 18px;
+    box-shadow: var(--shadow-xs); flex-wrap: wrap;
+  }
+  .update-info { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--ink-2); }
+  .update-info strong { color: var(--ink); font-weight: 800; }
+  .btn-refresh {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 9px 18px; border-radius: var(--radius-sm);
+    background: var(--accent); color: #fff; border: none;
+    font-size: 15px; font-weight: 700; cursor: pointer;
+    transition: var(--transition); font-family: inherit;
+  }
+  .btn-refresh:hover { background: var(--accent-ink); }
+  .btn-refresh:active { transform: scale(0.96); }
+  .btn-refresh svg { width: 18px; height: 18px; }
+  .spinning { animation: spin 0.8s linear infinite; }
+  @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+  .kpi-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 22px; }
+  .kpi-card {
+    background: var(--bg-card); border-radius: var(--radius-lg);
+    padding: 18px 16px; box-shadow: var(--shadow-sm);
+    position: relative; overflow: hidden; border: 1.5px solid var(--line-soft);
+  }
+  .kpi-card::after {
+    content: ''; position: absolute; top: -20px; inset-inline-end: -20px;
+    width: 80px; height: 80px; border-radius: 50%; opacity: 0.06;
+  }
+  .kpi-card.accent::after { background: var(--accent); }
+  .kpi-card.success::after { background: var(--success); }
+  .kpi-card.warning::after { background: var(--warning); }
+  .kpi-card.info::after { background: var(--info); }
+  .kpi-icon {
+    width: 44px; height: 44px; border-radius: var(--radius-sm);
+    display: grid; place-items: center; margin-bottom: 10px;
+  }
+  .kpi-card.accent .kpi-icon { background: var(--accent-soft); color: var(--accent-ink); }
+  .kpi-card.success .kpi-icon { background: var(--success-bg); color: #15803d; }
+  .kpi-card.warning .kpi-icon { background: var(--warning-bg); color: #92400e; }
+  .kpi-card.info .kpi-icon { background: var(--info-bg); color: #075985; }
+  .kpi-icon svg { width: 22px; height: 22px; }
+  .kpi-label { font-size: 13px; color: var(--ink-2); font-weight: 700; margin-bottom: 4px; }
+  .kpi-value {
+    font-size: 30px; font-weight: 900; color: var(--ink);
+    letter-spacing: -0.03em; font-variant-numeric: tabular-nums; line-height: 1.1;
+  }
+  .kpi-sub { font-size: 12px; font-weight: 600; margin-top: 6px; color: var(--ink-3); }
+
+  .section-title {
+    font-size: 19px; font-weight: 900; color: var(--ink);
+    margin-bottom: 14px; display: flex; align-items: center; gap: 10px;
+    letter-spacing: -0.01em;
+  }
+  .section-title .line { flex: 1; height: 2px; background: linear-gradient(90deg, var(--line), transparent); border-radius: 1px; }
+
+  .search-box { position: relative; margin-bottom: 16px; }
+  .search-input {
+    width: 100%; padding: 14px 16px 14px 48px;
+    border: 2px solid var(--line); border-radius: var(--radius-md);
+    font-size: 17px; font-family: inherit; background: var(--bg-card);
+    color: var(--ink); transition: var(--transition); outline: none; font-weight: 600;
+  }
+  .search-input:focus { border-color: var(--accent-light); box-shadow: 0 0 0 4px var(--accent-soft); }
+  .search-input::placeholder { color: var(--ink-3); font-weight: 500; }
+  .search-icon {
+    position: absolute; inset-inline-start: 16px; top: 50%;
+    transform: translateY(-50%); color: var(--ink-3);
+    width: 22px; height: 22px; pointer-events: none;
+  }
+
+  .filters { display: flex; gap: 8px; margin-bottom: 16px; overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 4px; scrollbar-width: none; }
+  .filters::-webkit-scrollbar { display: none; }
+  .chip {
+    flex-shrink: 0; padding: 8px 16px; border-radius: 999px;
+    font-size: 14px; font-weight: 700; background: var(--bg-card);
+    color: var(--ink-2); border: 2px solid var(--line);
+    cursor: pointer; transition: var(--transition); font-family: inherit; white-space: nowrap;
+  }
+  .chip:hover { background: var(--bg-soft); }
+  .chip.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+  .inv-list { display: flex; flex-direction: column; gap: 10px; }
+  .group-header {
+    font-size: 15px; font-weight: 900; color: var(--accent-ink);
+    margin: 14px 0 6px; padding: 8px 14px; background: var(--accent-soft);
+    border-radius: var(--radius-sm); display: flex; align-items: center; gap: 8px;
+  }
+  .group-count { font-size: 12px; font-weight: 800; color: var(--accent); background: #fff; padding: 3px 10px; border-radius: 999px; }
+
+  .inv-item {
+    background: var(--bg-card); border-radius: var(--radius-lg);
+    padding: 16px; box-shadow: var(--shadow-xs); border: 1.5px solid var(--line-soft);
+    transition: var(--transition); display: flex; flex-direction: column; gap: 12px;
+  }
+  .inv-item:hover { box-shadow: var(--shadow-md); border-color: var(--accent-light); }
+  .inv-item-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
+  .inv-name { font-size: 17px; font-weight: 800; color: var(--ink); line-height: 1.3; letter-spacing: -0.01em; }
+  .inv-code { font-size: 13px; color: var(--ink-3); font-weight: 600; margin-top: 3px; }
+  .inv-badge { flex-shrink: 0; padding: 5px 12px; border-radius: 999px; font-size: 13px; font-weight: 800; }
+  .inv-badge.ok { background: var(--success-bg); color: #15803d; }
+  .inv-badge.low { background: var(--warning-bg); color: #92400e; }
+  .inv-badge.out { background: var(--danger-bg); color: #b91c1c; }
+  .inv-balance-row { display: flex; align-items: baseline; gap: 6px; padding: 8px 0; border-top: 1px dashed var(--line); }
+  .inv-balance-label { font-size: 14px; color: var(--ink-2); font-weight: 700; }
+  .inv-balance-value { font-size: 24px; font-weight: 900; color: var(--ink); font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+  .inv-balance-unit { font-size: 14px; font-weight: 700; color: var(--ink-3); }
+  .inv-meta { display: flex; gap: 12px; flex-wrap: wrap; font-size: 13px; color: var(--ink-3); font-weight: 600; }
+
+  .toast {
+    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+    background: var(--ink); color: #fff; padding: 12px 24px;
+    border-radius: var(--radius-md); font-size: 15px; font-weight: 700;
+    box-shadow: var(--shadow-lg); z-index: 1000; opacity: 0; pointer-events: none;
+    transition: opacity 0.3s, transform 0.3s; max-width: 90vw; text-align: center;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(-6px); }
+
+  .skeleton { background: linear-gradient(90deg, var(--bg-soft) 25%, var(--bg-hover) 50%, var(--bg-soft) 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: var(--radius-md); }
+  @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+  .skeleton-item { height: 100px; margin-bottom: 10px; }
+
+  .empty-state { text-align: center; padding: 48px 20px; color: var(--ink-3); }
+  .empty-state p { font-size: 17px; font-weight: 700; }
+
+  @media (min-width: 768px) {
+    .app { padding: 0 24px 80px; }
+    .header { margin: 0 -24px 20px; padding: 16px 24px; }
+    .kpi-grid { grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .kpi-value { font-size: 36px; }
+    .header-text h1 { font-size: 22px; }
+    .header-logo { width: 50px; height: 50px; }
+    .header-logo svg { width: 28px; height: 28px; }
+    .inv-item { flex-direction: row; align-items: center; }
+    .inv-item-top { flex: 1; }
+    .inv-balance-row { flex: 0 0 200px; border-top: none; border-inline-start: 1px dashed var(--line); padding-inline-start: 16px; }
+    .inv-meta { flex: 0 0 150px; justify-content: flex-end; }
+  }
+  @media (min-width: 1024px) {
+    .inv-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .inv-item { flex-direction: column; }
+    .inv-item-top { flex: none; }
+    .inv-balance-row { flex: none; border-inline-start: none; border-top: 1px dashed var(--line); padding-inline-start: 0; }
+    .inv-meta { flex: none; justify-content: flex-start; }
+  }
+
+  .footer { text-align: center; padding: 24px 16px; color: var(--ink-3); font-size: 13px; font-weight: 600; }
+  .footer strong { color: var(--ink-2); }
+</style>
+</head>
+<body>
+
+<div class="app">
+  <header class="header">
+    <div class="header-row">
+      <div class="header-title">
+        <div class="header-logo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+            <polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+        </div>
+        <div class="header-text">
+          <h1>النور للمخزون</h1>
+          <p id="printDate">—</p>
+        </div>
+      </div>
+      <div id="livePill" class="live-pill live">
+        <span class="live-dot"></span>
+        <span id="liveText">مباشر</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="update-bar">
+    <div class="update-info">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      آخر تحديث: <strong id="lastUpdate">—</strong>
+    </div>
+    <button class="btn-refresh" id="refreshBtn">
+      <svg id="refreshIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+      تحديث
+    </button>
+  </div>
+
+  <div id="content">
+    <div class="skeleton skeleton-item"></div>
+    <div class="skeleton skeleton-item"></div>
+    <div class="skeleton skeleton-item"></div>
+  </div>
+
+  <div class="footer">
+    <strong>النور لتجارة الأعلاف</strong> — لوحة المخزون المباشرة<br>
+    مصدر البيانات: تقارير أرصدة المخازن — تحديث تلقائي كل دقيقة
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<!-- Embedded data -->
+<script>
+/*__EMBEDDED_DATA__*/
+var EMBEDDED_DATA = {"generated_at": "2026-08-10T13:58:40.810038", "print_date": "2026-08-10 11:14:40", "store_name": "النور لتجارة الأعلاف", "inventory": [{"store": "النور لتجارة الأعلاف", "code": "50046", "name": "علف النور حلاب", "unit": "كيلو", "balance": 1550.0, "detailed": "1 طن / 550 كيلو", "detained": 0.0, "group": "مجموعة أعلاف النور", "supplier": ""}, {"store": "النور لتجارة الأعلاف", "code": "50010", "name": "علف تسمين النور", "unit": "كيلو", "balance": 1664.0, "detailed": "1 طن / 664 كيلو", "detained": 0.0, "group": "مجموعة أعلاف النور", "supplier": ""}, {"store": "النور لتجارة الأعلاف", "code": "50033", "name": "اكسيد ماغنسيوم", "unit": "كيلو", "balance": 2540.25, "detailed": "2540 كيلو", "detained": 0.0, "group": "مجموعة إضافات الأعلاف", "supplier": ""}, {"store": "النور لتجارة الأعلاف", "code": "4620686", "name": "املاح معدنية اغنام", "unit": "كيلو", "balance": 25.0, "detailed": "25 كيلو", "detained": 0.0, "group": "مجموعة إضافات الأعلاف", "supplier": ""}, {"store": "النور لتجارة الأعلاف", "code": "50039", "name": "بريمكس تسمين", "unit": "كيلو", "balance": 2209.375, "detailed": "2209 كيلو", "detained": 0.0, "group": "مجموعة إضافات الأعلاف", "supplier": ""}, {"store": "النور لتجارة الأعلاف", "code": "50038", "name": "بيكربونات صوديوم", "unit": "كيلو", "balance": 2598.405, "detailed": "2598 كيلو", "detained": 0.0, "group": "مجموعة إضافات الأعلاف", "supplier": ""}, {"store": "النور لتجارة الأعلاف", "code": "50002", "name": "حجر جيرى", "unit": "كيلو", "balance": 13606.475, "detailed": "13606 كيلو", "detained": 0.0, "group": "مجموعة إضافات الأعلاف", "supplier": ""}, {"store": "النور لتجارة الأعلاف", "code": "50024", "name": "خميره", "unit": "كيلو", "balance": 610.9, "detailed": "610 كيلو", "detained": 0.0, "group": "مجموعة إضافات الأعلاف", "supplier": ""}, {"store": "النور لتجارة الأعلاف", "code": "50029", "name": "رافع مناعة", "unit": "كيلو", "balance": 20.25, "detailed": "20 كيلو", "detained": 0.0, "group": "مجموعة إضافات الأعلاف", "supplier": ""}, {"store": "النور لتجارة الأعلاف", "code": "50030", "name": "سلفات ماغنسيوم", "unit": "كيلو", "balance": 316.5, "detailed": "316 كيلو", "detained": 0.0, "group": "مجموعة إضافات الأعلاف", "supplier": ""}, {"store": "النور لتجارة الأعلاف", "code": "3900354", "name": "فيتامينات اغنام", "unit": "كيلو", "balance": 4.25, "detailed": "4 كيلو", "detained": 0.0, "group": "مجموعة إضافات الأعلاف", "supplier": ""}, {"store": "النور لتجارة الأعلاف", "code": "50040", "name": "كروميوم مخلبي", "unit": "كيلو", "balance": 25.0, "detailed": "25 كيلو", "detained": 0.0, "group": "مجموعة إضافات الأعلاف", "supplier": ""}, {"store": "النور لتجارة الأعلاف", "code": "50037", "name": "كلوريد امونيوم", "unit": "كيلو", "balance": 95.0, "detailed": "95 كيلو", "detained": 0.0, "group": "مجموعة إضافات الأعلاف", "supplier": ""}, {"store": "النور لتجارة الأعلاف", "code": "50025", "name": "مضاد سموم  كيميائي", "unit": "كيلو", "balance": 1904.635, "detailed": "1904 كيلو", "detained": 0.0, "group": "مجموعة إضافات الأعلاف", "supplier": ""}, {"store": "النور لتجارة الأعلاف", "code": "50026", "name": "مضاد سموم بيولوجي", "unit": "كيلو", "balance": 53.38, "detailed": "53 كيلو", "detained": 0.0, "group": "مجموعة إضافات الأعلاف", "supplier": ""}, {"store": "النور لتجارة الأعلاف", "code": "50001", "name": "ملح طعام", "unit": "كيلو", "balance": 3804.345, "detailed": "3804 كيلو", "detained": 0.0, "group": "مجموعة إضافات الأعلاف", "supplier": ""}, {"store": "النور لتجارة الأعلاف", "code": "50041", "name": "منظم حموضه - بفر", "unit": "كيلو", "balance": 0.95, "detailed": "0 كيلو", "detained": 0.0, "group": "مجموعة إضافات الأعلاف", "supplier": ""}, {"store": "النور لتجارة الأعلاف", "code": "1115094", "name": "بذرة قطن", "unit": "كيلو", "balance": 9280.0, "detailed": "9280 كيلو", "detained": 0.0, "group": "مجموعة خامات الأعلاف", "supplier": ""}, {"store": "النور لتجارة الأعلاف", "code": "50013", "name": "بذرة كتان", "unit": "كيلو", "balance": 2262.0, "detailed": "2262 كيلو", "detained": 0.0, "group": "مجموعة خامات الأعلاف", "supplier": ""}, {"store": "النور لتجارة الأعلاف", "code": "1124907", "name": "بريمكس تسمين اغنام", "unit": "كيلو", "balance": 0.75, "detailed": "0 كيلو", "detained": 0.0, "group": "مجموعة خامات الأعلاف", "supplier": ""}, {"store": "النور لتجارة الأعلاف", "code": "50009", "name": "جلوتوفيد", "unit": "كيلو", "balance": 0.75, "detailed": "0 كيلو", "detained": 0.0, "group": "مجموعة خامات الأعلاف", "supplier": ""}, {"store": "النور لتجارة الأعلاف", "code": "50020", "name": "دي دي جي", "unit": "كيلو", "balance": 6653.5, "detailed": "6653 كيلو", "detained": 0.0, "group": "مجموعة خامات الأعلاف", "supplier": ""}, {"store": "النور لتجارة الأعلاف", "code": "50005", "name": "ذره صفراء", "unit": "كيلو", "balance": 8465.75, "detailed": "8465 كيلو", "detained": 0.0, "group": "مجموعة خامات الأعلاف", "supplier": ""}, {"store": "النور لتجارة الأعلاف", "code": "50011", "name": "رجيعه (رجيع كون)", "unit": "كيلو", "balance": 7708.0, "detailed": "7708 كيلو", "detained": 0.0, "group": "مجموعة خامات الأعلاف", "supplier": ""}, {"store": "النور لتجارة الأعلاف", "code": "50018", "name": "صويا فولفات", "unit": "كيلو", "balance": 933.5, "detailed": "933 كيلو", "detained": 0.0, "group": "مجموعة خامات الأعلاف", "supplier": ""}, {"store": "النور لتجارة الأعلاف", "code": "50015", "name": "فول صويا44%", "unit": "كيلو", "balance": 0.75, "detailed": "0 كيلو", "detained": 0.0, "group": "مجموعة خامات الأعلاف", "supplier": ""}, {"store": "النور لتجارة الأعلاف", "code": "50016", "name": "فول صويا46%", "unit": "كيلو", "balance": 15322.8, "detailed": "15322 كيلو", "detained": 0.0, "group": "مجموعة خامات الأعلاف", "supplier": ""}, {"store": "النور لتجارة الأعلاف", "code": "50019", "name": "فول مجروش", "unit": "كيلو", "balance": 0.5, "detailed": "0 كيلو", "detained": 0.0, "group": "مجموعة خامات الأعلاف", "supplier": ""}, {"store": "النور لتجارة الأعلاف", "code": "50012", "name": "كسب", "unit": "كيلو", "balance": 0.75, "detailed": "0 كيلو", "detained": 0.0, "group": "مجموعة خامات الأعلاف", "supplier": ""}, {"store": "النور لتجارة الأعلاف", "code": "6950740", "name": "كسب النور", "unit": "كيلو", "balance": 4226.0, "detailed": "4 طن / 226 كيلو", "detained": 0.0, "group": "مجموعة خامات الأعلاف", "supplier": ""}, {"store": "النور لتجارة الأعلاف", "code": "50008", "name": "نخاله", "unit": "كيلو", "balance": 11443.29, "detailed": "11443 كيلو", "detained": 0.0, "group": "مجموعة خامات الأعلاف", "supplier": ""}, {"store": "النور لتجارة الأعلاف", "code": "1941822", "name": "شكاير شفاف احمر 60*115 بذره", "unit": "قطعه", "balance": 3000.2, "detailed": "3000 قطعه", "detained": 0.0, "group": "مجموعة مستلزمات الإنتاج", "supplier": ""}, {"store": "النور لتجارة الأعلاف", "code": "2209192", "name": "شكاير منسوجة لون أصفر مقاس  110*60", "unit": "قطعه", "balance": 3200.0, "detailed": "3200 قطعه", "detained": 0.0, "group": "مجموعة مستلزمات الإنتاج", "supplier": ""}, {"store": "النور لتجارة الأعلاف", "code": "6377177", "name": "شكاير منسوجة مقاس  70*115", "unit": "قطعه", "balance": 6280.0, "detailed": "6280 قطعه", "detained": 0.0, "group": "مجموعة مستلزمات الإنتاج", "supplier": ""}, {"store": "النور لتجارة الأعلاف", "code": "1801610", "name": "شكاير منسوجه  لون أبيض  بيور مقاس 110*60 (علف النور )", "unit": "قطعه", "balance": 5250.0, "detailed": "5250 قطعه", "detained": 0.0, "group": "مجموعة مستلزمات الإنتاج", "supplier": ""}], "stats": {"total_items": 35, "total_balance": 115057.255, "low_stock": 10, "out_of_stock": 0, "detained_total": 0.0, "groups": {"مجموعة أعلاف النور": {"count": 2, "balance": 3214.0}, "مجموعة إضافات الأعلاف": {"count": 15, "balance": 27814.715000000004}, "مجموعة خامات الأعلاف": {"count": 14, "balance": 66298.34}, "مجموعة مستلزمات الإنتاج": {"count": 4, "balance": 17730.2}}}};
+/*__END_EMBEDDED_DATA__*/
+</script>
+
+<script>
+let lastData = null;
+let activeFilter = 'all';
+let autoRefreshInterval = null;
+
+function formatNumber(n) {
+  if (n === null || n === undefined || n === '') return '—';
+  const num = parseFloat(n);
+  if (isNaN(num)) return '—';
+  return num.toLocaleString('ar-EG', { maximumFractionDigits: 3 });
+}
+
+function getStockBadge(balance) {
+  const n = parseFloat(balance);
+  if (isNaN(n) || n <= 0) return { cls: 'out', text: 'نفد' };
+  if (n < 50) return { cls: 'low', text: 'منخفض' };
+  return { cls: 'ok', text: 'متوفر' };
+}
+
+function renderKPIs(data) {
+  const s = data.stats || {};
+  const items = data.inventory || [];
+  return `
+    <div class="kpi-grid">
+      <div class="kpi-card accent">
+        <div class="kpi-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+        </div>
+        <div class="kpi-label">إجمالي الأصناف</div>
+        <div class="kpi-value">${s.total_items || items.length}</div>
+        <div class="kpi-sub">صنف في المخزن</div>
+      </div>
+      <div class="kpi-card success">
+        <div class="kpi-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+        </div>
+        <div class="kpi-label">إجمالي الأرصدة</div>
+        <div class="kpi-value">${formatNumber(s.total_balance)}</div>
+        <div class="kpi-sub">كيلو جرام</div>
+      </div>
+      <div class="kpi-card warning">
+        <div class="kpi-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        <div class="kpi-label">أصناف منخفضة</div>
+        <div class="kpi-value">${s.low_stock || 0}</div>
+        <div class="kpi-sub">تحت 50 كيلو</div>
+      </div>
+      <div class="kpi-card info">
+        <div class="kpi-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+        </div>
+        <div class="kpi-label">أصناف نافدة</div>
+        <div class="kpi-value">${s.out_of_stock || 0}</div>
+        <div class="kpi-sub">تحتاج إعادة طلب</div>
+      </div>
+    </div>
+  `;
+}
+
+function renderInventory(items, groups) {
+  if (!items || items.length === 0) {
+    return '<div class="empty-state"><p>لا توجد أصناف</p></div>';
+  }
+
+  let chipsHtml = '<div class="filters">';
+  chipsHtml += `<button class="chip ${activeFilter === 'all' ? 'active' : ''}" data-filter="all">الكل (${items.length})</button>`;
+  if (groups) {
+    Object.keys(groups).sort().forEach(g => {
+      const count = groups[g].count;
+      chipsHtml += `<button class="chip ${activeFilter === g ? 'active' : ''}" data-filter="${g}">${g} (${count})</button>`;
+    });
+  }
+  chipsHtml += '</div>';
+
+  let html = chipsHtml + `
+    <div class="search-box">
+      <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" class="search-input" id="searchInput" placeholder="ابحث عن صنف..." />
+    </div>
+  `;
+
+  let filtered = items;
+  if (activeFilter !== 'all') {
+    filtered = items.filter(i => (i.group || '') === activeFilter);
+  }
+
+  const grouped = {};
+  filtered.forEach(item => {
+    const cat = item.group || 'غير مصنف';
+    if (!grouped[cat]) grouped[cat] = [];
+    grouped[cat].push(item);
+  });
+
+  html += '<div class="inv-list" id="invList">';
+  Object.keys(grouped).sort().forEach(cat => {
+    html += `<div class="group-header">${cat} <span class="group-count">${grouped[cat].length}</span></div>`;
+    grouped[cat].forEach(item => {
+      const badge = getStockBadge(item.balance);
+      html += `
+        <div class="inv-item" data-name="${(item.name || '').toLowerCase()}">
+          <div class="inv-item-top">
+            <div>
+              <div class="inv-name">${item.name || '—'}</div>
+              <div class="inv-code">كود: ${item.code || '—'} ${item.unit ? ' · ' + item.unit : ''}</div>
+            </div>
+            <span class="inv-badge ${badge.cls}">${badge.text}</span>
+          </div>
+          <div class="inv-balance-row">
+            <span class="inv-balance-label">الرصيد:</span>
+            <span class="inv-balance-value">${formatNumber(item.balance)}</span>
+            <span class="inv-balance-unit">${item.unit || ''}</span>
+          </div>
+          ${item.detailed || item.detained ? `
+            <div class="inv-meta">
+              ${item.detailed ? `<span>${item.detailed}</span>` : ''}
+              ${item.detained ? `<span>محتجز: ${formatNumber(item.detained)}</span>` : ''}
+            </div>` : ''}
+        </div>
+      `;
+    });
+  });
+  html += '</div>';
+  return html;
+}
+
+function setPillState(state, text) {
+  document.getElementById('livePill').className = 'live-pill ' + state;
+  document.getElementById('liveText').textContent = text;
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+function renderContent() {
+  const content = document.getElementById('content');
+  if (!lastData) {
+    content.innerHTML = '<div class="skeleton skeleton-item"></div><div class="skeleton skeleton-item"></div>';
+    return;
+  }
+  let html = renderKPIs(lastData);
+  html += '<div class="section-title">أرصدة المخزن <div class="line"></div></div>';
+  html += renderInventory(lastData.inventory || [], lastData.stats && lastData.stats.groups);
+  content.innerHTML = html;
+
+  const searchInput = document.getElementById('searchInput');
+  if (searchInput) {
+    searchInput.addEventListener('input', e => {
+      const q = e.target.value.toLowerCase();
+      document.querySelectorAll('#invList .inv-item').forEach(item => {
+        item.style.display = (item.dataset.name || '').includes(q) ? '' : 'none';
+      });
+    });
+  }
+  document.querySelectorAll('.chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      activeFilter = chip.dataset.filter;
+      renderContent();
+    });
+  });
+}
+
+function loadData() {
+  // Use embedded data (works with file:// protocol)
+  if (typeof EMBEDDED_DATA !== 'undefined' && EMBEDDED_DATA) {
+    return Promise.resolve(EMBEDDED_DATA);
+  }
+  // Fallback: try fetch
+  return fetch('inventory_data.json?t=' + Date.now())
+    .then(res => res.ok ? res.json() : null)
+    .catch(() => null);
+}
+
+async function refresh(silent) {
+  if (!silent) {
+    setPillState('syncing', 'جاري التحديث...');
+    document.getElementById('refreshIcon').classList.add('spinning');
+  }
+
+  const data = await loadData();
+
+  if (!data) {
+    setPillState('stale', 'تعذّر التحديث');
+    if (!silent) {
+      document.getElementById('refreshIcon').classList.remove('spinning');
+      showToast('تعذّر تحديث البيانات');
+    }
+    return;
+  }
+
+  lastData = data;
+  const now = new Date();
+  document.getElementById('lastUpdate').textContent =
+    now.toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+
+  if (data.print_date) {
+    document.getElementById('printDate').textContent = 'تاريخ التقرير: ' + data.print_date;
+  }
+
+  setPillState('live', 'مباشر');
+  if (!silent) {
+    document.getElementById('refreshIcon').classList.remove('spinning');
+    showToast('تم تحديث البيانات');
+  }
+  renderContent();
+}
+
+document.getElementById('refreshBtn').addEventListener('click', () => refresh(false));
+
+// On page load, use embedded data
+refresh(true).then(() => {
+  // Try to refresh from server every 60s (works if served via http)
+  setInterval(() => {
+    fetch('inventory_data.json?t=' + Date.now())
+      .then(res => res.ok ? res.json() : null)
+      .then(data => {
+        if (data) {
+          lastData = data;
+          const now = new Date();
+          document.getElementById('lastUpdate').textContent =
+            now.toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+          setPillState('live', 'مباشر');
+          renderContent();
+        }
+      })
+      .catch(() => {});
+  }, 60000);
+});
+</script>
+
+</body>
+</html>
