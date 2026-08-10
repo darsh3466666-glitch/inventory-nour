@@ -109,7 +109,7 @@ def read_invoices():
             'name': '', 'code': '', 'unit': '',
             'total_out': 0, 'total_in': 0, 'total_revenue': 0,
             'invoice_count': 0, 'prices': [], 'customers': defaultdict(float),
-            'daily_out': defaultdict(float), 'transactions': []
+            'daily_out': defaultdict(float), 'daily_customers': defaultdict(lambda: defaultdict(float)), 'transactions': []
         })
 
         for row in ws.iter_rows(min_row=4, values_only=True):
@@ -169,14 +169,8 @@ def read_invoices():
             if dt:
                 date_key = dt.strftime('%Y-%m-%d')
                 item['daily_out'][date_key] += qty_out
-                item['transactions'].append({
-                    'date': date_key,
-                    'qty_out': qty_out,
-                    'price': price,
-                    'total': total,
-                    'customer': customer,
-                    'invoice': invoice_num,
-                })
+                if customer:
+                    item['daily_customers'][date_key][customer] += qty_out
 
         wb.close()
 
@@ -205,6 +199,7 @@ def read_invoices():
                 'latest_price': round(latest_price, 3),
                 'top_customers': [{'name': c, 'qty': round(q, 3)} for c, q in top_customers],
                 'daily_out': dict(data['daily_out']),
+                'daily_customers': {d: dict(custs) for d, custs in data['daily_customers'].items()},
             })
 
         # Sort by total_out descending
