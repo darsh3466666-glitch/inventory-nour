@@ -315,14 +315,21 @@ def embed_data_into_html(data):
 def git_push():
     try:
         os.chdir(REPO_DIR)
-        subprocess.run(['git', 'add', '-A'], capture_output=True, text=True, encoding='utf-8')
-        result = subprocess.run(['git', 'diff', '--cached', '--quiet'], capture_output=True, text=True)
+        creation_flags = subprocess.CREATE_NO_WINDOW if sys.platform == 'win32' else 0
+        startupinfo = None
+        if sys.platform == 'win32':
+            startupinfo = subprocess.STARTUPINFO()
+            startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+            startupinfo.wShowWindow = subprocess.SW_HIDE
+
+        subprocess.run(['git', 'add', '-A'], capture_output=True, text=True, encoding='utf-8', creationflags=creation_flags, startupinfo=startupinfo)
+        result = subprocess.run(['git', 'diff', '--cached', '--quiet'], capture_output=True, text=True, creationflags=creation_flags, startupinfo=startupinfo)
         if result.returncode == 0:
             log('No changes to commit')
             return True
         timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        subprocess.run(['git', 'commit', '-m', f'Auto-update {timestamp}'], capture_output=True, text=True, encoding='utf-8')
-        result = subprocess.run(['git', 'push'], capture_output=True, text=True, encoding='utf-8')
+        subprocess.run(['git', 'commit', '-m', f'Auto-update {timestamp}'], capture_output=True, text=True, encoding='utf-8', creationflags=creation_flags, startupinfo=startupinfo)
+        result = subprocess.run(['git', 'push'], capture_output=True, text=True, encoding='utf-8', creationflags=creation_flags, startupinfo=startupinfo)
         if result.returncode != 0:
             log(f'git push: {result.stderr}')
             return False
