@@ -21,9 +21,14 @@ INVENTORY_DIR = r'D:\Mostafa Ibrahim\جرد يومي'
 INVENTORY_FILE = os.path.join(INVENTORY_DIR, 'تقارير  ارصدة المخازن.xlsx')
 INVOICES_DIR = r'D:\Mostafa Ibrahim\آخر فاتورة للعميل_files'
 INVOICES_FILE = os.path.join(INVOICES_DIR, 'اخر فاتورة لعميل.xlsx')
+RECONCILIATION_FILES = [
+    os.path.join(INVENTORY_DIR, 'تقرير حركة الاصناف تفصيلي .xlsx'),
+    os.path.join(INVENTORY_DIR, 'تقرير حركة الاصناف تفصيلي.xlsx')
+]
 REPO_DIR = r'C:\Users\GoldenTech\inventory-nour'
 HTML_FILE = os.path.join(REPO_DIR, 'index.html')
 JSON_FILE = os.path.join(REPO_DIR, 'inventory_data.json')
+CACHE_REC_FILE = os.path.join(REPO_DIR, 'reconciliations_cache.json')
 LOG_FILE = os.path.join(REPO_DIR, 'watcher.log')
 
 # الأصناف المستبعدة (تصنيع / عمال / نقل)
@@ -251,10 +256,206 @@ def read_invoices():
         return {'items': [], 'top_customers': [], 'daily_totals': [], 'print_date': '', 'total_transactions': 0}
 
 
+def read_reconciliations():
+    """Read inventory reconciliation movements and calculate shrinkage/surplus statistics"""
+    target_file = None
+    for f in RECONCILIATION_FILES:
+        if os.path.exists(f):
+            target_file = f
+            break
+
+    if not target_file:
+        log('WARNING: Reconciliation file not found')
+        return {'items': [], 'summary': {}}
+
+    try:
+        mtime = os.path.getmtime(target_file)
+        if os.path.exists(CACHE_REC_FILE):
+            try:
+                with open(CACHE_REC_FILE, 'r', encoding='utf-8') as cf:
+                    cached = json.load(cf)
+                if cached.get('mtime') == mtime and 'data' in cached:
+                    return cached['data']
+            except Exception:
+                pass
+
+        wb = openpyxl.load_workbook(target_file, data_only=True, read_only=True)
+        ws = wb.active
+
+        items_movements = defaultdict(list)
+        cotton_seed_wared = []
+
+        for row in ws.iter_rows(min_row=4, values_only=True):
+            code = str(row[0] or '').strip()
+            if not code:
+                continue
+
+            name = str(row[1] or '').strip()
+            if is_excluded(name):
+                continue
+
+            unit = str(row[2] or '').strip()
+            wared = safe_float(row[3])
+            sader = safe_float(row[4])
+            talef = safe_float(row[5])
+            balance = safe_float(row[6])
+            bayan = str(row[7] or '').strip()
+            date_str = str(row[8] or '').strip()
+            user = str(row[9] or '').strip()
+
+            mov = {
+                'code': code,
+                'name': name,
+                'unit': unit,
+                'wared': wared,
+                'sader': sader,
+                'talef': talef,
+                'balance': balance,
+                'bayan': bayan,
+                'date': date_str,
+                'user': user,
+                'is_tasweya': 'تسوية' in bayan
+            }
+            items_movements[code].append(mov)
+            if code == '1115094' and wared > 0: # بذرة قطن
+                cotton_seed_wared.append((date_str, wared))
+
+        wb.close()
+
+        result_items = []
+        total_tasweyat_count = 0
+        shortage_items_count = 0
+        surplus_items_count = 0
+        total_shortage_kg = 0
+        total_surplus_kg = 0
+
+        for code, movs in items_movements.items():
+            tasweyat = [m for m in movs if m['is_tasweya']]
+            if not tasweyat:
+                continue
+
+            name = movs[0]['name']
+            unit = movs[0]['unit']
+            tasweyat.sort(key=lambda x: x['date'])
+            total_tasweyat_count += len(tasweyat)
+
+            # Build history
+            history = []
+            for idx, t in enumerate(tasweyat):
+                p_date = tasweyat[idx-1]['date'] if idx > 0 else '2025-12-31'
+                t_date = t['date']
+
+                c_movs = [m for m in movs if p_date < m['date'] <= t_date and not m['is_tasweya']]
+                if code == '6950740': # كسب النور uses بذرة قطن
+                    c_wared = sum(w for d, w in cotton_seed_wared if p_date < d <= t_date)
+                else:
+                    c_wared = sum(m['wared'] for m in c_movs)
+                c_sader = sum(m['sader'] for m in c_movs)
+
+                diff = t['wared'] - t['sader']
+                status = 'زيادة' if diff > 0 else 'عجز' if diff < 0 else 'مطابق'
+                abs_diff = round(abs(diff), 3)
+
+                kg_per_ton = round((abs_diff / (c_wared / 1000)), 2) if c_wared > 0 and diff < 0 else 0
+                shortage_pct = round((abs_diff / c_wared * 100), 2) if c_wared > 0 and diff < 0 else 0
+
+                history.append({
+                    'date': t_date,
+                    'bayan': t['bayan'],
+                    'user': t['user'],
+                    'status': status,
+                    'diff': abs_diff,
+                    'raw_diff': diff,
+                    'balance': round(t['balance'], 3),
+                    'prev_date': p_date,
+                    'cycle_wared': round(c_wared, 3),
+                    'cycle_sader': round(c_sader, 3),
+                    'kg_per_ton': kg_per_ton,
+                    'shortage_pct': shortage_pct
+                })
+
+            last_h = history[-1]
+            last_date = last_h['date']
+
+            # Post last tasweya movements
+            post_movs = [m for m in movs if m['date'] > last_date and not m['is_tasweya']]
+            if code == '6950740':
+                post_wared = sum(w for d, w in cotton_seed_wared if d > last_date)
+            else:
+                post_wared = sum(m['wared'] for m in post_movs)
+            post_sader = sum(m['sader'] for m in post_movs)
+
+            if last_h['raw_diff'] < 0:
+                shortage_items_count += 1
+                total_shortage_kg += last_h['diff']
+            elif last_h['raw_diff'] > 0:
+                surplus_items_count += 1
+                total_surplus_kg += last_h['diff']
+
+            is_cotton_based = (code == '6950740')
+
+            result_items.append({
+                'code': code,
+                'name': name,
+                'unit': unit,
+                'total_tasweyat': len(tasweyat),
+                'last_tasweya_date': last_h['date'],
+                'status': last_h['status'],
+                'diff': last_h['diff'],
+                'raw_diff': last_h['raw_diff'],
+                'balance_after': last_h['balance'],
+                'cycle_prev_date': last_h['prev_date'],
+                'cycle_wared': last_h['cycle_wared'],
+                'cycle_sader': last_h['cycle_sader'],
+                'kg_per_ton': last_h['kg_per_ton'],
+                'shortage_pct': last_h['shortage_pct'],
+                'post_wared': round(post_wared, 3),
+                'post_sader': round(post_sader, 3),
+                'is_cotton_based': is_cotton_based,
+                'history': list(reversed(history))
+            })
+
+        result_items.sort(key=lambda x: (
+            0 if x['raw_diff'] < 0 else 1,
+            -x['kg_per_ton'],
+            -x['diff']
+        ))
+
+        feed_shortages = [i['kg_per_ton'] for i in result_items if i['unit'] == 'كيلو' and i['kg_per_ton'] > 0]
+        avg_kg_per_ton = round(sum(feed_shortages) / len(feed_shortages), 2) if feed_shortages else 0
+
+        reconciliation_data = {
+            'items': result_items,
+            'summary': {
+                'total_items_with_tasweya': len(result_items),
+                'total_tasweyat_count': total_tasweyat_count,
+                'shortage_items_count': shortage_items_count,
+                'surplus_items_count': surplus_items_count,
+                'total_shortage_kg': round(total_shortage_kg, 2),
+                'total_surplus_kg': round(total_surplus_kg, 2),
+                'avg_kg_per_ton': avg_kg_per_ton
+            }
+        }
+
+        try:
+            with open(CACHE_REC_FILE, 'w', encoding='utf-8') as cf:
+                json.dump({'mtime': mtime, 'data': reconciliation_data}, cf, ensure_ascii=False, indent=2)
+        except Exception as e:
+            log(f'ERROR saving reconciliation cache: {e}')
+
+        return reconciliation_data
+
+    except Exception as e:
+        log(f'ERROR reconciliations: {e}')
+        log(traceback.format_exc())
+        return {'items': [], 'summary': {}}
+
+
 def generate_data():
     log('Reading data...')
     inv_items, inv_print_date = read_inventory()
     invoices = read_invoices()
+    reconciliations = read_reconciliations()
 
     total_items = len(inv_items)
     total_balance = sum(i['balance'] for i in inv_items)
@@ -276,6 +477,7 @@ def generate_data():
         'store_name': 'النور لتجارة الأعلاف',
         'inventory': inv_items,
         'invoices': invoices,
+        'reconciliations': reconciliations,
         'stats': {
             'total_items': total_items,
             'total_balance': round(total_balance, 3),
@@ -312,24 +514,24 @@ def embed_data_into_html(data):
         return False
 
 
+CREATE_NO_WINDOW = 0x08000000 if sys.platform == 'win32' else 0
+
 def git_push():
     try:
         os.chdir(REPO_DIR)
-        creation_flags = subprocess.CREATE_NO_WINDOW if sys.platform == 'win32' else 0
         startupinfo = None
         if sys.platform == 'win32':
             startupinfo = subprocess.STARTUPINFO()
             startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
             startupinfo.wShowWindow = subprocess.SW_HIDE
-
-        subprocess.run(['git', 'add', '-A'], capture_output=True, text=True, encoding='utf-8', creationflags=creation_flags, startupinfo=startupinfo)
-        result = subprocess.run(['git', 'diff', '--cached', '--quiet'], capture_output=True, text=True, creationflags=creation_flags, startupinfo=startupinfo)
+        subprocess.run(['git', 'add', '-A'], capture_output=True, text=True, encoding='utf-8', creationflags=CREATE_NO_WINDOW, startupinfo=startupinfo)
+        result = subprocess.run(['git', 'diff', '--cached', '--quiet'], capture_output=True, text=True, creationflags=CREATE_NO_WINDOW, startupinfo=startupinfo)
         if result.returncode == 0:
             log('No changes to commit')
             return True
         timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        subprocess.run(['git', 'commit', '-m', f'Auto-update {timestamp}'], capture_output=True, text=True, encoding='utf-8', creationflags=creation_flags, startupinfo=startupinfo)
-        result = subprocess.run(['git', 'push'], capture_output=True, text=True, encoding='utf-8', creationflags=creation_flags, startupinfo=startupinfo)
+        subprocess.run(['git', 'commit', '-m', f'Auto-update {timestamp}'], capture_output=True, text=True, encoding='utf-8', creationflags=CREATE_NO_WINDOW, startupinfo=startupinfo)
+        result = subprocess.run(['git', 'push'], capture_output=True, text=True, encoding='utf-8', creationflags=CREATE_NO_WINDOW, startupinfo=startupinfo)
         if result.returncode != 0:
             log(f'git push: {result.stderr}')
             return False
