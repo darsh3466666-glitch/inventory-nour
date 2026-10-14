@@ -75,11 +75,47 @@ def is_excluded(name, group=''):
     return False
 
 
+def find_latest_file(directory, keywords, default_path=None):
+    """Find the latest matching file in directory based on keywords, ignoring temp files (~$)"""
+    candidates = []
+    if os.path.exists(directory):
+        try:
+            for fname in os.listdir(directory):
+                if fname.startswith('~$') or not fname.lower().endswith(('.xlsx', '.xlsm', '.xls')):
+                    continue
+                if all(kw in fname for kw in keywords):
+                    full_p = os.path.join(directory, fname)
+                    candidates.append(full_p)
+        except Exception as e:
+            log(f"Error scanning directory {directory}: {e}")
+    if default_path and os.path.exists(default_path) and default_path not in candidates:
+        candidates.append(default_path)
+    if not candidates:
+        return default_path if (default_path and os.path.exists(default_path)) else None
+    return max(candidates, key=lambda p: os.path.getmtime(p))
+
+
+def safe_load_workbook(file_path, data_only=True, read_only=False, retries=5, delay=1.0):
+    """Safely open workbook with retries in case Excel/ERP has the file locked"""
+    for attempt in range(retries):
+        try:
+            return openpyxl.load_workbook(file_path, data_only=data_only, read_only=read_only)
+        except PermissionError:
+            log(f"File {os.path.basename(file_path)} locked by Excel (attempt {attempt+1}/{retries}), retrying in {delay}s...")
+            time.sleep(delay)
+        except Exception as e:
+            if attempt == retries - 1:
+                raise e
+            time.sleep(delay)
+    raise IOError(f"Could not open {file_path} after {retries} attempts")
+
+
 def read_inventory():
-    if not os.path.exists(INVENTORY_FILE):
+    target_file = find_latest_file(INVENTORY_DIR, ['ارصدة', 'المخازن'], INVENTORY_FILE)
+    if not target_file or not os.path.exists(target_file):
         return [], ''
     try:
-        wb = openpyxl.load_workbook(INVENTORY_FILE, data_only=True)
+        wb = safe_load_workbook(target_file, data_only=True, read_only=False)
         ws = wb.active
         items = []
         print_date = ''
@@ -114,12 +150,13 @@ def read_inventory():
 
 def read_invoices():
     """Read invoice data and compute analytics"""
-    if not os.path.exists(INVOICES_FILE):
-        log(f'WARNING: Invoices file not found: {INVOICES_FILE}')
+    target_file = find_latest_file(INVOICES_DIR, ['فاتورة'], INVOICES_FILE)
+    if not target_file or not os.path.exists(target_file):
+        log(f'WARNING: Invoices file not found in {INVOICES_DIR}')
         return {'items': [], 'top_customers': {}, 'item_stats': {}, 'print_date': ''}
 
     try:
-        wb = openpyxl.load_workbook(INVOICES_FILE, data_only=True, read_only=True)
+        wb = safe_load_workbook(target_file, data_only=True, read_only=True)
         ws = wb.active
 
         print_date = ''
@@ -258,14 +295,19 @@ def read_invoices():
 
 def read_reconciliations():
     """Read inventory reconciliation movements and calculate shrinkage/surplus statistics"""
-    target_file = None
-    for f in RECONCILIATION_FILES:
-        if os.path.exists(f):
-            target_file = f
-            break
+    target_file = find_latest_file(INVENTORY_DIR, ['حركة', 'تفصيلي'], RECONCILIATION_FILES[0])
 
-    if not target_file:
-        log('WARNING: Reconciliation file not found')
+    if not target_file or not os.path.exists(target_file):
+        log('WARNING: Reconciliation file not found in ' + str(INVENTORY_DIR))
+        if os.path.exists(CACHE_REC_FILE):
+            try:
+                with open(CACHE_REC_FILE, 'r', encoding='utf-8') as cf:
+                    cached = json.load(cf)
+                if 'data' in cached:
+                    log('Falling back to cached reconciliation data')
+                    return cached['data']
+            except Exception:
+                pass
         return {'items': [], 'summary': {}}
 
     try:
@@ -279,7 +321,7 @@ def read_reconciliations():
             except Exception:
                 pass
 
-        wb = openpyxl.load_workbook(target_file, data_only=True, read_only=True)
+        wb = safe_load_workbook(target_file, data_only=True, read_only=True)
         ws = wb.active
 
         items_movements = defaultdict(list)
@@ -466,6 +508,15 @@ def read_reconciliations():
     except Exception as e:
         log(f'ERROR reconciliations: {e}')
         log(traceback.format_exc())
+        if os.path.exists(CACHE_REC_FILE):
+            try:
+                with open(CACHE_REC_FILE, 'r', encoding='utf-8') as cf:
+                    cached = json.load(cf)
+                if 'data' in cached:
+                    log('Falling back to cached reconciliation data after error')
+                    return cached['data']
+            except Exception:
+                pass
         return {'items': [], 'summary': {}}
 
 
@@ -575,14 +626,31 @@ def run_once():
         return False
 
 
-def run_loop(interval_seconds=60):
-    log(f'=== Watcher Started ===')
-    log(f'Inventory: {INVENTORY_FILE}')
-    log(f'Invoices: {INVOICES_FILE}')
+def run_loop(interval_seconds=30):
+    log(f'=== Watcher Started (Interval: {interval_seconds}s) ===')
     log(f'Repo: {REPO_DIR}')
+    last_mtimes = {}
+
     while True:
-        run_once()
-        log(f'Next in {interval_seconds}s...')
+        try:
+            cur_files = [
+                find_latest_file(INVENTORY_DIR, ['ارصدة', 'المخازن'], INVENTORY_FILE),
+                find_latest_file(INVOICES_DIR, ['فاتورة'], INVOICES_FILE),
+                find_latest_file(INVENTORY_DIR, ['حركة', 'تفصيلي'], RECONCILIATION_FILES[0])
+            ]
+            cur_mtimes = {}
+            for fp in cur_files:
+                if fp and os.path.exists(fp):
+                    cur_mtimes[fp] = os.path.getmtime(fp)
+
+            if cur_mtimes != last_mtimes:
+                log(f'Detected file change or initial run: {list(cur_mtimes.keys())}')
+                run_once()
+                last_mtimes = cur_mtimes
+        except Exception as e:
+            log(f'Error in watch loop: {e}')
+            log(traceback.format_exc())
+
         try:
             time.sleep(interval_seconds)
         except KeyboardInterrupt:
@@ -594,4 +662,4 @@ if __name__ == '__main__':
     if len(sys.argv) > 1 and sys.argv[1] == '--once':
         sys.exit(0 if run_once() else 1)
     else:
-        run_loop(60)
+        run_loop(30)
