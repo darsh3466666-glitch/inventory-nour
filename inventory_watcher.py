@@ -315,11 +315,13 @@ def read_reconciliations(inv_items=None):
 
     try:
         mtime = os.path.getmtime(target_file)
+        mtime_str = datetime.fromtimestamp(mtime).strftime('%Y-%m-%d %H:%M:%S')
         if os.path.exists(CACHE_REC_FILE):
             try:
                 with open(CACHE_REC_FILE, 'r', encoding='utf-8') as cf:
                     cached = json.load(cf)
                 if cached.get('mtime') == mtime and 'data' in cached:
+                    log(f'Reconciliations verified with: {os.path.basename(target_file)} (modified: {mtime_str})')
                     cdata = cached['data']
                     if inv_items:
                         inv_map = {str(i.get('code', '')).strip(): i for i in (inv_items or [])}
@@ -330,8 +332,7 @@ def read_reconciliations(inv_items=None):
             except Exception:
                 pass
 
-        mtime_str = datetime.fromtimestamp(mtime).strftime('%Y-%m-%d %H:%M:%S')
-        log(f'Reading reconciliations from: {os.path.basename(target_file)} (modified: {mtime_str})')
+        log(f'Parsing new reconciliations from: {os.path.basename(target_file)} (modified: {mtime_str})')
         wb = safe_load_workbook(target_file, data_only=True, read_only=True)
         ws = wb.active
 
