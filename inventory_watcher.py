@@ -113,8 +113,11 @@ def safe_load_workbook(file_path, data_only=True, read_only=False, retries=5, de
 def read_inventory():
     target_file = find_latest_file(INVENTORY_DIR, ['ارصدة', 'المخازن'], INVENTORY_FILE)
     if not target_file or not os.path.exists(target_file):
+        log(f'WARNING: Inventory balances file not found in {INVENTORY_DIR}')
         return [], ''
     try:
+        mtime_str = datetime.fromtimestamp(os.path.getmtime(target_file)).strftime('%Y-%m-%d %H:%M:%S')
+        log(f'Reading inventory balances from: {os.path.basename(target_file)} (modified: {mtime_str})')
         wb = safe_load_workbook(target_file, data_only=True, read_only=False)
         ws = wb.active
         items = []
@@ -293,7 +296,7 @@ def read_invoices():
         return {'items': [], 'top_customers': [], 'daily_totals': [], 'print_date': '', 'total_transactions': 0}
 
 
-def read_reconciliations():
+def read_reconciliations(inv_items=None):
     """Read inventory reconciliation movements and calculate shrinkage/surplus statistics"""
     target_file = find_latest_file(INVENTORY_DIR, ['حركة', 'تفصيلي'], RECONCILIATION_FILES[0])
 
@@ -317,10 +320,18 @@ def read_reconciliations():
                 with open(CACHE_REC_FILE, 'r', encoding='utf-8') as cf:
                     cached = json.load(cf)
                 if cached.get('mtime') == mtime and 'data' in cached:
-                    return cached['data']
+                    cdata = cached['data']
+                    if inv_items:
+                        inv_map = {str(i.get('code', '')).strip(): i for i in (inv_items or [])}
+                        for it in cdata.get('items', []):
+                            inv_entry = inv_map.get(str(it['code']).strip())
+                            it['current_stock_balance'] = inv_entry['balance'] if inv_entry else None
+                    return cdata
             except Exception:
                 pass
 
+        mtime_str = datetime.fromtimestamp(mtime).strftime('%Y-%m-%d %H:%M:%S')
+        log(f'Reading reconciliations from: {os.path.basename(target_file)} (modified: {mtime_str})')
         wb = safe_load_workbook(target_file, data_only=True, read_only=True)
         ws = wb.active
 
@@ -469,6 +480,12 @@ def read_reconciliations():
                 'history': list(reversed(history))
             })
 
+        # Attach current stock balance from تقارير ارصدة المخازن
+        inv_map = {str(i.get('code', '')).strip(): i for i in (inv_items or [])}
+        for it in result_items:
+            inv_entry = inv_map.get(str(it['code']).strip())
+            it['current_stock_balance'] = inv_entry['balance'] if inv_entry else None
+
         # Feeds/commodities first, shortages first, then highest kg_per_ton, then diff
         result_items.sort(key=lambda x: (
             0 if x['is_feed'] else 1,
@@ -524,7 +541,7 @@ def generate_data():
     log('Reading data...')
     inv_items, inv_print_date = read_inventory()
     invoices = read_invoices()
-    reconciliations = read_reconciliations()
+    reconciliations = read_reconciliations(inv_items)
 
     total_items = len(inv_items)
     total_balance = sum(i['balance'] for i in inv_items)
@@ -618,7 +635,8 @@ def run_once():
             json.dump(data, f, ensure_ascii=False, indent=2)
         embed_data_into_html(data)
         git_push()
-        log(f'Done. Items: {data["stats"]["total_items"]}, Balance: {data["stats"]["total_balance"]}')
+        rec_count = len(data.get("reconciliations", {}).get("items", []))
+        log(f'Done. Inventory: {data["stats"]["total_items"]} items (Balance: {data["stats"]["total_balance"]}), Reconciliations: {rec_count} items')
         return True
     except Exception as e:
         log(f'FATAL: {e}')

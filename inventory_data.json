@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-14T15:18:21.210600",
+  "generated_at": "2026-10-14T15:18:58.619774",
   "print_date": "2026-10-13 18:05:19",
   "invoices_print_date": "",
   "store_name": "النور لتجارة الأعلاف",
@@ -33062,7 +33062,8 @@
             "kg_per_ton": 14.37,
             "shortage_pct": 1.44
           }
-        ]
+        ],
+        "current_stock_balance": 8793.0
       },
       {
         "code": "50005",
@@ -33141,7 +33142,8 @@
             "kg_per_ton": 1.03,
             "shortage_pct": 0.1
           }
-        ]
+        ],
+        "current_stock_balance": 108609.25
       },
       {
         "code": "50016",
@@ -33290,7 +33292,8 @@
             "kg_per_ton": 0,
             "shortage_pct": 0
           }
-        ]
+        ],
+        "current_stock_balance": 16859.55
       },
       {
         "code": "50018",
@@ -33383,7 +33386,8 @@
             "kg_per_ton": 0.82,
             "shortage_pct": 0.08
           }
-        ]
+        ],
+        "current_stock_balance": 879.5
       },
       {
         "code": "50020",
@@ -33490,7 +33494,8 @@
             "kg_per_ton": 1.33,
             "shortage_pct": 0.13
           }
-        ]
+        ],
+        "current_stock_balance": 6567.0
       },
       {
         "code": "50011",
@@ -33625,7 +33630,8 @@
             "kg_per_ton": 0.18,
             "shortage_pct": 0.02
           }
-        ]
+        ],
+        "current_stock_balance": 3740.5
       },
       {
         "code": "50013",
@@ -33718,7 +33724,8 @@
             "kg_per_ton": 2.3,
             "shortage_pct": 0.23
           }
-        ]
+        ],
+        "current_stock_balance": 1.0
       },
       {
         "code": "50021",
@@ -33783,7 +33790,8 @@
             "kg_per_ton": 25.53,
             "shortage_pct": 2.55
           }
-        ]
+        ],
+        "current_stock_balance": null
       },
       {
         "code": "50027",
@@ -33834,7 +33842,8 @@
             "kg_per_ton": 0,
             "shortage_pct": 0
           }
-        ]
+        ],
+        "current_stock_balance": null
       },
       {
         "code": "50008",
@@ -33871,7 +33880,8 @@
             "kg_per_ton": 0,
             "shortage_pct": 0
           }
-        ]
+        ],
+        "current_stock_balance": 7967.29
       },
       {
         "code": "50046",
@@ -33908,7 +33918,8 @@
             "kg_per_ton": 0,
             "shortage_pct": 0
           }
-        ]
+        ],
+        "current_stock_balance": 431.0
       },
       {
         "code": "50010",
@@ -33945,7 +33956,8 @@
             "kg_per_ton": 0,
             "shortage_pct": 0
           }
-        ]
+        ],
+        "current_stock_balance": 1589.0
       },
       {
         "code": "50038",
@@ -33982,7 +33994,8 @@
             "kg_per_ton": 0,
             "shortage_pct": 0
           }
-        ]
+        ],
+        "current_stock_balance": 2756.355
       },
       {
         "code": "50039",
@@ -34047,7 +34060,8 @@
             "kg_per_ton": 0,
             "shortage_pct": 0
           }
-        ]
+        ],
+        "current_stock_balance": 1131.675
       },
       {
         "code": "50033",
@@ -34098,7 +34112,8 @@
             "kg_per_ton": 0,
             "shortage_pct": 0
           }
-        ]
+        ],
+        "current_stock_balance": 2296.1
       },
       {
         "code": "4620686",
@@ -34135,7 +34150,8 @@
             "kg_per_ton": 0,
             "shortage_pct": 0
           }
-        ]
+        ],
+        "current_stock_balance": 22.75
       },
       {
         "code": "50024",
@@ -34200,7 +34216,8 @@
             "kg_per_ton": 0,
             "shortage_pct": 0
           }
-        ]
+        ],
+        "current_stock_balance": 259.15
       },
       {
         "code": "50025",
@@ -34237,7 +34254,8 @@
             "kg_per_ton": 0,
             "shortage_pct": 0
           }
-        ]
+        ],
+        "current_stock_balance": 650.535
       },
       {
         "code": "3900354",
@@ -34274,7 +34292,8 @@
             "kg_per_ton": 0,
             "shortage_pct": 0
           }
-        ]
+        ],
+        "current_stock_balance": 2.5
       },
       {
         "code": "6377177",
@@ -34423,7 +34442,8 @@
             "kg_per_ton": 0,
             "shortage_pct": 34.4
           }
-        ]
+        ],
+        "current_stock_balance": 2000.0
       },
       {
         "code": "1801610",
@@ -34572,7 +34592,8 @@
             "kg_per_ton": 0,
             "shortage_pct": 52.25
           }
-        ]
+        ],
+        "current_stock_balance": 3120.0
       },
       {
         "code": "2209192",
@@ -34721,7 +34742,8 @@
             "kg_per_ton": 0,
             "shortage_pct": 38.21
           }
-        ]
+        ],
+        "current_stock_balance": 1620.0
       },
       {
         "code": "1941822",
@@ -34814,7 +34836,8 @@
             "kg_per_ton": 0,
             "shortage_pct": 28.91
           }
-        ]
+        ],
+        "current_stock_balance": 2500.6
       }
     ],
     "summary": {
