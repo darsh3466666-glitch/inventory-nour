@@ -458,6 +458,19 @@ def read_reconciliations(inv_items=None):
             is_cotton_based = (code == '6950740')
             category = 'خامات وأعلاف' if is_kilo else 'مستلزمات تعبئة وتغليف'
 
+            # Calculate item cumulative metrics and average shortage across all cycles
+            shortage_cycles = [h for h in history if h['raw_diff'] < 0]
+            total_item_shortage = sum(h['diff'] for h in shortage_cycles)
+            total_shortage_wared = sum(h['cycle_wared'] for h in shortage_cycles)
+            total_all_wared = sum(h['cycle_wared'] for h in history)
+
+            if is_kilo:
+                item_avg_kg_per_ton = round(total_item_shortage / (total_shortage_wared / 1000), 2) if total_shortage_wared > 0 else 0
+                item_avg_shortage_pct = round(total_item_shortage / total_shortage_wared * 100, 2) if total_shortage_wared > 0 else 0
+            else:
+                item_avg_kg_per_ton = 0
+                item_avg_shortage_pct = round(total_item_shortage / total_shortage_wared * 100, 2) if total_shortage_wared > 0 else 0
+
             result_items.append({
                 'code': code,
                 'name': name,
@@ -475,6 +488,11 @@ def read_reconciliations(inv_items=None):
                 'cycle_sader': last_h['cycle_sader'],
                 'kg_per_ton': last_h['kg_per_ton'],
                 'shortage_pct': last_h['shortage_pct'],
+                'avg_kg_per_ton': item_avg_kg_per_ton,
+                'avg_shortage_pct': item_avg_shortage_pct,
+                'total_shortage_qty': round(total_item_shortage, 3),
+                'total_cycle_wared': round(total_all_wared, 3),
+                'shortage_cycles_count': len(shortage_cycles),
                 'post_wared': round(post_wared, 3),
                 'post_sader': round(post_sader, 3),
                 'is_cotton_based': is_cotton_based,
