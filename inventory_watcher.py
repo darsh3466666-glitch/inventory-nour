@@ -326,8 +326,10 @@ def read_reconciliations():
         total_tasweyat_count = 0
         shortage_items_count = 0
         surplus_items_count = 0
-        total_shortage_kg = 0
-        total_surplus_kg = 0
+        total_shortage_feed_kg = 0.0
+        total_shortage_pieces = 0.0
+        total_surplus_feed_kg = 0.0
+        total_surplus_pieces = 0.0
 
         for code, movs in items_movements.items():
             tasweyat = [m for m in movs if m['is_tasweya']]
@@ -336,6 +338,7 @@ def read_reconciliations():
 
             name = movs[0]['name']
             unit = movs[0]['unit']
+            is_kilo = (unit == 'كيلو')
             tasweyat.sort(key=lambda x: x['date'])
             total_tasweyat_count += len(tasweyat)
 
@@ -356,8 +359,8 @@ def read_reconciliations():
                 status = 'زيادة' if diff > 0 else 'عجز' if diff < 0 else 'مطابق'
                 abs_diff = round(abs(diff), 3)
 
-                kg_per_ton = round((abs_diff / (c_wared / 1000)), 2) if c_wared > 0 and diff < 0 else 0
-                shortage_pct = round((abs_diff / c_wared * 100), 2) if c_wared > 0 and diff < 0 else 0
+                kg_per_ton = round((abs_diff / (c_wared / 1000)), 2) if (is_kilo and c_wared > 0 and diff < 0) else 0
+                shortage_pct = round((abs_diff / c_wared * 100), 2) if (c_wared > 0 and diff < 0) else 0
 
                 history.append({
                     'date': t_date,
@@ -387,17 +390,26 @@ def read_reconciliations():
 
             if last_h['raw_diff'] < 0:
                 shortage_items_count += 1
-                total_shortage_kg += last_h['diff']
+                if is_kilo:
+                    total_shortage_feed_kg += last_h['diff']
+                else:
+                    total_shortage_pieces += last_h['diff']
             elif last_h['raw_diff'] > 0:
                 surplus_items_count += 1
-                total_surplus_kg += last_h['diff']
+                if is_kilo:
+                    total_surplus_feed_kg += last_h['diff']
+                else:
+                    total_surplus_pieces += last_h['diff']
 
             is_cotton_based = (code == '6950740')
+            category = 'خامات وأعلاف' if is_kilo else 'مستلزمات تعبئة وتغليف'
 
             result_items.append({
                 'code': code,
                 'name': name,
                 'unit': unit,
+                'category': category,
+                'is_feed': is_kilo,
                 'total_tasweyat': len(tasweyat),
                 'last_tasweya_date': last_h['date'],
                 'status': last_h['status'],
@@ -415,13 +427,15 @@ def read_reconciliations():
                 'history': list(reversed(history))
             })
 
+        # Feeds/commodities first, shortages first, then highest kg_per_ton, then diff
         result_items.sort(key=lambda x: (
+            0 if x['is_feed'] else 1,
             0 if x['raw_diff'] < 0 else 1,
-            -x['kg_per_ton'],
+            -x['kg_per_ton'] if x['is_feed'] else -x['shortage_pct'],
             -x['diff']
         ))
 
-        feed_shortages = [i['kg_per_ton'] for i in result_items if i['unit'] == 'كيلو' and i['kg_per_ton'] > 0]
+        feed_shortages = [i['kg_per_ton'] for i in result_items if i['is_feed'] and i['kg_per_ton'] > 0]
         avg_kg_per_ton = round(sum(feed_shortages) / len(feed_shortages), 2) if feed_shortages else 0
 
         reconciliation_data = {
@@ -431,8 +445,12 @@ def read_reconciliations():
                 'total_tasweyat_count': total_tasweyat_count,
                 'shortage_items_count': shortage_items_count,
                 'surplus_items_count': surplus_items_count,
-                'total_shortage_kg': round(total_shortage_kg, 2),
-                'total_surplus_kg': round(total_surplus_kg, 2),
+                'total_shortage_feed_kg': round(total_shortage_feed_kg, 2),
+                'total_shortage_pieces': int(total_shortage_pieces),
+                'total_surplus_feed_kg': round(total_surplus_feed_kg, 2),
+                'total_surplus_pieces': int(total_surplus_pieces),
+                'total_shortage_kg': round(total_shortage_feed_kg, 2),
+                'total_surplus_kg': round(total_surplus_feed_kg, 2),
                 'avg_kg_per_ton': avg_kg_per_ton
             }
         }
