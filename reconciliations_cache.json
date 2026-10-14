@@ -1,5 +1,5 @@
 {
-  "mtime": 1791800839.5358455,
+  "mtime": 1791978553.6328566,
   "data": {
     "items": [
       {
@@ -20,7 +20,7 @@
         "kg_per_ton": 27.03,
         "shortage_pct": 2.7,
         "post_wared": 9914.0,
-        "post_sader": 830.0,
+        "post_sader": 1332.0,
         "is_cotton_based": true,
         "history": [
           {
@@ -126,8 +126,8 @@
         "cycle_sader": 340393.25,
         "kg_per_ton": 5.82,
         "shortage_pct": 0.58,
-        "post_wared": 694990.0,
-        "post_sader": 642358.25,
+        "post_wared": 763680.0,
+        "post_sader": 657584.25,
         "is_cotton_based": false,
         "history": [
           {
@@ -206,7 +206,7 @@
         "kg_per_ton": 4.78,
         "shortage_pct": 0.48,
         "post_wared": 27860.0,
-        "post_sader": 8485.5,
+        "post_sader": 13241.5,
         "is_cotton_based": false,
         "history": [
           {
@@ -448,7 +448,7 @@
         "kg_per_ton": 3.06,
         "shortage_pct": 0.31,
         "post_wared": 35000.0,
-        "post_sader": 38677.0,
+        "post_sader": 38977.0,
         "is_cotton_based": false,
         "history": [
           {
@@ -555,7 +555,7 @@
         "kg_per_ton": 1.21,
         "shortage_pct": 0.12,
         "post_wared": 9018.0,
-        "post_sader": 5518.0,
+        "post_sader": 5908.0,
         "is_cotton_based": false,
         "history": [
           {
@@ -898,8 +898,8 @@
         "cycle_sader": 856758.05,
         "kg_per_ton": 0,
         "shortage_pct": 0,
-        "post_wared": 436070.0,
-        "post_sader": 435357.9,
+        "post_wared": 445070.0,
+        "post_sader": 441137.9,
         "is_cotton_based": false,
         "history": [
           {
@@ -936,7 +936,7 @@
         "kg_per_ton": 0,
         "shortage_pct": 0,
         "post_wared": 2537.0,
-        "post_sader": 38849.0,
+        "post_sader": 39649.0,
         "is_cotton_based": false,
         "history": [
           {
@@ -972,8 +972,8 @@
         "cycle_sader": 585374.0,
         "kg_per_ton": 0,
         "shortage_pct": 0,
-        "post_wared": 34205.0,
-        "post_sader": 239237.0,
+        "post_wared": 34209.0,
+        "post_sader": 242387.0,
         "is_cotton_based": false,
         "history": [
           {
@@ -1010,7 +1010,7 @@
         "kg_per_ton": 0,
         "shortage_pct": 0,
         "post_wared": 12000.0,
-        "post_sader": 10913.2,
+        "post_sader": 10934.7,
         "is_cotton_based": false,
         "history": [
           {
@@ -1047,7 +1047,7 @@
         "kg_per_ton": 0,
         "shortage_pct": 0,
         "post_wared": 4320.0,
-        "post_sader": 5299.6,
+        "post_sader": 5324.35,
         "is_cotton_based": false,
         "history": [
           {
@@ -1112,7 +1112,7 @@
         "kg_per_ton": 0,
         "shortage_pct": 0,
         "post_wared": 5523.0,
-        "post_sader": 3773.4,
+        "post_sader": 3776.9,
         "is_cotton_based": false,
         "history": [
           {
@@ -1200,7 +1200,7 @@
         "kg_per_ton": 0,
         "shortage_pct": 0,
         "post_wared": 0.0,
-        "post_sader": 612.35,
+        "post_sader": 615.35,
         "is_cotton_based": false,
         "history": [
           {
@@ -1265,7 +1265,7 @@
         "kg_per_ton": 0,
         "shortage_pct": 0,
         "post_wared": 2000.0,
-        "post_sader": 1946.6,
+        "post_sader": 1953.6,
         "is_cotton_based": false,
         "history": [
           {
@@ -1488,7 +1488,7 @@
         "kg_per_ton": 0,
         "shortage_pct": 23.33,
         "post_wared": 0.0,
-        "post_sader": 600.0,
+        "post_sader": 680.0,
         "is_cotton_based": false,
         "history": [
           {
