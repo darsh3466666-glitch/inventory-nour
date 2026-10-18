@@ -685,13 +685,57 @@ def git_push():
         return False
 
 
-def run_once():
+MTIMES_STATE_FILE = os.path.join(REPO_DIR, '.last_mtimes.json')
+
+def get_current_source_mtimes():
+    files = [
+        find_latest_file(INVENTORY_DIR, ['ارصدة', 'المخازن'], INVENTORY_FILE),
+        find_latest_file(INVOICES_DIR, ['فاتورة'], INVOICES_FILE),
+        find_latest_file(INVENTORY_DIR, ['حركة', 'تفصيلي'], RECONCILIATION_FILES[0])
+    ]
+    mtimes = {}
+    for f in files:
+        if f and os.path.exists(f):
+            mtimes[f] = os.path.getmtime(f)
+    return mtimes
+
+
+def run_once(force=False):
     try:
+        cur_mtimes = get_current_source_mtimes()
+        last_mtimes = {}
+        if os.path.exists(MTIMES_STATE_FILE):
+            try:
+                with open(MTIMES_STATE_FILE, 'r', encoding='utf-8') as mf:
+                    last_mtimes = json.load(mf)
+            except:
+                pass
+
+        files_changed = (cur_mtimes != last_mtimes)
+        git_has_diff = False
+        try:
+            diff_check = subprocess.run(['git', 'status', '--porcelain'], cwd=REPO_DIR, capture_output=True, text=True, creationflags=CREATE_NO_WINDOW)
+            if diff_check.stdout.strip():
+                git_has_diff = True
+        except:
+            pass
+
+        if not files_changed and not git_has_diff and not force:
+            log('No changes in Excel files or code; skipping push')
+            return True
+
         data = generate_data()
         with open(JSON_FILE, 'w', encoding='utf-8') as f:
             json.dump(data, f, ensure_ascii=False, indent=2)
         embed_data_into_html(data)
         git_push()
+
+        try:
+            with open(MTIMES_STATE_FILE, 'w', encoding='utf-8') as mf:
+                json.dump(cur_mtimes, mf)
+        except:
+            pass
+
         rec_count = len(data.get("reconciliations", {}).get("items", []))
         log(f'Done. Inventory: {data["stats"]["total_items"]} items (Balance: {data["stats"]["total_balance"]}), Reconciliations: {rec_count} items')
         return True
@@ -720,7 +764,7 @@ def run_loop(interval_seconds=30):
 
             if cur_mtimes != last_mtimes:
                 log(f'Detected file change or initial run: {list(cur_mtimes.keys())}')
-                run_once()
+                run_once(force=True)
                 last_mtimes = cur_mtimes
         except Exception as e:
             log(f'Error in watch loop: {e}')
@@ -734,7 +778,8 @@ def run_loop(interval_seconds=30):
 
 
 if __name__ == '__main__':
+    force_flag = '--force' in sys.argv
     if len(sys.argv) > 1 and sys.argv[1] == '--once':
-        sys.exit(0 if run_once() else 1)
+        sys.exit(0 if run_once(force=force_flag) else 1)
     else:
         run_loop(30)
