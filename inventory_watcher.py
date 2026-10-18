@@ -595,28 +595,32 @@ def generate_data():
     return data
 
 
-def embed_data_into_html(data):
-    """Embed full data into HTML"""
+def embed_data_into_html(data, retries=3, delay=1.0):
+    """Embed full data into HTML with retry on file collisions"""
     if not os.path.exists(HTML_FILE):
         return False
-    try:
-        with open(HTML_FILE, 'r', encoding='utf-8') as f:
-            html = f.read()
-        json_str = json.dumps(data, ensure_ascii=False)
-        marker_start = '/*__EMBEDDED_DATA__*/'
-        marker_end = '/*__END_EMBEDDED_DATA__*/'
-        start_idx = html.find(marker_start)
-        end_idx = html.find(marker_end)
-        if start_idx != -1 and end_idx != -1:
-            new_block = f'{marker_start}\nvar EMBEDDED_DATA = {json_str};\n{marker_end}'
-            html = html[:start_idx] + new_block + html[end_idx + len(marker_end):]
-            with open(HTML_FILE, 'w', encoding='utf-8') as f:
-                f.write(html)
-            return True
-        return False
-    except Exception as e:
-        log(f'ERROR embed: {e}')
-        return False
+    for attempt in range(retries):
+        try:
+            with open(HTML_FILE, 'r', encoding='utf-8') as f:
+                html = f.read()
+            json_str = json.dumps(data, ensure_ascii=False)
+            marker_start = '/*__EMBEDDED_DATA__*/'
+            marker_end = '/*__END_EMBEDDED_DATA__*/'
+            start_idx = html.find(marker_start)
+            end_idx = html.find(marker_end)
+            if start_idx != -1 and end_idx != -1:
+                new_block = f'{marker_start}\nvar EMBEDDED_DATA = {json_str};\n{marker_end}'
+                html = html[:start_idx] + new_block + html[end_idx + len(marker_end):]
+                with open(HTML_FILE, 'w', encoding='utf-8') as f:
+                    f.write(html)
+                return True
+            return False
+        except Exception as e:
+            if attempt == retries - 1:
+                log(f'ERROR embed: {e}')
+                return False
+            time.sleep(delay)
+    return False
 
 
 CREATE_NO_WINDOW = 0x08000000 if sys.platform == 'win32' else 0
