@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-18T18:10:21.978140",
-  "print_date": "2026-10-18 14:58:14",
+  "generated_at": "2026-10-18T18:11:22.404813",
+  "print_date": "2026-10-18 18:11:01",
   "invoices_print_date": "",
   "store_name": "النور لتجارة الأعلاف",
   "inventory": [
@@ -9,8 +9,8 @@
       "code": "50046",
       "name": "علف النور حلاب",
       "unit": "كيلو",
-      "balance": -719.0,
-      "detailed": "- 0 طن / 719 كيلو",
+      "balance": 1281.0,
+      "detailed": "1 طن / 281 كيلو",
       "detained": 0.0,
       "group": "مجموعة أعلاف النور",
       "supplier": ""
@@ -20,8 +20,8 @@
       "code": "50010",
       "name": "علف تسمين النور",
       "unit": "كيلو",
-      "balance": 873.0,
-      "detailed": "0 طن / 873 كيلو",
+      "balance": 1823.0,
+      "detailed": "1 طن / 823 كيلو",
       "detained": 0.0,
       "group": "مجموعة أعلاف النور",
       "supplier": ""
@@ -31,8 +31,8 @@
       "code": "50033",
       "name": "اكسيد ماغنسيوم",
       "unit": "كيلو",
-      "balance": 2123.35,
-      "detailed": "2123 كيلو",
+      "balance": 1815.35,
+      "detailed": "1815 كيلو",
       "detained": 0.0,
       "group": "مجموعة إضافات الأعلاف",
       "supplier": ""
@@ -53,8 +53,8 @@
       "code": "50039",
       "name": "بريمكس تسمين",
       "unit": "كيلو",
-      "balance": 868.425,
-      "detailed": "868 كيلو",
+      "balance": 835.425,
+      "detailed": "835 كيلو",
       "detained": 0.0,
       "group": "مجموعة إضافات الأعلاف",
       "supplier": ""
@@ -64,8 +64,8 @@
       "code": "50038",
       "name": "بيكربونات صوديوم",
       "unit": "كيلو",
-      "balance": 2402.355,
-      "detailed": "2402 كيلو",
+      "balance": 2235.355,
+      "detailed": "2235 كيلو",
       "detained": 0.0,
       "group": "مجموعة إضافات الأعلاف",
       "supplier": ""
@@ -75,8 +75,8 @@
       "code": "50002",
       "name": "حجر جيرى",
       "unit": "كيلو",
-      "balance": 16932.825,
-      "detailed": "16932 كيلو",
+      "balance": 16819.825,
+      "detailed": "16819 كيلو",
       "detained": 0.0,
       "group": "مجموعة إضافات الأعلاف",
       "supplier": ""
@@ -86,8 +86,8 @@
       "code": "50024",
       "name": "خميره",
       "unit": "كيلو",
-      "balance": 238.15,
-      "detailed": "238 كيلو",
+      "balance": 231.65,
+      "detailed": "231 كيلو",
       "detained": 0.0,
       "group": "مجموعة إضافات الأعلاف",
       "supplier": ""
@@ -152,8 +152,8 @@
       "code": "50025",
       "name": "مضاد سموم  كيميائي",
       "unit": "كيلو",
-      "balance": 567.035,
-      "detailed": "567 كيلو",
+      "balance": 556.535,
+      "detailed": "556 كيلو",
       "detained": 0.0,
       "group": "مجموعة إضافات الأعلاف",
       "supplier": ""
@@ -174,8 +174,8 @@
       "code": "50001",
       "name": "ملح طعام",
       "unit": "كيلو",
-      "balance": 7429.395,
-      "detailed": "7429 كيلو",
+      "balance": 6746.895,
+      "detailed": "6746 كيلو",
       "detained": 0.0,
       "group": "مجموعة إضافات الأعلاف",
       "supplier": ""
@@ -196,8 +196,8 @@
       "code": "50013",
       "name": "بذرة كتان",
       "unit": "كيلو",
-      "balance": 2908.0,
-      "detailed": "2908 كيلو",
+      "balance": 2533.0,
+      "detailed": "2533 كيلو",
       "detained": 0.0,
       "group": "مجموعة خامات الأعلاف",
       "supplier": ""
@@ -229,8 +229,8 @@
       "code": "50020",
       "name": "دي دي جي",
       "unit": "كيلو",
-      "balance": 3373.0,
-      "detailed": "3373 كيلو",
+      "balance": 3173.0,
+      "detailed": "3173 كيلو",
       "detained": 0.0,
       "group": "مجموعة خامات الأعلاف",
       "supplier": ""
@@ -240,8 +240,8 @@
       "code": "50005",
       "name": "ذره صفراء",
       "unit": "كيلو",
-      "balance": 36588.0,
-      "detailed": "36588 كيلو",
+      "balance": 26716.0,
+      "detailed": "26716 كيلو",
       "detained": 0.0,
       "group": "مجموعة خامات الأعلاف",
       "supplier": ""
@@ -251,8 +251,8 @@
       "code": "50011",
       "name": "رجيعه (رجيع كون)",
       "unit": "كيلو",
-      "balance": 1151.5,
-      "detailed": "1151 كيلو",
+      "balance": 8727.5,
+      "detailed": "8727 كيلو",
       "detained": 0.0,
       "group": "مجموعة خامات الأعلاف",
       "supplier": ""
@@ -284,8 +284,8 @@
       "code": "50016",
       "name": "فول صويا46%",
       "unit": "كيلو",
-      "balance": 4349.8,
-      "detailed": "4349 كيلو",
+      "balance": 22678.8,
+      "detailed": "22678 كيلو",
       "detained": 0.0,
       "group": "مجموعة خامات الأعلاف",
       "supplier": ""
@@ -317,8 +317,8 @@
       "code": "6950740",
       "name": "كسب النور",
       "unit": "كيلو",
-      "balance": 4203.5,
-      "detailed": "4 طن / 203 كيلو",
+      "balance": 3348.5,
+      "detailed": "3 طن / 348 كيلو",
       "detained": 0.0,
       "group": "مجموعة خامات الأعلاف",
       "supplier": ""
@@ -339,8 +339,8 @@
       "code": "50008",
       "name": "نخاله",
       "unit": "كيلو",
-      "balance": 31955.79,
-      "detailed": "31955 كيلو",
+      "balance": 27122.79,
+      "detailed": "27122 كيلو",
       "detained": 0.0,
       "group": "مجموعة خامات الأعلاف",
       "supplier": ""
@@ -361,8 +361,8 @@
       "code": "2209192",
       "name": "شكاير منسوجة لون أصفر مقاس  110*60",
       "unit": "قطعه",
-      "balance": 1600.0,
-      "detailed": "1600 قطعه",
+      "balance": 1560.0,
+      "detailed": "1560 قطعه",
       "detained": 0.0,
       "group": "مجموعة مستلزمات الإنتاج",
       "supplier": ""
@@ -383,8 +383,8 @@
       "code": "1801610",
       "name": "شكاير منسوجه  لون أبيض  بيور مقاس 110*60 (علف النور )",
       "unit": "قطعه",
-      "balance": 2920.0,
-      "detailed": "2920 قطعه",
+      "balance": 2880.0,
+      "detailed": "2880 قطعه",
       "detained": 0.0,
       "group": "مجموعة مستلزمات الإنتاج",
       "supplier": ""
@@ -33478,7 +33478,7 @@
             "shortage_pct": 1.44
           }
         ],
-        "current_stock_balance": 4203.5
+        "current_stock_balance": 3348.5
       },
       {
         "code": "50005",
@@ -33563,7 +33563,7 @@
             "shortage_pct": 0.1
           }
         ],
-        "current_stock_balance": 36588.0
+        "current_stock_balance": 26716.0
       },
       {
         "code": "50016",
@@ -33732,7 +33732,7 @@
             "shortage_pct": 0
           }
         ],
-        "current_stock_balance": 4349.8
+        "current_stock_balance": 22678.8
       },
       {
         "code": "50011",
@@ -33887,7 +33887,7 @@
             "shortage_pct": 0.02
           }
         ],
-        "current_stock_balance": 1151.5
+        "current_stock_balance": 8727.5
       },
       {
         "code": "50018",
@@ -34099,7 +34099,7 @@
             "shortage_pct": 0.13
           }
         ],
-        "current_stock_balance": 3373.0
+        "current_stock_balance": 3173.0
       },
       {
         "code": "50013",
@@ -34198,7 +34198,7 @@
             "shortage_pct": 0.23
           }
         ],
-        "current_stock_balance": 2908.0
+        "current_stock_balance": 2533.0
       },
       {
         "code": "50021",
@@ -34369,7 +34369,7 @@
             "shortage_pct": 0
           }
         ],
-        "current_stock_balance": 31955.79
+        "current_stock_balance": 27122.79
       },
       {
         "code": "50046",
@@ -34412,7 +34412,7 @@
             "shortage_pct": 0
           }
         ],
-        "current_stock_balance": -719.0
+        "current_stock_balance": 1281.0
       },
       {
         "code": "50010",
@@ -34455,7 +34455,7 @@
             "shortage_pct": 0
           }
         ],
-        "current_stock_balance": 873.0
+        "current_stock_balance": 1823.0
       },
       {
         "code": "50038",
@@ -34498,7 +34498,7 @@
             "shortage_pct": 0
           }
         ],
-        "current_stock_balance": 2402.355
+        "current_stock_balance": 2235.355
       },
       {
         "code": "50039",
@@ -34569,7 +34569,7 @@
             "shortage_pct": 0
           }
         ],
-        "current_stock_balance": 868.425
+        "current_stock_balance": 835.425
       },
       {
         "code": "50033",
@@ -34626,7 +34626,7 @@
             "shortage_pct": 0
           }
         ],
-        "current_stock_balance": 2123.35
+        "current_stock_balance": 1815.35
       },
       {
         "code": "4620686",
@@ -34740,7 +34740,7 @@
             "shortage_pct": 0
           }
         ],
-        "current_stock_balance": 238.15
+        "current_stock_balance": 231.65
       },
       {
         "code": "50025",
@@ -34783,7 +34783,7 @@
             "shortage_pct": 0
           }
         ],
-        "current_stock_balance": 567.035
+        "current_stock_balance": 556.535
       },
       {
         "code": "3900354",
@@ -35136,7 +35136,7 @@
             "shortage_pct": 52.25
           }
         ],
-        "current_stock_balance": 2920.0
+        "current_stock_balance": 2880.0
       },
       {
         "code": "2209192",
@@ -35291,7 +35291,7 @@
             "shortage_pct": 38.21
           }
         ],
-        "current_stock_balance": 1600.0
+        "current_stock_balance": 1560.0
       },
       {
         "code": "1941822",
@@ -35409,25 +35409,25 @@
   },
   "stats": {
     "total_items": 35,
-    "total_balance": 125989.805,
+    "total_balance": 137309.305,
     "low_stock": 11,
-    "out_of_stock": 1,
+    "out_of_stock": 0,
     "groups": {
       "مجموعة أعلاف النور": {
         "count": 2,
-        "balance": 154.0
+        "balance": 3104.0
       },
       "مجموعة إضافات الأعلاف": {
         "count": 15,
-        "balance": 30797.365000000005
+        "balance": 29476.865000000005
       },
       "مجموعة خامات الأعلاف": {
         "count": 14,
-        "balance": 86017.84
+        "balance": 95787.84
       },
       "مجموعة مستلزمات الإنتاج": {
         "count": 4,
-        "balance": 9020.6
+        "balance": 8940.6
       }
     },
     "total_transactions": 23404
