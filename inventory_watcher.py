@@ -621,26 +621,60 @@ def embed_data_into_html(data):
 
 CREATE_NO_WINDOW = 0x08000000 if sys.platform == 'win32' else 0
 
+def cleanup_stale_git_lock():
+    """Remove stale git lock files (.git/index.lock, etc.) if older than 5 seconds"""
+    git_dir = os.path.join(REPO_DIR, '.git')
+    lock_files = ['index.lock', 'HEAD.lock', 'refs/heads/main.lock']
+    for lf in lock_files:
+        lock_path = os.path.join(git_dir, lf)
+        if os.path.exists(lock_path):
+            try:
+                age = time.time() - os.path.getmtime(lock_path)
+                if age > 5:
+                    log(f'Removing stale git lock: {lf} (age: {int(age)}s)')
+                    os.remove(lock_path)
+            except Exception as e:
+                log(f'Could not remove lock {lf}: {e}')
+
+
 def git_push():
     try:
         os.chdir(REPO_DIR)
+        cleanup_stale_git_lock()
+
         startupinfo = None
         if sys.platform == 'win32':
             startupinfo = subprocess.STARTUPINFO()
             startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
             startupinfo.wShowWindow = subprocess.SW_HIDE
-        subprocess.run(['git', 'add', '-A'], capture_output=True, text=True, encoding='utf-8', creationflags=CREATE_NO_WINDOW, startupinfo=startupinfo)
+
+        add_res = subprocess.run(['git', 'add', '-A'], capture_output=True, text=True, encoding='utf-8', creationflags=CREATE_NO_WINDOW, startupinfo=startupinfo)
+        if add_res.returncode != 0:
+            log(f'git add warning: {add_res.stderr.strip()}')
+            cleanup_stale_git_lock()
+            subprocess.run(['git', 'add', '-A'], capture_output=True, text=True, encoding='utf-8', creationflags=CREATE_NO_WINDOW, startupinfo=startupinfo)
+
         result = subprocess.run(['git', 'diff', '--cached', '--quiet'], capture_output=True, text=True, creationflags=CREATE_NO_WINDOW, startupinfo=startupinfo)
         if result.returncode == 0:
             log('No changes to commit')
             return True
+
         timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        subprocess.run(['git', 'commit', '-m', f'Auto-update {timestamp}'], capture_output=True, text=True, encoding='utf-8', creationflags=CREATE_NO_WINDOW, startupinfo=startupinfo)
-        result = subprocess.run(['git', 'push'], capture_output=True, text=True, encoding='utf-8', creationflags=CREATE_NO_WINDOW, startupinfo=startupinfo)
-        if result.returncode != 0:
-            log(f'git push: {result.stderr}')
+        commit_res = subprocess.run(['git', 'commit', '-m', f'Auto-update {timestamp}'], capture_output=True, text=True, encoding='utf-8', creationflags=CREATE_NO_WINDOW, startupinfo=startupinfo)
+        if commit_res.returncode != 0:
+            log(f'git commit error: {commit_res.stderr.strip()}')
             return False
-        log('Pushed to GitHub')
+
+        push_res = subprocess.run(['git', 'push', 'origin', 'main'], capture_output=True, text=True, encoding='utf-8', creationflags=CREATE_NO_WINDOW, startupinfo=startupinfo)
+        if push_res.returncode != 0:
+            log(f'git push initial failed: {push_res.stderr.strip()}, attempting pull --rebase...')
+            subprocess.run(['git', 'pull', '--rebase', 'origin', 'main'], capture_output=True, text=True, encoding='utf-8', creationflags=CREATE_NO_WINDOW, startupinfo=startupinfo)
+            push_res = subprocess.run(['git', 'push', 'origin', 'main'], capture_output=True, text=True, encoding='utf-8', creationflags=CREATE_NO_WINDOW, startupinfo=startupinfo)
+            if push_res.returncode != 0:
+                log(f'git push retry failed: {push_res.stderr.strip()}')
+                return False
+
+        log('Pushed to GitHub successfully')
         return True
     except Exception as e:
         log(f'ERROR git: {e}')
