@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-19T17:58:21.308008",
-  "print_date": "2026-10-19 17:56:59",
+  "generated_at": "2026-10-20T12:06:21.938357",
+  "print_date": "2026-10-20 12:05:48",
   "invoices_print_date": "",
   "store_name": "النور لتجارة الأعلاف",
   "inventory": [
@@ -64,7 +64,7 @@
       "code": "50038",
       "name": "بيكربونات صوديوم",
       "unit": "كيلو",
-      "balance": 2172.855,
+      "balance": 2172.355,
       "detailed": "2172 كيلو",
       "detained": 0.0,
       "group": "مجموعة إضافات الأعلاف",
@@ -34740,7 +34740,7 @@
             "shortage_pct": 0
           }
         ],
-        "current_stock_balance": 2172.855
+        "current_stock_balance": 2172.355
       },
       {
         "code": "50039",
@@ -35651,7 +35651,7 @@
   },
   "stats": {
     "total_items": 35,
-    "total_balance": 114767.305,
+    "total_balance": 114766.805,
     "low_stock": 11,
     "out_of_stock": 0,
     "groups": {
@@ -35661,7 +35661,7 @@
       },
       "مجموعة إضافات الأعلاف": {
         "count": 15,
-        "balance": 31079.865000000005
+        "balance": 31079.365000000005
       },
       "مجموعة خامات الأعلاف": {
         "count": 14,
