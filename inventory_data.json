@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-27T17:46:21.778754",
-  "print_date": "2026-10-27 17:45:10",
+  "generated_at": "2026-10-28T14:29:22.179296",
+  "print_date": "2026-10-28 14:29:18",
   "invoices_print_date": "",
   "store_name": "النور لتجارة الأعلاف",
   "inventory": [
@@ -262,8 +262,8 @@
       "code": "50011",
       "name": "رجيعه (رجيع كون)",
       "unit": "كيلو",
-      "balance": 1251.5,
-      "detailed": "1251 كيلو",
+      "balance": 1409.5,
+      "detailed": "1409 كيلو",
       "detained": 0.0,
       "group": "مجموعة خامات الأعلاف",
       "supplier": ""
@@ -273,8 +273,8 @@
       "code": "50018",
       "name": "صويا فولفات",
       "unit": "كيلو",
-      "balance": 464.75,
-      "detailed": "464 كيلو",
+      "balance": 306.75,
+      "detailed": "306 كيلو",
       "detained": 0.0,
       "group": "مجموعة خامات الأعلاف",
       "supplier": ""
@@ -35007,7 +35007,7 @@
             "shortage_pct": 0.02
           }
         ],
-        "current_stock_balance": 1251.5
+        "current_stock_balance": 1409.5
       },
       {
         "code": "50018",
@@ -35106,7 +35106,7 @@
             "shortage_pct": 0.08
           }
         ],
-        "current_stock_balance": 464.75
+        "current_stock_balance": 306.75
       },
       {
         "code": "50020",
