@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-01T15:59:25.039998",
-  "print_date": "2026-11-01 14:20:56",
+  "generated_at": "2026-11-01T16:00:21.442093",
+  "print_date": "2026-11-01 15:59:24",
   "invoices_print_date": "",
   "store_name": "النور لتجارة الأعلاف",
   "inventory": [
@@ -20,8 +20,8 @@
       "code": "50010",
       "name": "علف تسمين النور",
       "unit": "كيلو",
-      "balance": 1073.0,
-      "detailed": "1 طن / 73 كيلو",
+      "balance": 973.0,
+      "detailed": "0 طن / 973 كيلو",
       "detained": 0.0,
       "group": "مجموعة أعلاف النور",
       "supplier": ""
@@ -284,8 +284,8 @@
       "code": "50016",
       "name": "فول صويا46%",
       "unit": "كيلو",
-      "balance": 830.200001,
-      "detailed": "830 كيلو",
+      "balance": 650.000001,
+      "detailed": "650 كيلو",
       "detained": 0.0,
       "group": "مجموعة خامات الأعلاف",
       "supplier": ""
@@ -35575,7 +35575,7 @@
             "shortage_pct": 0
           }
         ],
-        "current_stock_balance": 830.200001
+        "current_stock_balance": 650.000001
       },
       {
         "code": "50020",
@@ -36044,7 +36044,7 @@
             "shortage_pct": 0
           }
         ],
-        "current_stock_balance": 1073.0
+        "current_stock_balance": 973.0
       },
       {
         "code": "50038",
@@ -37040,13 +37040,13 @@
   },
   "stats": {
     "total_items": 35,
-    "total_balance": 102645.355,
+    "total_balance": 102365.155,
     "low_stock": 11,
     "out_of_stock": 0,
     "groups": {
       "مجموعة أعلاف النور": {
         "count": 2,
-        "balance": 1824.0
+        "balance": 1724.0
       },
       "مجموعة إضافات الأعلاف": {
         "count": 15,
@@ -37054,7 +37054,7 @@
       },
       "مجموعة خامات الأعلاف": {
         "count": 14,
-        "balance": 60076.840001
+        "balance": 59896.640001
       },
       "مجموعة مستلزمات الإنتاج": {
         "count": 4,
