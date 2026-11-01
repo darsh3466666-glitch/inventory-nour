@@ -1,5 +1,5 @@
 {
-  "mtime": 1793455542.13758,
+  "mtime": 1793541530.6921184,
   "data": {
     "items": [
       {
@@ -25,7 +25,7 @@
         "total_cycle_wared": 279337.0,
         "shortage_cycles_count": 6,
         "post_wared": 27466.0,
-        "post_sader": 19357.0,
+        "post_sader": 19471.0,
         "is_cotton_based": true,
         "history": [
           {
@@ -113,7 +113,7 @@
             "shortage_pct": 1.44
           }
         ],
-        "current_stock_balance": 641.0
+        "current_stock_balance": 8206.0
       },
       {
         "code": "50005",
@@ -138,7 +138,7 @@
         "total_cycle_wared": 4476927.31,
         "shortage_cycles_count": 3,
         "post_wared": 972770.0,
-        "post_sader": 947425.5,
+        "post_sader": 947245.0,
         "is_cotton_based": false,
         "history": [
           {
@@ -198,7 +198,261 @@
             "shortage_pct": 0.1
           }
         ],
-        "current_stock_balance": 47395.0
+        "current_stock_balance": 28038.5
+      },
+      {
+        "code": "50011",
+        "name": "رجيعه (رجيع كون)",
+        "unit": "كيلو",
+        "category": "خامات وأعلاف",
+        "is_feed": true,
+        "total_tasweyat": 9,
+        "last_tasweya_date": "2026-10-18 15:26:05.187000",
+        "status": "عجز",
+        "diff": 35.0,
+        "raw_diff": -35.0,
+        "balance_after": 1116.5,
+        "cycle_prev_date": "2026-10-03 18:38:14.610000",
+        "cycle_wared": 9018.0,
+        "cycle_sader": 8497.0,
+        "kg_per_ton": 3.88,
+        "shortage_pct": 0.39,
+        "avg_kg_per_ton": 0.94,
+        "avg_shortage_pct": 0.09,
+        "total_shortage_qty": 191.38,
+        "total_cycle_wared": 203563.88,
+        "shortage_cycles_count": 9,
+        "post_wared": 18635.0,
+        "post_sader": 14139.0,
+        "is_cotton_based": false,
+        "history": [
+          {
+            "date": "2026-10-18 15:26:05.187000",
+            "bayan": "سند تسوية جرد رقم 51 م 0",
+            "user": "mostafa",
+            "status": "عجز",
+            "diff": 35.0,
+            "raw_diff": -35.0,
+            "balance": 1116.5,
+            "prev_date": "2026-10-03 18:38:14.610000",
+            "cycle_wared": 9018.0,
+            "cycle_sader": 8497.0,
+            "kg_per_ton": 3.88,
+            "shortage_pct": 0.39
+          },
+          {
+            "date": "2026-10-03 18:38:14.610000",
+            "bayan": "سند تسوية جرد رقم 48 م 0",
+            "user": "mostafa",
+            "status": "عجز",
+            "diff": 34.5,
+            "raw_diff": -34.5,
+            "balance": 630.5,
+            "prev_date": "2026-08-08 13:45:26.890000",
+            "cycle_wared": 28419.0,
+            "cycle_sader": 38406.0,
+            "kg_per_ton": 1.21,
+            "shortage_pct": 0.12
+          },
+          {
+            "date": "2026-08-08 13:45:26.890000",
+            "bayan": "سند تسوية جرد رقم 44 م 0",
+            "user": "mostafa",
+            "status": "عجز",
+            "diff": 22.5,
+            "raw_diff": -22.5,
+            "balance": 10652.0,
+            "prev_date": "2026-06-25 18:14:05.040000",
+            "cycle_wared": 36040.0,
+            "cycle_sader": 27014.0,
+            "kg_per_ton": 0.62,
+            "shortage_pct": 0.06
+          },
+          {
+            "date": "2026-06-25 18:14:05.040000",
+            "bayan": "سند تسوية جرد رقم 30 م 0",
+            "user": "mostafa",
+            "status": "عجز",
+            "diff": 25.0,
+            "raw_diff": -25.0,
+            "balance": 1648.5,
+            "prev_date": "2026-06-14 11:35:33.390000",
+            "cycle_wared": 8345.0,
+            "cycle_sader": 7827.0,
+            "kg_per_ton": 3.0,
+            "shortage_pct": 0.3
+          },
+          {
+            "date": "2026-06-14 11:35:33.390000",
+            "bayan": "سند تسوية جرد رقم 28 م 0",
+            "user": "mostafa",
+            "status": "عجز",
+            "diff": 22.5,
+            "raw_diff": -22.5,
+            "balance": 1155.5,
+            "prev_date": "2026-06-03 13:06:44.147000",
+            "cycle_wared": 8492.0,
+            "cycle_sader": 7768.0,
+            "kg_per_ton": 2.65,
+            "shortage_pct": 0.26
+          },
+          {
+            "date": "2026-06-03 13:06:44.147000",
+            "bayan": "سند تسوية جرد رقم 27 م 0",
+            "user": "mostafa",
+            "status": "عجز",
+            "diff": 13.0,
+            "raw_diff": -13.0,
+            "balance": 454.0,
+            "prev_date": "2026-04-09 16:27:21.947000",
+            "cycle_wared": 36965.0,
+            "cycle_sader": 36908.0,
+            "kg_per_ton": 0.35,
+            "shortage_pct": 0.04
+          },
+          {
+            "date": "2026-04-09 16:27:21.947000",
+            "bayan": "سند تسوية جرد رقم 18 م 0",
+            "user": "mostafa",
+            "status": "عجز",
+            "diff": 6.0,
+            "raw_diff": -6.0,
+            "balance": 410.0,
+            "prev_date": "2026-03-29 15:23:02.783000",
+            "cycle_wared": 9710.0,
+            "cycle_sader": 9509.0,
+            "kg_per_ton": 0.62,
+            "shortage_pct": 0.06
+          },
+          {
+            "date": "2026-03-29 15:23:02.783000",
+            "bayan": "سند تسوية جرد رقم 16 م 0",
+            "user": "mostafa",
+            "status": "عجز",
+            "diff": 23.0,
+            "raw_diff": -23.0,
+            "balance": 215.0,
+            "prev_date": "2026-03-14 11:41:14.637000",
+            "cycle_wared": 10200.0,
+            "cycle_sader": 10839.0,
+            "kg_per_ton": 2.25,
+            "shortage_pct": 0.23
+          },
+          {
+            "date": "2026-03-14 11:41:14.637000",
+            "bayan": "سند تسوية جرد رقم 14 م 0",
+            "user": "mostafa",
+            "status": "عجز",
+            "diff": 9.88,
+            "raw_diff": -9.88,
+            "balance": 877.0,
+            "prev_date": "2025-12-31",
+            "cycle_wared": 56374.88,
+            "cycle_sader": 55488.0,
+            "kg_per_ton": 0.18,
+            "shortage_pct": 0.02
+          }
+        ],
+        "current_stock_balance": 5612.5
+      },
+      {
+        "code": "50018",
+        "name": "صويا فولفات",
+        "unit": "كيلو",
+        "category": "خامات وأعلاف",
+        "is_feed": true,
+        "total_tasweyat": 5,
+        "last_tasweya_date": "2026-07-06 10:09:17.470000",
+        "status": "عجز",
+        "diff": 7.0,
+        "raw_diff": -7.0,
+        "balance_after": 2000.0,
+        "cycle_prev_date": "2026-06-21 16:39:19.250000",
+        "cycle_wared": 2000.0,
+        "cycle_sader": 608.0,
+        "kg_per_ton": 3.5,
+        "shortage_pct": 0.35,
+        "avg_kg_per_ton": 3.33,
+        "avg_shortage_pct": 0.33,
+        "total_shortage_qty": 41.25,
+        "total_cycle_wared": 12389.25,
+        "shortage_cycles_count": 5,
+        "post_wared": 2000.0,
+        "post_sader": 3693.25,
+        "is_cotton_based": false,
+        "history": [
+          {
+            "date": "2026-07-06 10:09:17.470000",
+            "bayan": "سند تسوية جرد رقم 37 م 0",
+            "user": "mostafa",
+            "status": "عجز",
+            "diff": 7.0,
+            "raw_diff": -7.0,
+            "balance": 2000.0,
+            "prev_date": "2026-06-21 16:39:19.250000",
+            "cycle_wared": 2000.0,
+            "cycle_sader": 608.0,
+            "kg_per_ton": 3.5,
+            "shortage_pct": 0.35
+          },
+          {
+            "date": "2026-06-21 16:39:19.250000",
+            "bayan": "سند تسوية جرد رقم 29 م 0",
+            "user": "mostafa",
+            "status": "عجز",
+            "diff": 17.0,
+            "raw_diff": -17.0,
+            "balance": 615.0,
+            "prev_date": "2026-05-19 18:22:34.483000",
+            "cycle_wared": 0.0,
+            "cycle_sader": 1619.0,
+            "kg_per_ton": 0,
+            "shortage_pct": 0
+          },
+          {
+            "date": "2026-05-19 18:22:34.483000",
+            "bayan": "سند تسوية جرد رقم 25 م 0",
+            "user": "mostafa",
+            "status": "عجز",
+            "diff": 11.0,
+            "raw_diff": -11.0,
+            "balance": 2251.0,
+            "prev_date": "2026-04-14 12:03:00",
+            "cycle_wared": 4000.0,
+            "cycle_sader": 1812.0,
+            "kg_per_ton": 2.75,
+            "shortage_pct": 0.27
+          },
+          {
+            "date": "2026-04-14 12:03:00",
+            "bayan": "سند تسوية جرد رقم 19 م 0",
+            "user": "mostafa",
+            "status": "عجز",
+            "diff": 1.0,
+            "raw_diff": -1.0,
+            "balance": 74.0,
+            "prev_date": "2026-03-14 11:41:14.637000",
+            "cycle_wared": 0.0,
+            "cycle_sader": 783.0,
+            "kg_per_ton": 0,
+            "shortage_pct": 0
+          },
+          {
+            "date": "2026-03-14 11:41:14.637000",
+            "bayan": "سند تسوية جرد رقم 14 م 0",
+            "user": "mostafa",
+            "status": "عجز",
+            "diff": 5.25,
+            "raw_diff": -5.25,
+            "balance": 858.0,
+            "prev_date": "2025-12-31",
+            "cycle_wared": 6389.25,
+            "cycle_sader": 5526.0,
+            "kg_per_ton": 0.82,
+            "shortage_pct": 0.08
+          }
+        ],
+        "current_stock_balance": 306.75
       },
       {
         "code": "50016",
@@ -206,26 +460,40 @@
         "unit": "كيلو",
         "category": "خامات وأعلاف",
         "is_feed": true,
-        "total_tasweyat": 10,
-        "last_tasweya_date": "2026-10-18 15:26:05.187000",
+        "total_tasweyat": 11,
+        "last_tasweya_date": "2026-11-01 15:56:56.743000",
         "status": "عجز",
-        "diff": 123.0,
-        "raw_diff": -123.0,
-        "balance_after": 4226.8,
-        "cycle_prev_date": "2026-10-08 18:46:40.430000",
-        "cycle_wared": 27860.0,
-        "cycle_sader": 25751.25,
-        "kg_per_ton": 4.41,
-        "shortage_pct": 0.44,
-        "avg_kg_per_ton": 5.08,
-        "avg_shortage_pct": 0.51,
-        "total_shortage_qty": 5760.082,
-        "total_cycle_wared": 1209618.057,
-        "shortage_cycles_count": 9,
-        "post_wared": 53630.0,
-        "post_sader": 57097.85,
+        "diff": 180.2,
+        "raw_diff": -180.2,
+        "balance_after": 650.0,
+        "cycle_prev_date": "2026-10-18 15:26:05.187000",
+        "cycle_wared": 53630.0,
+        "cycle_sader": 57026.6,
+        "kg_per_ton": 3.36,
+        "shortage_pct": 0.34,
+        "avg_kg_per_ton": 5.0,
+        "avg_shortage_pct": 0.5,
+        "total_shortage_qty": 5940.282,
+        "total_cycle_wared": 1263248.057,
+        "shortage_cycles_count": 10,
+        "post_wared": 0,
+        "post_sader": 0,
         "is_cotton_based": false,
         "history": [
+          {
+            "date": "2026-11-01 15:56:56.743000",
+            "bayan": "سند تسوية جرد رقم 53 م 0",
+            "user": "mostafa",
+            "status": "عجز",
+            "diff": 180.2,
+            "raw_diff": -180.2,
+            "balance": 650.0,
+            "prev_date": "2026-10-18 15:26:05.187000",
+            "cycle_wared": 53630.0,
+            "cycle_sader": 57026.6,
+            "kg_per_ton": 3.36,
+            "shortage_pct": 0.34
+          },
           {
             "date": "2026-10-18 15:26:05.187000",
             "bayan": "سند تسوية جرد رقم 51 م 0",
@@ -367,261 +635,7 @@
             "shortage_pct": 0
           }
         ],
-        "current_stock_balance": 5928.700001
-      },
-      {
-        "code": "50011",
-        "name": "رجيعه (رجيع كون)",
-        "unit": "كيلو",
-        "category": "خامات وأعلاف",
-        "is_feed": true,
-        "total_tasweyat": 9,
-        "last_tasweya_date": "2026-10-18 15:26:05.187000",
-        "status": "عجز",
-        "diff": 35.0,
-        "raw_diff": -35.0,
-        "balance_after": 1116.5,
-        "cycle_prev_date": "2026-10-03 18:38:14.610000",
-        "cycle_wared": 9018.0,
-        "cycle_sader": 8497.0,
-        "kg_per_ton": 3.88,
-        "shortage_pct": 0.39,
-        "avg_kg_per_ton": 0.94,
-        "avg_shortage_pct": 0.09,
-        "total_shortage_qty": 191.38,
-        "total_cycle_wared": 203563.88,
-        "shortage_cycles_count": 9,
-        "post_wared": 18635.0,
-        "post_sader": 14264.0,
-        "is_cotton_based": false,
-        "history": [
-          {
-            "date": "2026-10-18 15:26:05.187000",
-            "bayan": "سند تسوية جرد رقم 51 م 0",
-            "user": "mostafa",
-            "status": "عجز",
-            "diff": 35.0,
-            "raw_diff": -35.0,
-            "balance": 1116.5,
-            "prev_date": "2026-10-03 18:38:14.610000",
-            "cycle_wared": 9018.0,
-            "cycle_sader": 8497.0,
-            "kg_per_ton": 3.88,
-            "shortage_pct": 0.39
-          },
-          {
-            "date": "2026-10-03 18:38:14.610000",
-            "bayan": "سند تسوية جرد رقم 48 م 0",
-            "user": "mostafa",
-            "status": "عجز",
-            "diff": 34.5,
-            "raw_diff": -34.5,
-            "balance": 630.5,
-            "prev_date": "2026-08-08 13:45:26.890000",
-            "cycle_wared": 28419.0,
-            "cycle_sader": 38406.0,
-            "kg_per_ton": 1.21,
-            "shortage_pct": 0.12
-          },
-          {
-            "date": "2026-08-08 13:45:26.890000",
-            "bayan": "سند تسوية جرد رقم 44 م 0",
-            "user": "mostafa",
-            "status": "عجز",
-            "diff": 22.5,
-            "raw_diff": -22.5,
-            "balance": 10652.0,
-            "prev_date": "2026-06-25 18:14:05.040000",
-            "cycle_wared": 36040.0,
-            "cycle_sader": 27014.0,
-            "kg_per_ton": 0.62,
-            "shortage_pct": 0.06
-          },
-          {
-            "date": "2026-06-25 18:14:05.040000",
-            "bayan": "سند تسوية جرد رقم 30 م 0",
-            "user": "mostafa",
-            "status": "عجز",
-            "diff": 25.0,
-            "raw_diff": -25.0,
-            "balance": 1648.5,
-            "prev_date": "2026-06-14 11:35:33.390000",
-            "cycle_wared": 8345.0,
-            "cycle_sader": 7827.0,
-            "kg_per_ton": 3.0,
-            "shortage_pct": 0.3
-          },
-          {
-            "date": "2026-06-14 11:35:33.390000",
-            "bayan": "سند تسوية جرد رقم 28 م 0",
-            "user": "mostafa",
-            "status": "عجز",
-            "diff": 22.5,
-            "raw_diff": -22.5,
-            "balance": 1155.5,
-            "prev_date": "2026-06-03 13:06:44.147000",
-            "cycle_wared": 8492.0,
-            "cycle_sader": 7768.0,
-            "kg_per_ton": 2.65,
-            "shortage_pct": 0.26
-          },
-          {
-            "date": "2026-06-03 13:06:44.147000",
-            "bayan": "سند تسوية جرد رقم 27 م 0",
-            "user": "mostafa",
-            "status": "عجز",
-            "diff": 13.0,
-            "raw_diff": -13.0,
-            "balance": 454.0,
-            "prev_date": "2026-04-09 16:27:21.947000",
-            "cycle_wared": 36965.0,
-            "cycle_sader": 36908.0,
-            "kg_per_ton": 0.35,
-            "shortage_pct": 0.04
-          },
-          {
-            "date": "2026-04-09 16:27:21.947000",
-            "bayan": "سند تسوية جرد رقم 18 م 0",
-            "user": "mostafa",
-            "status": "عجز",
-            "diff": 6.0,
-            "raw_diff": -6.0,
-            "balance": 410.0,
-            "prev_date": "2026-03-29 15:23:02.783000",
-            "cycle_wared": 9710.0,
-            "cycle_sader": 9509.0,
-            "kg_per_ton": 0.62,
-            "shortage_pct": 0.06
-          },
-          {
-            "date": "2026-03-29 15:23:02.783000",
-            "bayan": "سند تسوية جرد رقم 16 م 0",
-            "user": "mostafa",
-            "status": "عجز",
-            "diff": 23.0,
-            "raw_diff": -23.0,
-            "balance": 215.0,
-            "prev_date": "2026-03-14 11:41:14.637000",
-            "cycle_wared": 10200.0,
-            "cycle_sader": 10839.0,
-            "kg_per_ton": 2.25,
-            "shortage_pct": 0.23
-          },
-          {
-            "date": "2026-03-14 11:41:14.637000",
-            "bayan": "سند تسوية جرد رقم 14 م 0",
-            "user": "mostafa",
-            "status": "عجز",
-            "diff": 9.88,
-            "raw_diff": -9.88,
-            "balance": 877.0,
-            "prev_date": "2025-12-31",
-            "cycle_wared": 56374.88,
-            "cycle_sader": 55488.0,
-            "kg_per_ton": 0.18,
-            "shortage_pct": 0.02
-          }
-        ],
-        "current_stock_balance": 9114.5
-      },
-      {
-        "code": "50018",
-        "name": "صويا فولفات",
-        "unit": "كيلو",
-        "category": "خامات وأعلاف",
-        "is_feed": true,
-        "total_tasweyat": 5,
-        "last_tasweya_date": "2026-07-06 10:09:17.470000",
-        "status": "عجز",
-        "diff": 7.0,
-        "raw_diff": -7.0,
-        "balance_after": 2000.0,
-        "cycle_prev_date": "2026-06-21 16:39:19.250000",
-        "cycle_wared": 2000.0,
-        "cycle_sader": 608.0,
-        "kg_per_ton": 3.5,
-        "shortage_pct": 0.35,
-        "avg_kg_per_ton": 3.33,
-        "avg_shortage_pct": 0.33,
-        "total_shortage_qty": 41.25,
-        "total_cycle_wared": 12389.25,
-        "shortage_cycles_count": 5,
-        "post_wared": 2000.0,
-        "post_sader": 3693.25,
-        "is_cotton_based": false,
-        "history": [
-          {
-            "date": "2026-07-06 10:09:17.470000",
-            "bayan": "سند تسوية جرد رقم 37 م 0",
-            "user": "mostafa",
-            "status": "عجز",
-            "diff": 7.0,
-            "raw_diff": -7.0,
-            "balance": 2000.0,
-            "prev_date": "2026-06-21 16:39:19.250000",
-            "cycle_wared": 2000.0,
-            "cycle_sader": 608.0,
-            "kg_per_ton": 3.5,
-            "shortage_pct": 0.35
-          },
-          {
-            "date": "2026-06-21 16:39:19.250000",
-            "bayan": "سند تسوية جرد رقم 29 م 0",
-            "user": "mostafa",
-            "status": "عجز",
-            "diff": 17.0,
-            "raw_diff": -17.0,
-            "balance": 615.0,
-            "prev_date": "2026-05-19 18:22:34.483000",
-            "cycle_wared": 0.0,
-            "cycle_sader": 1619.0,
-            "kg_per_ton": 0,
-            "shortage_pct": 0
-          },
-          {
-            "date": "2026-05-19 18:22:34.483000",
-            "bayan": "سند تسوية جرد رقم 25 م 0",
-            "user": "mostafa",
-            "status": "عجز",
-            "diff": 11.0,
-            "raw_diff": -11.0,
-            "balance": 2251.0,
-            "prev_date": "2026-04-14 12:03:00",
-            "cycle_wared": 4000.0,
-            "cycle_sader": 1812.0,
-            "kg_per_ton": 2.75,
-            "shortage_pct": 0.27
-          },
-          {
-            "date": "2026-04-14 12:03:00",
-            "bayan": "سند تسوية جرد رقم 19 م 0",
-            "user": "mostafa",
-            "status": "عجز",
-            "diff": 1.0,
-            "raw_diff": -1.0,
-            "balance": 74.0,
-            "prev_date": "2026-03-14 11:41:14.637000",
-            "cycle_wared": 0.0,
-            "cycle_sader": 783.0,
-            "kg_per_ton": 0,
-            "shortage_pct": 0
-          },
-          {
-            "date": "2026-03-14 11:41:14.637000",
-            "bayan": "سند تسوية جرد رقم 14 م 0",
-            "user": "mostafa",
-            "status": "عجز",
-            "diff": 5.25,
-            "raw_diff": -5.25,
-            "balance": 858.0,
-            "prev_date": "2025-12-31",
-            "cycle_wared": 6389.25,
-            "cycle_sader": 5526.0,
-            "kg_per_ton": 0.82,
-            "shortage_pct": 0.08
-          }
-        ],
-        "current_stock_balance": 306.75
+        "current_stock_balance": 830.200001
       },
       {
         "code": "50020",
@@ -646,7 +660,7 @@
         "total_cycle_wared": 157235.0,
         "shortage_cycles_count": 6,
         "post_wared": 42985.0,
-        "post_sader": 51018.5,
+        "post_sader": 50896.0,
         "is_cotton_based": false,
         "history": [
           {
@@ -734,7 +748,7 @@
             "shortage_pct": 0.13
           }
         ],
-        "current_stock_balance": 3808.0
+        "current_stock_balance": 2633.0
       },
       {
         "code": "50013",
@@ -833,7 +847,7 @@
             "shortage_pct": 0.23
           }
         ],
-        "current_stock_balance": 736.0
+        "current_stock_balance": 436.0
       },
       {
         "code": "50021",
@@ -986,7 +1000,7 @@
         "total_cycle_wared": 859280.24,
         "shortage_cycles_count": 0,
         "post_wared": 526070.0,
-        "post_sader": 517151.8,
+        "post_sader": 517119.8,
         "is_cotton_based": false,
         "history": [
           {
@@ -1004,7 +1018,7 @@
             "shortage_pct": 0
           }
         ],
-        "current_stock_balance": 17362.39
+        "current_stock_balance": 12985.39
       },
       {
         "code": "50046",
@@ -1047,7 +1061,7 @@
             "shortage_pct": 0
           }
         ],
-        "current_stock_balance": 1201.0
+        "current_stock_balance": 751.0
       },
       {
         "code": "50010",
@@ -1072,7 +1086,7 @@
         "total_cycle_wared": 175711.0,
         "shortage_cycles_count": 0,
         "post_wared": 34260.0,
-        "post_sader": 293303.0,
+        "post_sader": 294003.0,
         "is_cotton_based": false,
         "history": [
           {
@@ -1115,7 +1129,7 @@
         "total_cycle_wared": 22748.75,
         "shortage_cycles_count": 0,
         "post_wared": 12000.0,
-        "post_sader": 12696.45,
+        "post_sader": 12693.2,
         "is_cotton_based": false,
         "history": [
           {
@@ -1133,7 +1147,7 @@
             "shortage_pct": 0
           }
         ],
-        "current_stock_balance": 1156.605
+        "current_stock_balance": 997.855
       },
       {
         "code": "50039",
@@ -1158,7 +1172,7 @@
         "total_cycle_wared": 12376.19,
         "shortage_cycles_count": 0,
         "post_wared": 6450.0,
-        "post_sader": 6304.85,
+        "post_sader": 6301.65,
         "is_cotton_based": false,
         "history": [
           {
@@ -1204,7 +1218,7 @@
             "shortage_pct": 0
           }
         ],
-        "current_stock_balance": 2363.625
+        "current_stock_balance": 2284.375
       },
       {
         "code": "50033",
@@ -1229,7 +1243,7 @@
         "total_cycle_wared": 10325.375,
         "shortage_cycles_count": 0,
         "post_wared": 5523.0,
-        "post_sader": 4754.15,
+        "post_sader": 4749.15,
         "is_cotton_based": false,
         "history": [
           {
@@ -1261,7 +1275,7 @@
             "shortage_pct": 0
           }
         ],
-        "current_stock_balance": 1420.850001
+        "current_stock_balance": 1323.850001
       },
       {
         "code": "4620686",
@@ -1329,7 +1343,7 @@
         "total_cycle_wared": 1950.65,
         "shortage_cycles_count": 0,
         "post_wared": 0.0,
-        "post_sader": 702.1,
+        "post_sader": 702.6,
         "is_cotton_based": false,
         "history": [
           {
@@ -1375,7 +1389,7 @@
             "shortage_pct": 0
           }
         ],
-        "current_stock_balance": 174.4
+        "current_stock_balance": 171.9
       },
       {
         "code": "50025",
@@ -1400,7 +1414,7 @@
         "total_cycle_wared": 4314.735,
         "shortage_cycles_count": 0,
         "post_wared": 2000.0,
-        "post_sader": 2281.55,
+        "post_sader": 2280.4,
         "is_cotton_based": false,
         "history": [
           {
@@ -1418,7 +1432,7 @@
             "shortage_pct": 0
           }
         ],
-        "current_stock_balance": 350.485002
+        "current_stock_balance": 323.735002
       },
       {
         "code": "3900354",
@@ -1630,7 +1644,7 @@
             "shortage_pct": 34.4
           }
         ],
-        "current_stock_balance": 7000.0
+        "current_stock_balance": 4100.0
       },
       {
         "code": "1801610",
@@ -1799,7 +1813,7 @@
             "shortage_pct": 52.25
           }
         ],
-        "current_stock_balance": 7140.0
+        "current_stock_balance": 5600.0
       },
       {
         "code": "2209192",
@@ -1968,7 +1982,7 @@
             "shortage_pct": 38.21
           }
         ],
-        "current_stock_balance": 1400.0
+        "current_stock_balance": 800.0
       },
       {
         "code": "1941822",
@@ -2072,16 +2086,16 @@
     ],
     "summary": {
       "total_items_with_tasweya": 23,
-      "total_tasweyat_count": 100,
+      "total_tasweyat_count": 101,
       "shortage_items_count": 13,
       "surplus_items_count": 10,
-      "total_shortage_feed_kg": 3204.0,
+      "total_shortage_feed_kg": 3261.2,
       "total_shortage_pieces": 5314,
       "total_surplus_feed_kg": 1647.98,
       "total_surplus_pieces": 0,
-      "total_shortage_kg": 3204.0,
+      "total_shortage_kg": 3261.2,
       "total_surplus_kg": 1647.98,
-      "avg_kg_per_ton": 7.95
+      "avg_kg_per_ton": 7.77
     }
   }
 }
