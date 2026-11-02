@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-01T17:42:21.719488",
-  "print_date": "2026-11-01 17:38:09",
+  "generated_at": "2026-11-02T12:29:21.407793",
+  "print_date": "2026-11-02 12:29:02",
   "invoices_print_date": "",
   "store_name": "النور لتجارة الأعلاف",
   "inventory": [
@@ -229,8 +229,8 @@
       "code": "50020",
       "name": "دي دي جي",
       "unit": "كيلو",
-      "balance": 2050.5,
-      "detailed": "2050 كيلو",
+      "balance": 10050.5,
+      "detailed": "10050 كيلو",
       "detained": 0.0,
       "group": "مجموعة خامات الأعلاف",
       "supplier": ""
@@ -240,8 +240,8 @@
       "code": "50005",
       "name": "ذره صفراء",
       "unit": "كيلو",
-      "balance": 22648.0,
-      "detailed": "22648 كيلو",
+      "balance": 102968.0,
+      "detailed": "102968 كيلو",
       "detained": 0.0,
       "group": "مجموعة خامات الأعلاف",
       "supplier": ""
@@ -284,8 +284,8 @@
       "code": "50016",
       "name": "فول صويا46%",
       "unit": "كيلو",
-      "balance": -2367.249999,
-      "detailed": "- 2367 كيلو",
+      "balance": 26532.750001,
+      "detailed": "26532 كيلو",
       "detained": 0.0,
       "group": "مجموعة خامات الأعلاف",
       "supplier": ""
@@ -339,8 +339,8 @@
       "code": "50008",
       "name": "نخاله",
       "unit": "كيلو",
-      "balance": 11312.39,
-      "detailed": "11312 كيلو",
+      "balance": 33312.39,
+      "detailed": "33312 كيلو",
       "detained": 0.0,
       "group": "مجموعة خامات الأعلاف",
       "supplier": ""
@@ -35265,7 +35265,7 @@
             "shortage_pct": 0.1
           }
         ],
-        "current_stock_balance": 22648.0
+        "current_stock_balance": 102968.0
       },
       {
         "code": "50011",
@@ -35702,7 +35702,7 @@
             "shortage_pct": 0
           }
         ],
-        "current_stock_balance": -2367.249999
+        "current_stock_balance": 26532.750001
       },
       {
         "code": "50020",
@@ -35815,7 +35815,7 @@
             "shortage_pct": 0.13
           }
         ],
-        "current_stock_balance": 2050.5
+        "current_stock_balance": 10050.5
       },
       {
         "code": "50013",
@@ -36085,7 +36085,7 @@
             "shortage_pct": 0
           }
         ],
-        "current_stock_balance": 11312.39
+        "current_stock_balance": 33312.39
       },
       {
         "code": "50046",
@@ -37167,9 +37167,9 @@
   },
   "stats": {
     "total_items": 35,
-    "total_balance": 92356.905,
+    "total_balance": 231576.905,
     "low_stock": 11,
-    "out_of_stock": 1,
+    "out_of_stock": 0,
     "groups": {
       "مجموعة أعلاف النور": {
         "count": 2,
@@ -37181,7 +37181,7 @@
       },
       "مجموعة خامات الأعلاف": {
         "count": 14,
-        "balance": 48328.390001
+        "balance": 187548.39000100002
       },
       "مجموعة مستلزمات الإنتاج": {
         "count": 4,
