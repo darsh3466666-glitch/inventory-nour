@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-03T13:17:21.632134",
-  "print_date": "2026-11-03 13:15:39",
+  "generated_at": "2026-11-03T13:21:21.091918",
+  "print_date": "2026-11-03 13:20:53",
   "invoices_print_date": "",
   "store_name": "النور لتجارة الأعلاف",
   "inventory": [
@@ -9,8 +9,8 @@
       "code": "50046",
       "name": "علف النور حلاب",
       "unit": "كيلو",
-      "balance": 701.0,
-      "detailed": "0 طن / 701 كيلو",
+      "balance": 651.0,
+      "detailed": "0 طن / 651 كيلو",
       "detained": 0.0,
       "group": "مجموعة أعلاف النور",
       "supplier": ""
@@ -36278,7 +36278,7 @@
             "shortage_pct": 0
           }
         ],
-        "current_stock_balance": 701.0
+        "current_stock_balance": 651.0
       },
       {
         "code": "50010",
@@ -37331,13 +37331,13 @@
   },
   "stats": {
     "total_items": 35,
-    "total_balance": 183534.93,
+    "total_balance": 183484.93,
     "low_stock": 11,
     "out_of_stock": 0,
     "groups": {
       "مجموعة أعلاف النور": {
         "count": 2,
-        "balance": 1524.0
+        "balance": 1474.0
       },
       "مجموعة إضافات الأعلاف": {
         "count": 15,
