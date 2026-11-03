@@ -1,5 +1,5 @@
 {
-  "mtime": 1793541530.6921184,
+  "mtime": 1793696734.7204342,
   "data": {
     "items": [
       {
@@ -25,7 +25,7 @@
         "total_cycle_wared": 279337.0,
         "shortage_cycles_count": 6,
         "post_wared": 27466.0,
-        "post_sader": 19471.0,
+        "post_sader": 21413.5,
         "is_cotton_based": true,
         "history": [
           {
@@ -113,7 +113,7 @@
             "shortage_pct": 1.44
           }
         ],
-        "current_stock_balance": 8206.0
+        "current_stock_balance": 6263.5
       },
       {
         "code": "50005",
@@ -137,8 +137,8 @@
         "total_shortage_qty": 7304.81,
         "total_cycle_wared": 4476927.31,
         "shortage_cycles_count": 3,
-        "post_wared": 972770.0,
-        "post_sader": 947245.0,
+        "post_wared": 1053740.0,
+        "post_sader": 993400.75,
         "is_cotton_based": false,
         "history": [
           {
@@ -198,7 +198,7 @@
             "shortage_pct": 0.1
           }
         ],
-        "current_stock_balance": 28038.5
+        "current_stock_balance": 62972.75
       },
       {
         "code": "50011",
@@ -223,7 +223,7 @@
         "total_cycle_wared": 203563.88,
         "shortage_cycles_count": 9,
         "post_wared": 18635.0,
-        "post_sader": 14139.0,
+        "post_sader": 14994.0,
         "is_cotton_based": false,
         "history": [
           {
@@ -353,7 +353,7 @@
             "shortage_pct": 0.02
           }
         ],
-        "current_stock_balance": 5612.5
+        "current_stock_balance": 4757.5
       },
       {
         "code": "50018",
@@ -465,10 +465,10 @@
         "status": "عجز",
         "diff": 180.2,
         "raw_diff": -180.2,
-        "balance_after": 650.0,
+        "balance_after": 533.0,
         "cycle_prev_date": "2026-10-18 15:26:05.187000",
         "cycle_wared": 53630.0,
-        "cycle_sader": 57026.6,
+        "cycle_sader": 57143.6,
         "kg_per_ton": 3.36,
         "shortage_pct": 0.34,
         "avg_kg_per_ton": 5.0,
@@ -476,8 +476,8 @@
         "total_shortage_qty": 5940.282,
         "total_cycle_wared": 1263248.057,
         "shortage_cycles_count": 10,
-        "post_wared": 0,
-        "post_sader": 0,
+        "post_wared": 28900.0,
+        "post_sader": 4017.0,
         "is_cotton_based": false,
         "history": [
           {
@@ -487,10 +487,10 @@
             "status": "عجز",
             "diff": 180.2,
             "raw_diff": -180.2,
-            "balance": 650.0,
+            "balance": 533.0,
             "prev_date": "2026-10-18 15:26:05.187000",
             "cycle_wared": 53630.0,
-            "cycle_sader": 57026.6,
+            "cycle_sader": 57143.6,
             "kg_per_ton": 3.36,
             "shortage_pct": 0.34
           },
@@ -635,7 +635,7 @@
             "shortage_pct": 0
           }
         ],
-        "current_stock_balance": 830.200001
+        "current_stock_balance": 25416.000001
       },
       {
         "code": "50020",
@@ -659,8 +659,8 @@
         "total_shortage_qty": 294.5,
         "total_cycle_wared": 157235.0,
         "shortage_cycles_count": 6,
-        "post_wared": 42985.0,
-        "post_sader": 50896.0,
+        "post_wared": 50985.0,
+        "post_sader": 52153.5,
         "is_cotton_based": false,
         "history": [
           {
@@ -748,7 +748,7 @@
             "shortage_pct": 0.13
           }
         ],
-        "current_stock_balance": 2633.0
+        "current_stock_balance": 9375.5
       },
       {
         "code": "50013",
@@ -999,8 +999,8 @@
         "total_shortage_qty": 0,
         "total_cycle_wared": 859280.24,
         "shortage_cycles_count": 0,
-        "post_wared": 526070.0,
-        "post_sader": 517119.8,
+        "post_wared": 548070.0,
+        "post_sader": 522685.05,
         "is_cotton_based": false,
         "history": [
           {
@@ -1018,7 +1018,7 @@
             "shortage_pct": 0
           }
         ],
-        "current_stock_balance": 12985.39
+        "current_stock_balance": 29420.14
       },
       {
         "code": "50046",
@@ -1042,8 +1042,8 @@
         "total_shortage_qty": 0,
         "total_cycle_wared": 21289.0,
         "shortage_cycles_count": 0,
-        "post_wared": 2598.0,
-        "post_sader": 50379.0,
+        "post_wared": 2600.0,
+        "post_sader": 52429.0,
         "is_cotton_based": false,
         "history": [
           {
@@ -1061,7 +1061,7 @@
             "shortage_pct": 0
           }
         ],
-        "current_stock_balance": 751.0
+        "current_stock_balance": 701.0
       },
       {
         "code": "50010",
@@ -1085,8 +1085,8 @@
         "total_shortage_qty": 0,
         "total_cycle_wared": 175711.0,
         "shortage_cycles_count": 0,
-        "post_wared": 34260.0,
-        "post_sader": 294003.0,
+        "post_wared": 34269.0,
+        "post_sader": 303203.0,
         "is_cotton_based": false,
         "history": [
           {
@@ -1104,7 +1104,7 @@
             "shortage_pct": 0
           }
         ],
-        "current_stock_balance": 1073.0
+        "current_stock_balance": 773.0
       },
       {
         "code": "50038",
@@ -1129,7 +1129,7 @@
         "total_cycle_wared": 22748.75,
         "shortage_cycles_count": 0,
         "post_wared": 12000.0,
-        "post_sader": 12693.2,
+        "post_sader": 12773.7,
         "is_cotton_based": false,
         "history": [
           {
@@ -1147,7 +1147,7 @@
             "shortage_pct": 0
           }
         ],
-        "current_stock_balance": 997.855
+        "current_stock_balance": 917.355
       },
       {
         "code": "50039",
@@ -1172,7 +1172,7 @@
         "total_cycle_wared": 12376.19,
         "shortage_cycles_count": 0,
         "post_wared": 6450.0,
-        "post_sader": 6301.65,
+        "post_sader": 6377.6,
         "is_cotton_based": false,
         "history": [
           {
@@ -1218,7 +1218,7 @@
             "shortage_pct": 0
           }
         ],
-        "current_stock_balance": 2284.375
+        "current_stock_balance": 2208.425
       },
       {
         "code": "50033",
@@ -1243,7 +1243,7 @@
         "total_cycle_wared": 10325.375,
         "shortage_cycles_count": 0,
         "post_wared": 5523.0,
-        "post_sader": 4749.15,
+        "post_sader": 4778.4,
         "is_cotton_based": false,
         "history": [
           {
@@ -1275,7 +1275,7 @@
             "shortage_pct": 0
           }
         ],
-        "current_stock_balance": 1323.850001
+        "current_stock_balance": 1294.600001
       },
       {
         "code": "4620686",
@@ -1300,7 +1300,7 @@
         "total_cycle_wared": 120.0,
         "shortage_cycles_count": 0,
         "post_wared": 0.0,
-        "post_sader": 54.75,
+        "post_sader": 56.0,
         "is_cotton_based": false,
         "history": [
           {
@@ -1318,7 +1318,7 @@
             "shortage_pct": 0
           }
         ],
-        "current_stock_balance": 22.75
+        "current_stock_balance": 21.5
       },
       {
         "code": "50024",
@@ -1343,7 +1343,7 @@
         "total_cycle_wared": 1950.65,
         "shortage_cycles_count": 0,
         "post_wared": 0.0,
-        "post_sader": 702.6,
+        "post_sader": 709.6,
         "is_cotton_based": false,
         "history": [
           {
@@ -1389,7 +1389,7 @@
             "shortage_pct": 0
           }
         ],
-        "current_stock_balance": 171.9
+        "current_stock_balance": 164.9
       },
       {
         "code": "50025",
@@ -1413,8 +1413,8 @@
         "total_shortage_qty": 0,
         "total_cycle_wared": 4314.735,
         "shortage_cycles_count": 0,
-        "post_wared": 2000.0,
-        "post_sader": 2280.4,
+        "post_wared": 3980.0,
+        "post_sader": 2305.3,
         "is_cotton_based": false,
         "history": [
           {
@@ -1432,7 +1432,7 @@
             "shortage_pct": 0
           }
         ],
-        "current_stock_balance": 323.735002
+        "current_stock_balance": 2278.835003
       },
       {
         "code": "3900354",
@@ -1668,8 +1668,8 @@
         "total_shortage_qty": 20180.0,
         "total_cycle_wared": 39741.0,
         "shortage_cycles_count": 10,
-        "post_wared": 0,
-        "post_sader": 0,
+        "post_wared": 0.0,
+        "post_sader": 180.0,
         "is_cotton_based": false,
         "history": [
           {
@@ -1813,7 +1813,7 @@
             "shortage_pct": 52.25
           }
         ],
-        "current_stock_balance": 5600.0
+        "current_stock_balance": 5420.0
       },
       {
         "code": "2209192",
@@ -1837,8 +1837,8 @@
         "total_shortage_qty": 5888.0,
         "total_cycle_wared": 8689.0,
         "shortage_cycles_count": 10,
-        "post_wared": 0,
-        "post_sader": 0,
+        "post_wared": 0.0,
+        "post_sader": 40.0,
         "is_cotton_based": false,
         "history": [
           {
@@ -1982,7 +1982,7 @@
             "shortage_pct": 38.21
           }
         ],
-        "current_stock_balance": 800.0
+        "current_stock_balance": 760.0
       },
       {
         "code": "1941822",
@@ -1990,15 +1990,15 @@
         "unit": "قطعه",
         "category": "مستلزمات تعبئة وتغليف",
         "is_feed": false,
-        "total_tasweyat": 5,
-        "last_tasweya_date": "2026-09-30 12:16:25.703000",
-        "status": "عجز",
-        "diff": 314.0,
-        "raw_diff": -314.0,
-        "balance_after": 2500.6,
-        "cycle_prev_date": "2026-07-30 14:14:40.883000",
-        "cycle_wared": 0.0,
-        "cycle_sader": 185.6,
+        "total_tasweyat": 6,
+        "last_tasweya_date": "2026-11-03 11:01:09.810000",
+        "status": "زيادة",
+        "diff": 499.4,
+        "raw_diff": 499.4,
+        "balance_after": 3000.0,
+        "cycle_prev_date": "2026-09-30 12:16:25.703000",
+        "cycle_wared": 0,
+        "cycle_sader": 0,
         "kg_per_ton": 0,
         "shortage_pct": 0,
         "avg_kg_per_ton": 0,
@@ -2010,6 +2010,20 @@
         "post_sader": 0,
         "is_cotton_based": false,
         "history": [
+          {
+            "date": "2026-11-03 11:01:09.810000",
+            "bayan": "سند تسوية جرد رقم 54 م 0",
+            "user": "mostafa",
+            "status": "زيادة",
+            "diff": 499.4,
+            "raw_diff": 499.4,
+            "balance": 3000.0,
+            "prev_date": "2026-09-30 12:16:25.703000",
+            "cycle_wared": 0,
+            "cycle_sader": 0,
+            "kg_per_ton": 0,
+            "shortage_pct": 0
+          },
           {
             "date": "2026-09-30 12:16:25.703000",
             "bayan": "سند تسوية جرد رقم 47 م 0",
@@ -2086,13 +2100,13 @@
     ],
     "summary": {
       "total_items_with_tasweya": 23,
-      "total_tasweyat_count": 101,
-      "shortage_items_count": 13,
-      "surplus_items_count": 10,
+      "total_tasweyat_count": 102,
+      "shortage_items_count": 12,
+      "surplus_items_count": 11,
       "total_shortage_feed_kg": 3261.2,
-      "total_shortage_pieces": 5314,
+      "total_shortage_pieces": 5000,
       "total_surplus_feed_kg": 1647.98,
-      "total_surplus_pieces": 0,
+      "total_surplus_pieces": 499,
       "total_shortage_kg": 3261.2,
       "total_surplus_kg": 1647.98,
       "avg_kg_per_ton": 7.77
