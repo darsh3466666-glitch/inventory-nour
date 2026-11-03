@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-03T11:07:21.881100",
-  "print_date": "2026-11-02 17:19:17",
+  "generated_at": "2026-11-03T12:49:21.067355",
+  "print_date": "2026-11-03 12:48:19",
   "invoices_print_date": "",
   "store_name": "النور لتجارة الأعلاف",
   "inventory": [
@@ -240,8 +240,8 @@
       "code": "50005",
       "name": "ذره صفراء",
       "unit": "كيلو",
-      "balance": 62972.75,
-      "detailed": "62972 كيلو",
+      "balance": 62852.75,
+      "detailed": "62852 كيلو",
       "detained": 0.0,
       "group": "مجموعة خامات الأعلاف",
       "supplier": ""
@@ -251,8 +251,8 @@
       "code": "50011",
       "name": "رجيعه (رجيع كون)",
       "unit": "كيلو",
-      "balance": 4757.5,
-      "detailed": "4757 كيلو",
+      "balance": 4782.5,
+      "detailed": "4782 كيلو",
       "detained": 0.0,
       "group": "مجموعة خامات الأعلاف",
       "supplier": ""
@@ -350,8 +350,8 @@
       "code": "1941822",
       "name": "شكاير شفاف احمر 60*115 بذره",
       "unit": "قطعه",
-      "balance": 2500.6,
-      "detailed": "2500 قطعه",
+      "balance": 3000.0,
+      "detailed": "3000 قطعه",
       "detained": 0.0,
       "group": "مجموعة مستلزمات الإنتاج",
       "supplier": ""
@@ -35415,7 +35415,7 @@
             "shortage_pct": 0.1
           }
         ],
-        "current_stock_balance": 62972.75
+        "current_stock_balance": 62852.75
       },
       {
         "code": "50011",
@@ -35570,7 +35570,7 @@
             "shortage_pct": 0.02
           }
         ],
-        "current_stock_balance": 4757.5
+        "current_stock_balance": 4782.5
       },
       {
         "code": "50018",
@@ -37312,7 +37312,7 @@
             "shortage_pct": 28.91
           }
         ],
-        "current_stock_balance": 2500.6
+        "current_stock_balance": 3000.0
       }
     ],
     "summary": {
@@ -37331,7 +37331,7 @@
   },
   "stats": {
     "total_items": 35,
-    "total_balance": 183080.53,
+    "total_balance": 183484.93,
     "low_stock": 11,
     "out_of_stock": 0,
     "groups": {
@@ -37345,11 +37345,11 @@
       },
       "مجموعة خامات الأعلاف": {
         "count": 14,
-        "balance": 139951.64000100002
+        "balance": 139856.64000100002
       },
       "مجموعة مستلزمات الإنتاج": {
         "count": 4,
-        "balance": 12780.6
+        "balance": 13280.0
       }
     },
     "total_transactions": 24667
