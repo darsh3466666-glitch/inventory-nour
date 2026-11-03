@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-03T13:03:20.963454",
-  "print_date": "2026-11-03 13:01:22",
+  "generated_at": "2026-11-03T13:09:21.222846",
+  "print_date": "2026-11-03 13:08:30",
   "invoices_print_date": "",
   "store_name": "النور لتجارة الأعلاف",
   "inventory": [
@@ -9,8 +9,8 @@
       "code": "50046",
       "name": "علف النور حلاب",
       "unit": "كيلو",
-      "balance": 701.0,
-      "detailed": "0 طن / 701 كيلو",
+      "balance": 651.0,
+      "detailed": "0 طن / 651 كيلو",
       "detained": 0.0,
       "group": "مجموعة أعلاف النور",
       "supplier": ""
@@ -20,8 +20,8 @@
       "code": "50010",
       "name": "علف تسمين النور",
       "unit": "كيلو",
-      "balance": 823.0,
-      "detailed": "0 طن / 823 كيلو",
+      "balance": 873.0,
+      "detailed": "0 طن / 873 كيلو",
       "detained": 0.0,
       "group": "مجموعة أعلاف النور",
       "supplier": ""
@@ -36278,7 +36278,7 @@
             "shortage_pct": 0
           }
         ],
-        "current_stock_balance": 701.0
+        "current_stock_balance": 651.0
       },
       {
         "code": "50010",
@@ -36321,7 +36321,7 @@
             "shortage_pct": 0
           }
         ],
-        "current_stock_balance": 823.0
+        "current_stock_balance": 873.0
       },
       {
         "code": "50038",
