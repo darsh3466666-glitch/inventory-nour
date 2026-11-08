@@ -626,7 +626,7 @@ def embed_data_into_html(data, retries=3, delay=1.0):
 CREATE_NO_WINDOW = 0x08000000 if sys.platform == 'win32' else 0
 
 def cleanup_stale_git_lock():
-    """Remove stale git lock files (.git/index.lock, etc.) if older than 5 seconds"""
+    """Remove stale git lock files and auto-heal corrupt index/refs if corrupted by sudden power loss"""
     git_dir = os.path.join(REPO_DIR, '.git')
     lock_files = ['index.lock', 'HEAD.lock', 'refs/heads/main.lock']
     for lf in lock_files:
@@ -639,6 +639,35 @@ def cleanup_stale_git_lock():
                     os.remove(lock_path)
             except Exception as e:
                 log(f'Could not remove lock {lf}: {e}')
+
+    # Auto-heal corrupted index (e.g. bad signature 0x00000000 from power cut)
+    index_path = os.path.join(git_dir, 'index')
+    if os.path.exists(index_path):
+        try:
+            with open(index_path, 'rb') as f:
+                header = f.read(4)
+            if header != b'DIRC' or os.path.getsize(index_path) < 12:
+                log('Corrupted git index detected (bad signature or truncated). Auto-repairing...')
+                os.remove(index_path)
+                subprocess.run(['git', 'reset'], cwd=REPO_DIR, capture_output=True, creationflags=CREATE_NO_WINDOW)
+        except Exception as e:
+            log(f'Warning validating git index: {e}')
+
+    # Auto-heal zeroed refs/heads/main if power cut occurred during ref update
+    main_ref = os.path.join(git_dir, 'refs', 'heads', 'main')
+    origin_ref = os.path.join(git_dir, 'refs', 'remotes', 'origin', 'main')
+    if os.path.exists(main_ref):
+        try:
+            with open(main_ref, 'rb') as f:
+                ref_data = f.read()
+            if len(ref_data) == 0 or all(b == 0 for b in ref_data):
+                log('Corrupted zeroed refs/heads/main detected. Auto-recovering from remote ref...')
+                if os.path.exists(origin_ref):
+                    import shutil
+                    shutil.copyfile(origin_ref, main_ref)
+                    subprocess.run(['git', 'reset'], cwd=REPO_DIR, capture_output=True, creationflags=CREATE_NO_WINDOW)
+        except Exception as e:
+            log(f'Warning validating main ref: {e}')
 
 
 def git_push():
