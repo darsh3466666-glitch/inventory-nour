@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-09T16:40:20.734546",
+  "generated_at": "2026-11-09T16:42:30.297567",
   "print_date": "2026-11-09 16:17:24",
   "invoices_print_date": "",
   "store_name": "النور لتجارة الأعلاف",
@@ -35835,6 +35835,13 @@
         "cycle_base": 1.0,
         "kg_per_ton": 1000.0,
         "shortage_pct": 100.0,
+        "threshold_safe": 2.0,
+        "threshold_high": 5.0,
+        "threshold_desc": "إضافات دقيقة",
+        "shortage_level": "high",
+        "shortage_level_label": "عجز مرتفع",
+        "avg_shortage_level": "high",
+        "avg_shortage_label": "عجز مرتفع",
         "avg_kg_per_ton": 16.99,
         "avg_shortage_pct": 1.7,
         "total_shortage_qty": 4.0,
@@ -35859,7 +35866,9 @@
             "cycle_wared": 0,
             "cycle_sader": 0,
             "kg_per_ton": 1000.0,
-            "shortage_pct": 100.0
+            "shortage_pct": 100.0,
+            "shortage_level": "high",
+            "shortage_level_label": "عجز مرتفع"
           },
           {
             "date": "2026-04-14 12:03:00",
@@ -35875,7 +35884,9 @@
             "cycle_wared": 0,
             "cycle_sader": 0,
             "kg_per_ton": 0.0,
-            "shortage_pct": 0.0
+            "shortage_pct": 0.0,
+            "shortage_level": "surplus",
+            "shortage_level_label": "فائض جرد"
           },
           {
             "date": "2026-03-25 10:59:37.347000",
@@ -35891,7 +35902,9 @@
             "cycle_wared": 117.5,
             "cycle_sader": 114.0,
             "kg_per_ton": 12.79,
-            "shortage_pct": 1.28
+            "shortage_pct": 1.28,
+            "shortage_level": "high",
+            "shortage_level_label": "عجز مرتفع"
           }
         ],
         "current_stock_balance": null
@@ -35914,6 +35927,13 @@
         "cycle_base": 1.0,
         "kg_per_ton": 1000.0,
         "shortage_pct": 100.0,
+        "threshold_safe": 2.0,
+        "threshold_high": 5.0,
+        "threshold_desc": "فيتامينات دقيقة",
+        "shortage_level": "high",
+        "shortage_level_label": "عجز مرتفع",
+        "avg_shortage_level": "high",
+        "avg_shortage_label": "عجز مرتفع",
         "avg_kg_per_ton": 1000.0,
         "avg_shortage_pct": 100.0,
         "total_shortage_qty": 1.0,
@@ -35938,7 +35958,9 @@
             "cycle_wared": 0,
             "cycle_sader": 0,
             "kg_per_ton": 1000.0,
-            "shortage_pct": 100.0
+            "shortage_pct": 100.0,
+            "shortage_level": "high",
+            "shortage_level_label": "عجز مرتفع"
           },
           {
             "date": "2026-04-14 12:03:00",
@@ -35954,7 +35976,9 @@
             "cycle_wared": 55.25,
             "cycle_sader": 55.0,
             "kg_per_ton": 0.0,
-            "shortage_pct": 0.0
+            "shortage_pct": 0.0,
+            "shortage_level": "surplus",
+            "shortage_level_label": "فائض جرد"
           }
         ],
         "current_stock_balance": null
@@ -35977,6 +36001,13 @@
         "cycle_base": 38960.0,
         "kg_per_ton": 26.1,
         "shortage_pct": 2.61,
+        "threshold_safe": 15.0,
+        "threshold_high": 25.0,
+        "threshold_desc": "كسب قطن محلي",
+        "shortage_level": "high",
+        "shortage_level_label": "عجز مرتفع",
+        "avg_shortage_level": "high",
+        "avg_shortage_label": "عجز مرتفع",
         "avg_kg_per_ton": 26.56,
         "avg_shortage_pct": 2.66,
         "total_shortage_qty": 7558.0,
@@ -36001,7 +36032,9 @@
             "cycle_wared": 37627.0,
             "cycle_sader": 37943.0,
             "kg_per_ton": 26.1,
-            "shortage_pct": 2.61
+            "shortage_pct": 2.61,
+            "shortage_level": "high",
+            "shortage_level_label": "عجز مرتفع"
           },
           {
             "date": "2026-08-31 15:13:57.017000",
@@ -36017,7 +36050,9 @@
             "cycle_wared": 37075.0,
             "cycle_sader": 43233.0,
             "kg_per_ton": 60.0,
-            "shortage_pct": 6.0
+            "shortage_pct": 6.0,
+            "shortage_level": "high",
+            "shortage_level_label": "عجز مرتفع"
           },
           {
             "date": "2026-07-12 14:34:35.917000",
@@ -36033,7 +36068,9 @@
             "cycle_wared": 9425.0,
             "cycle_sader": 9965.5,
             "kg_per_ton": 3.94,
-            "shortage_pct": 0.39
+            "shortage_pct": 0.39,
+            "shortage_level": "safe",
+            "shortage_level_label": "عجز طبيعي آمن"
           },
           {
             "date": "2026-06-30 19:59:18.003000",
@@ -36049,7 +36086,9 @@
             "cycle_wared": 9255.0,
             "cycle_sader": 2948.0,
             "kg_per_ton": 86.6,
-            "shortage_pct": 8.66
+            "shortage_pct": 8.66,
+            "shortage_level": "high",
+            "shortage_level_label": "عجز مرتفع"
           },
           {
             "date": "2026-06-27 17:32:41.790000",
@@ -36065,7 +36104,9 @@
             "cycle_wared": 136395.0,
             "cycle_sader": 141072.25,
             "kg_per_ton": 24.82,
-            "shortage_pct": 2.48
+            "shortage_pct": 2.48,
+            "shortage_level": "moderate",
+            "shortage_level_label": "عجز متوسط"
           },
           {
             "date": "2026-02-10 10:18:34.240000",
@@ -36081,7 +36122,9 @@
             "cycle_wared": 49560.0,
             "cycle_sader": 42913.25,
             "kg_per_ton": 13.32,
-            "shortage_pct": 1.33
+            "shortage_pct": 1.33,
+            "shortage_level": "safe",
+            "shortage_level_label": "عجز طبيعي آمن"
           }
         ],
         "current_stock_balance": 9142.5
@@ -36104,6 +36147,13 @@
         "cycle_base": 615.0,
         "kg_per_ton": 11.38,
         "shortage_pct": 1.14,
+        "threshold_safe": 8.0,
+        "threshold_high": 12.0,
+        "threshold_desc": "صويا مبثوقة عالية الزيت",
+        "shortage_level": "moderate",
+        "shortage_level_label": "عجز متوسط",
+        "avg_shortage_level": "safe",
+        "avg_shortage_label": "عجز طبيعي آمن",
         "avg_kg_per_ton": 3.39,
         "avg_shortage_pct": 0.34,
         "total_shortage_qty": 41.25,
@@ -36128,7 +36178,9 @@
             "cycle_wared": 2000.0,
             "cycle_sader": 608.0,
             "kg_per_ton": 11.38,
-            "shortage_pct": 1.14
+            "shortage_pct": 1.14,
+            "shortage_level": "moderate",
+            "shortage_level_label": "عجز متوسط"
           },
           {
             "date": "2026-06-21 16:39:19.250000",
@@ -36144,7 +36196,9 @@
             "cycle_wared": 0.0,
             "cycle_sader": 1619.0,
             "kg_per_ton": 10.39,
-            "shortage_pct": 1.04
+            "shortage_pct": 1.04,
+            "shortage_level": "moderate",
+            "shortage_level_label": "عجز متوسط"
           },
           {
             "date": "2026-05-19 18:22:34.483000",
@@ -36160,7 +36214,9 @@
             "cycle_wared": 4000.0,
             "cycle_sader": 1812.0,
             "kg_per_ton": 6.03,
-            "shortage_pct": 0.6
+            "shortage_pct": 0.6,
+            "shortage_level": "safe",
+            "shortage_level_label": "عجز طبيعي آمن"
           },
           {
             "date": "2026-04-14 12:03:00",
@@ -36176,7 +36232,9 @@
             "cycle_wared": 0.0,
             "cycle_sader": 783.0,
             "kg_per_ton": 1.28,
-            "shortage_pct": 0.13
+            "shortage_pct": 0.13,
+            "shortage_level": "safe",
+            "shortage_level_label": "عجز طبيعي آمن"
           },
           {
             "date": "2026-03-14 11:41:14.637000",
@@ -36192,7 +36250,9 @@
             "cycle_wared": 6389.25,
             "cycle_sader": 5526.0,
             "kg_per_ton": 0.72,
-            "shortage_pct": 0.07
+            "shortage_pct": 0.07,
+            "shortage_level": "safe",
+            "shortage_level_label": "عجز طبيعي آمن"
           }
         ],
         "current_stock_balance": 842.75
@@ -36215,6 +36275,13 @@
         "cycle_base": 7898.0,
         "kg_per_ton": 6.96,
         "shortage_pct": 0.7,
+        "threshold_safe": 7.0,
+        "threshold_high": 10.0,
+        "threshold_desc": "مخلفات تقطير ناعمة",
+        "shortage_level": "safe",
+        "shortage_level_label": "عجز طبيعي آمن",
+        "avg_shortage_level": "safe",
+        "avg_shortage_label": "عجز طبيعي آمن",
         "avg_kg_per_ton": 1.97,
         "avg_shortage_pct": 0.2,
         "total_shortage_qty": 294.5,
@@ -36239,7 +36306,9 @@
             "cycle_wared": 18000.0,
             "cycle_sader": 7843.0,
             "kg_per_ton": 6.96,
-            "shortage_pct": 0.7
+            "shortage_pct": 0.7,
+            "shortage_level": "safe",
+            "shortage_level_label": "عجز طبيعي آمن"
           },
           {
             "date": "2026-07-19 14:12:58.557000",
@@ -36255,7 +36324,9 @@
             "cycle_wared": 8000.0,
             "cycle_sader": 8356.0,
             "kg_per_ton": 1.2,
-            "shortage_pct": 0.12
+            "shortage_pct": 0.12,
+            "shortage_level": "safe",
+            "shortage_level_label": "عجز طبيعي آمن"
           },
           {
             "date": "2026-06-30 19:59:18.003000",
@@ -36271,7 +36342,9 @@
             "cycle_wared": 0.0,
             "cycle_sader": 2208.0,
             "kg_per_ton": 1.13,
-            "shortage_pct": 0.11
+            "shortage_pct": 0.11,
+            "shortage_level": "safe",
+            "shortage_level_label": "عجز طبيعي آمن"
           },
           {
             "date": "2026-06-25 18:14:05.040000",
@@ -36287,7 +36360,9 @@
             "cycle_wared": 25930.0,
             "cycle_sader": 23363.0,
             "kg_per_ton": 5.47,
-            "shortage_pct": 0.55
+            "shortage_pct": 0.55,
+            "shortage_level": "safe",
+            "shortage_level_label": "عجز طبيعي آمن"
           },
           {
             "date": "2026-05-14 14:47:57.650000",
@@ -36303,7 +36378,9 @@
             "cycle_wared": 84325.0,
             "cycle_sader": 83727.5,
             "kg_per_ton": 0.84,
-            "shortage_pct": 0.08
+            "shortage_pct": 0.08,
+            "shortage_level": "safe",
+            "shortage_level_label": "عجز طبيعي آمن"
           },
           {
             "date": "2026-02-03 13:09:49.620000",
@@ -36319,7 +36396,9 @@
             "cycle_wared": 20980.0,
             "cycle_sader": 20899.0,
             "kg_per_ton": 1.17,
-            "shortage_pct": 0.12
+            "shortage_pct": 0.12,
+            "shortage_level": "safe",
+            "shortage_level_label": "عجز طبيعي آمن"
           }
         ],
         "current_stock_balance": 7119.5
@@ -36342,6 +36421,13 @@
         "cycle_base": 342352.25,
         "kg_per_ton": 5.72,
         "shortage_pct": 0.57,
+        "threshold_safe": 5.0,
+        "threshold_high": 8.0,
+        "threshold_desc": "حبوب صب كاملة",
+        "shortage_level": "moderate",
+        "shortage_level_label": "عجز متوسط",
+        "avg_shortage_level": "safe",
+        "avg_shortage_label": "عجز طبيعي آمن",
         "avg_kg_per_ton": 2.32,
         "avg_shortage_pct": 0.23,
         "total_shortage_qty": 7304.81,
@@ -36366,7 +36452,9 @@
             "cycle_wared": 336400.0,
             "cycle_sader": 340393.25,
             "kg_per_ton": 5.72,
-            "shortage_pct": 0.57
+            "shortage_pct": 0.57,
+            "shortage_level": "moderate",
+            "shortage_level_label": "عجز متوسط"
           },
           {
             "date": "2026-08-09 19:19:10.157000",
@@ -36382,7 +36470,9 @@
             "cycle_wared": 689100.0,
             "cycle_sader": 702491.5,
             "kg_per_ton": 4.62,
-            "shortage_pct": 0.46
+            "shortage_pct": 0.46,
+            "shortage_level": "safe",
+            "shortage_level_label": "عجز طبيعي آمن"
           },
           {
             "date": "2026-06-23 14:17:30",
@@ -36398,7 +36488,9 @@
             "cycle_wared": 1422980.0,
             "cycle_sader": 1404270.75,
             "kg_per_ton": 0.0,
-            "shortage_pct": 0.0
+            "shortage_pct": 0.0,
+            "shortage_level": "surplus",
+            "shortage_level_label": "فائض جرد"
           },
           {
             "date": "2026-04-14 12:03:00",
@@ -36414,7 +36506,9 @@
             "cycle_wared": 2028447.31,
             "cycle_sader": 2023129.5,
             "kg_per_ton": 1.0,
-            "shortage_pct": 0.1
+            "shortage_pct": 0.1,
+            "shortage_level": "safe",
+            "shortage_level_label": "عجز طبيعي آمن"
           }
         ],
         "current_stock_balance": 30313.0
@@ -36437,6 +36531,13 @@
         "cycle_base": 1224.0,
         "kg_per_ton": 4.9,
         "shortage_pct": 0.49,
+        "threshold_safe": 6.0,
+        "threshold_high": 10.0,
+        "threshold_desc": "حبوب زيتية",
+        "shortage_level": "safe",
+        "shortage_level_label": "عجز طبيعي آمن",
+        "avg_shortage_level": "safe",
+        "avg_shortage_label": "عجز طبيعي آمن",
         "avg_kg_per_ton": 3.36,
         "avg_shortage_pct": 0.34,
         "total_shortage_qty": 64.85,
@@ -36461,7 +36562,9 @@
             "cycle_wared": 0.0,
             "cycle_sader": 1218.0,
             "kg_per_ton": 4.9,
-            "shortage_pct": 0.49
+            "shortage_pct": 0.49,
+            "shortage_level": "safe",
+            "shortage_level_label": "عجز طبيعي آمن"
           },
           {
             "date": "2026-06-21 16:39:19.250000",
@@ -36477,7 +36580,9 @@
             "cycle_wared": 5924.0,
             "cycle_sader": 4668.0,
             "kg_per_ton": 3.31,
-            "shortage_pct": 0.33
+            "shortage_pct": 0.33,
+            "shortage_level": "safe",
+            "shortage_level_label": "عجز طبيعي آمن"
           },
           {
             "date": "2026-03-14 11:41:14.637000",
@@ -36493,7 +36598,9 @@
             "cycle_wared": 3084.0,
             "cycle_sader": 4358.5,
             "kg_per_ton": 4.23,
-            "shortage_pct": 0.42
+            "shortage_pct": 0.42,
+            "shortage_level": "safe",
+            "shortage_level_label": "عجز طبيعي آمن"
           },
           {
             "date": "2026-02-14 10:27:54.780000",
@@ -36509,7 +36616,9 @@
             "cycle_wared": 3140.0,
             "cycle_sader": 1850.0,
             "kg_per_ton": 8.84,
-            "shortage_pct": 0.88
+            "shortage_pct": 0.88,
+            "shortage_level": "moderate",
+            "shortage_level_label": "عجز متوسط"
           },
           {
             "date": "2026-01-31 16:13:03.670000",
@@ -36525,7 +36634,9 @@
             "cycle_wared": 3635.8,
             "cycle_sader": 3528.45,
             "kg_per_ton": 1.16,
-            "shortage_pct": 0.12
+            "shortage_pct": 0.12,
+            "shortage_level": "safe",
+            "shortage_level_label": "عجز طبيعي آمن"
           }
         ],
         "current_stock_balance": 9.5
@@ -36548,6 +36659,13 @@
         "cycle_base": 8532.0,
         "kg_per_ton": 4.1,
         "shortage_pct": 0.41,
+        "threshold_safe": 10.0,
+        "threshold_high": 15.0,
+        "threshold_desc": "ألياف أرز سريعة التطاير",
+        "shortage_level": "safe",
+        "shortage_level_label": "عجز طبيعي آمن",
+        "avg_shortage_level": "safe",
+        "avg_shortage_label": "عجز طبيعي آمن",
         "avg_kg_per_ton": 0.94,
         "avg_shortage_pct": 0.09,
         "total_shortage_qty": 191.38,
@@ -36572,7 +36690,9 @@
             "cycle_wared": 9018.0,
             "cycle_sader": 8497.0,
             "kg_per_ton": 4.1,
-            "shortage_pct": 0.41
+            "shortage_pct": 0.41,
+            "shortage_level": "safe",
+            "shortage_level_label": "عجز طبيعي آمن"
           },
           {
             "date": "2026-10-03 18:38:14.610000",
@@ -36588,7 +36708,9 @@
             "cycle_wared": 28419.0,
             "cycle_sader": 38406.0,
             "kg_per_ton": 0.9,
-            "shortage_pct": 0.09
+            "shortage_pct": 0.09,
+            "shortage_level": "safe",
+            "shortage_level_label": "عجز طبيعي آمن"
           },
           {
             "date": "2026-08-08 13:45:26.890000",
@@ -36604,7 +36726,9 @@
             "cycle_wared": 36040.0,
             "cycle_sader": 27014.0,
             "kg_per_ton": 0.83,
-            "shortage_pct": 0.08
+            "shortage_pct": 0.08,
+            "shortage_level": "safe",
+            "shortage_level_label": "عجز طبيعي آمن"
           },
           {
             "date": "2026-06-25 18:14:05.040000",
@@ -36620,7 +36744,9 @@
             "cycle_wared": 8345.0,
             "cycle_sader": 7827.0,
             "kg_per_ton": 3.18,
-            "shortage_pct": 0.32
+            "shortage_pct": 0.32,
+            "shortage_level": "safe",
+            "shortage_level_label": "عجز طبيعي آمن"
           },
           {
             "date": "2026-06-14 11:35:33.390000",
@@ -36636,7 +36762,9 @@
             "cycle_wared": 8492.0,
             "cycle_sader": 7768.0,
             "kg_per_ton": 2.89,
-            "shortage_pct": 0.29
+            "shortage_pct": 0.29,
+            "shortage_level": "safe",
+            "shortage_level_label": "عجز طبيعي آمن"
           },
           {
             "date": "2026-06-03 13:06:44.147000",
@@ -36652,7 +36780,9 @@
             "cycle_wared": 36965.0,
             "cycle_sader": 36908.0,
             "kg_per_ton": 0.35,
-            "shortage_pct": 0.04
+            "shortage_pct": 0.04,
+            "shortage_level": "safe",
+            "shortage_level_label": "عجز طبيعي آمن"
           },
           {
             "date": "2026-04-09 16:27:21.947000",
@@ -36668,7 +36798,9 @@
             "cycle_wared": 9710.0,
             "cycle_sader": 9509.0,
             "kg_per_ton": 0.63,
-            "shortage_pct": 0.06
+            "shortage_pct": 0.06,
+            "shortage_level": "safe",
+            "shortage_level_label": "عجز طبيعي آمن"
           },
           {
             "date": "2026-03-29 15:23:02.783000",
@@ -36684,7 +36816,9 @@
             "cycle_wared": 10200.0,
             "cycle_sader": 10839.0,
             "kg_per_ton": 2.12,
-            "shortage_pct": 0.21
+            "shortage_pct": 0.21,
+            "shortage_level": "safe",
+            "shortage_level_label": "عجز طبيعي آمن"
           },
           {
             "date": "2026-03-14 11:41:14.637000",
@@ -36700,7 +36834,9 @@
             "cycle_wared": 56374.88,
             "cycle_sader": 55488.0,
             "kg_per_ton": 0.17,
-            "shortage_pct": 0.02
+            "shortage_pct": 0.02,
+            "shortage_level": "safe",
+            "shortage_level_label": "عجز طبيعي آمن"
           }
         ],
         "current_stock_balance": 1166.5
@@ -36723,6 +36859,13 @@
         "cycle_base": 57323.8,
         "kg_per_ton": 3.14,
         "shortage_pct": 0.31,
+        "threshold_safe": 6.0,
+        "threshold_high": 9.0,
+        "threshold_desc": "كسب بروتين مطحون",
+        "shortage_level": "safe",
+        "shortage_level_label": "عجز طبيعي آمن",
+        "avg_shortage_level": "safe",
+        "avg_shortage_label": "عجز طبيعي آمن",
         "avg_kg_per_ton": 4.96,
         "avg_shortage_pct": 0.5,
         "total_shortage_qty": 5940.282,
@@ -36747,7 +36890,9 @@
             "cycle_wared": 53630.0,
             "cycle_sader": 57143.6,
             "kg_per_ton": 3.14,
-            "shortage_pct": 0.31
+            "shortage_pct": 0.31,
+            "shortage_level": "safe",
+            "shortage_level_label": "عجز طبيعي آمن"
           },
           {
             "date": "2026-10-18 15:26:05.187000",
@@ -36763,7 +36908,9 @@
             "cycle_wared": 27860.0,
             "cycle_sader": 25751.25,
             "kg_per_ton": 4.75,
-            "shortage_pct": 0.48
+            "shortage_pct": 0.48,
+            "shortage_level": "safe",
+            "shortage_level_label": "عجز طبيعي آمن"
           },
           {
             "date": "2026-10-08 18:46:40.430000",
@@ -36779,7 +36926,9 @@
             "cycle_wared": 212705.0,
             "cycle_sader": 214675.75,
             "kg_per_ton": 4.71,
-            "shortage_pct": 0.47
+            "shortage_pct": 0.47,
+            "shortage_level": "safe",
+            "shortage_level_label": "عجز طبيعي آمن"
           },
           {
             "date": "2026-08-06 10:11:11",
@@ -36795,7 +36944,9 @@
             "cycle_wared": 57730.0,
             "cycle_sader": 62246.35,
             "kg_per_ton": 9.7,
-            "shortage_pct": 0.97
+            "shortage_pct": 0.97,
+            "shortage_level": "high",
+            "shortage_level_label": "عجز مرتفع"
           },
           {
             "date": "2026-07-19 14:12:58.557000",
@@ -36811,7 +36962,9 @@
             "cycle_wared": 57380.0,
             "cycle_sader": 48341.05,
             "kg_per_ton": 4.39,
-            "shortage_pct": 0.44
+            "shortage_pct": 0.44,
+            "shortage_level": "safe",
+            "shortage_level_label": "عجز طبيعي آمن"
           },
           {
             "date": "2026-07-05 18:54:03.153000",
@@ -36827,7 +36980,9 @@
             "cycle_wared": 43280.0,
             "cycle_sader": 44586.25,
             "kg_per_ton": 2.39,
-            "shortage_pct": 0.24
+            "shortage_pct": 0.24,
+            "shortage_level": "safe",
+            "shortage_level_label": "عجز طبيعي آمن"
           },
           {
             "date": "2026-06-25 18:14:05.040000",
@@ -36843,7 +36998,9 @@
             "cycle_wared": 251580.0,
             "cycle_sader": 248644.25,
             "kg_per_ton": 5.66,
-            "shortage_pct": 0.57
+            "shortage_pct": 0.57,
+            "shortage_level": "safe",
+            "shortage_level_label": "عجز طبيعي آمن"
           },
           {
             "date": "2026-04-25 17:55:41.700000",
@@ -36859,7 +37016,9 @@
             "cycle_wared": 337140.0,
             "cycle_sader": 345114.625,
             "kg_per_ton": 5.58,
-            "shortage_pct": 0.56
+            "shortage_pct": 0.56,
+            "shortage_level": "safe",
+            "shortage_level_label": "عجز طبيعي آمن"
           },
           {
             "date": "2026-02-11 11:11:11.423000",
@@ -36875,7 +37034,9 @@
             "cycle_wared": 28460.0,
             "cycle_sader": 16172.7,
             "kg_per_ton": 0.59,
-            "shortage_pct": 0.06
+            "shortage_pct": 0.06,
+            "shortage_level": "safe",
+            "shortage_level_label": "عجز طبيعي آمن"
           },
           {
             "date": "2026-02-07 12:28:36.293000",
@@ -36891,7 +37052,9 @@
             "cycle_wared": 117730.0,
             "cycle_sader": 128871.075,
             "kg_per_ton": 2.54,
-            "shortage_pct": 0.25
+            "shortage_pct": 0.25,
+            "shortage_level": "safe",
+            "shortage_level_label": "عجز طبيعي آمن"
           },
           {
             "date": "2026-01-15 09:39:37.630000",
@@ -36907,7 +37070,9 @@
             "cycle_wared": 75753.057,
             "cycle_sader": 65242.375,
             "kg_per_ton": 0.0,
-            "shortage_pct": 0.0
+            "shortage_pct": 0.0,
+            "shortage_level": "surplus",
+            "shortage_level_label": "فائض جرد"
           }
         ],
         "current_stock_balance": 21826.500001
@@ -36930,6 +37095,13 @@
         "cycle_base": 865521.29,
         "kg_per_ton": 0.0,
         "shortage_pct": 0.0,
+        "threshold_safe": 10.0,
+        "threshold_high": 15.0,
+        "threshold_desc": "ردة قمح خفيفة",
+        "shortage_level": "surplus",
+        "shortage_level_label": "فائض جرد",
+        "avg_shortage_level": "matched",
+        "avg_shortage_label": "مطابق",
         "avg_kg_per_ton": 0.0,
         "avg_shortage_pct": 0.0,
         "total_shortage_qty": 0,
@@ -36954,7 +37126,9 @@
             "cycle_wared": 859280.24,
             "cycle_sader": 856758.05,
             "kg_per_ton": 0.0,
-            "shortage_pct": 0.0
+            "shortage_pct": 0.0,
+            "shortage_level": "surplus",
+            "shortage_level_label": "فائض جرد"
           }
         ],
         "current_stock_balance": 844.14
@@ -36977,6 +37151,13 @@
         "cycle_base": 21168.0,
         "kg_per_ton": 0.0,
         "shortage_pct": 0.0,
+        "threshold_safe": 3.0,
+        "threshold_high": 6.0,
+        "threshold_desc": "علف تام مصنع",
+        "shortage_level": "surplus",
+        "shortage_level_label": "فائض جرد",
+        "avg_shortage_level": "matched",
+        "avg_shortage_label": "مطابق",
         "avg_kg_per_ton": 0.0,
         "avg_shortage_pct": 0.0,
         "total_shortage_qty": 0,
@@ -37001,7 +37182,9 @@
             "cycle_wared": 21289.0,
             "cycle_sader": 50729.0,
             "kg_per_ton": 0.0,
-            "shortage_pct": 0.0
+            "shortage_pct": 0.0,
+            "shortage_level": "surplus",
+            "shortage_level_label": "فائض جرد"
           }
         ],
         "current_stock_balance": 1301.0
@@ -37024,6 +37207,13 @@
         "cycle_base": 175385.0,
         "kg_per_ton": 0.0,
         "shortage_pct": 0.0,
+        "threshold_safe": 3.0,
+        "threshold_high": 6.0,
+        "threshold_desc": "علف تام مصنع",
+        "shortage_level": "surplus",
+        "shortage_level_label": "فائض جرد",
+        "avg_shortage_level": "matched",
+        "avg_shortage_label": "مطابق",
         "avg_kg_per_ton": 0.0,
         "avg_shortage_pct": 0.0,
         "total_shortage_qty": 0,
@@ -37048,7 +37238,9 @@
             "cycle_wared": 175711.0,
             "cycle_sader": 585374.0,
             "kg_per_ton": 0.0,
-            "shortage_pct": 0.0
+            "shortage_pct": 0.0,
+            "shortage_level": "surplus",
+            "shortage_level_label": "فائض جرد"
           }
         ],
         "current_stock_balance": 2773.0
@@ -37071,6 +37263,13 @@
         "cycle_base": 22156.445,
         "kg_per_ton": 0.0,
         "shortage_pct": 0.0,
+        "threshold_safe": 2.0,
+        "threshold_high": 5.0,
+        "threshold_desc": "أملاح بيكربونات",
+        "shortage_level": "surplus",
+        "shortage_level_label": "فائض جرد",
+        "avg_shortage_level": "matched",
+        "avg_shortage_label": "مطابق",
         "avg_kg_per_ton": 0.0,
         "avg_shortage_pct": 0.0,
         "total_shortage_qty": 0,
@@ -37095,7 +37294,9 @@
             "cycle_wared": 22748.75,
             "cycle_sader": 21069.225,
             "kg_per_ton": 0.0,
-            "shortage_pct": 0.0
+            "shortage_pct": 0.0,
+            "shortage_level": "surplus",
+            "shortage_level_label": "فائض جرد"
           }
         ],
         "current_stock_balance": 1044.605
@@ -37118,6 +37319,13 @@
         "cycle_base": 6460.975,
         "kg_per_ton": 0.0,
         "shortage_pct": 0.0,
+        "threshold_safe": 2.0,
+        "threshold_high": 5.0,
+        "threshold_desc": "بريمكسات دقيقة",
+        "shortage_level": "surplus",
+        "shortage_level_label": "فائض جرد",
+        "avg_shortage_level": "matched",
+        "avg_shortage_label": "مطابق",
         "avg_kg_per_ton": 0.0,
         "avg_shortage_pct": 0.0,
         "total_shortage_qty": 0,
@@ -37142,7 +37350,9 @@
             "cycle_wared": 6447.0,
             "cycle_sader": 6467.975,
             "kg_per_ton": 0.0,
-            "shortage_pct": 0.0
+            "shortage_pct": 0.0,
+            "shortage_level": "surplus",
+            "shortage_level_label": "فائض جرد"
           },
           {
             "date": "2026-03-07 13:40:45.900000",
@@ -37158,7 +37368,9 @@
             "cycle_wared": 5100.45,
             "cycle_sader": 3517.2,
             "kg_per_ton": 0.0,
-            "shortage_pct": 0.0
+            "shortage_pct": 0.0,
+            "shortage_level": "surplus",
+            "shortage_level_label": "فائض جرد"
           },
           {
             "date": "2026-01-07 11:29:18.590000",
@@ -37174,7 +37386,9 @@
             "cycle_wared": 828.74,
             "cycle_sader": 407.75,
             "kg_per_ton": 0.0,
-            "shortage_pct": 0.0
+            "shortage_pct": 0.0,
+            "shortage_level": "surplus",
+            "shortage_level_label": "فائض جرد"
           }
         ],
         "current_stock_balance": 1826.675
@@ -37197,6 +37411,13 @@
         "cycle_base": 5797.5,
         "kg_per_ton": 0.0,
         "shortage_pct": 0.0,
+        "threshold_safe": 2.0,
+        "threshold_high": 5.0,
+        "threshold_desc": "معادن دقيقة",
+        "shortage_level": "surplus",
+        "shortage_level_label": "فائض جرد",
+        "avg_shortage_level": "matched",
+        "avg_shortage_label": "مطابق",
         "avg_kg_per_ton": 0.0,
         "avg_shortage_pct": 0.0,
         "total_shortage_qty": 0,
@@ -37221,7 +37442,9 @@
             "cycle_wared": 6000.0,
             "cycle_sader": 5803.5,
             "kg_per_ton": 0.0,
-            "shortage_pct": 0.0
+            "shortage_pct": 0.0,
+            "shortage_level": "surplus",
+            "shortage_level_label": "فائض جرد"
           },
           {
             "date": "2026-03-05 12:52:48.140000",
@@ -37237,7 +37460,9 @@
             "cycle_wared": 4325.375,
             "cycle_sader": 3987.15,
             "kg_per_ton": 0.0,
-            "shortage_pct": 0.0
+            "shortage_pct": 0.0,
+            "shortage_level": "surplus",
+            "shortage_level_label": "فائض جرد"
           }
         ],
         "current_stock_balance": 1037.100001
@@ -37260,6 +37485,13 @@
         "cycle_base": 42.5,
         "kg_per_ton": 0.0,
         "shortage_pct": 0.0,
+        "threshold_safe": 2.0,
+        "threshold_high": 5.0,
+        "threshold_desc": "أملاح معدنية",
+        "shortage_level": "surplus",
+        "shortage_level_label": "فائض جرد",
+        "avg_shortage_level": "matched",
+        "avg_shortage_label": "مطابق",
         "avg_kg_per_ton": 0.0,
         "avg_shortage_pct": 0.0,
         "total_shortage_qty": 0,
@@ -37284,7 +37516,9 @@
             "cycle_wared": 120.0,
             "cycle_sader": 47.5,
             "kg_per_ton": 0.0,
-            "shortage_pct": 0.0
+            "shortage_pct": 0.0,
+            "shortage_level": "surplus",
+            "shortage_level_label": "فائض جرد"
           }
         ],
         "current_stock_balance": 21.5
@@ -37307,6 +37541,13 @@
         "cycle_base": 218.25,
         "kg_per_ton": 0.0,
         "shortage_pct": 0.0,
+        "threshold_safe": 2.0,
+        "threshold_high": 5.0,
+        "threshold_desc": "خمائر حيوية",
+        "shortage_level": "surplus",
+        "shortage_level_label": "فائض جرد",
+        "avg_shortage_level": "matched",
+        "avg_shortage_label": "مطابق",
         "avg_kg_per_ton": 0.0,
         "avg_shortage_pct": 0.0,
         "total_shortage_qty": 0,
@@ -37331,7 +37572,9 @@
             "cycle_wared": 1092.0,
             "cycle_sader": 221.0,
             "kg_per_ton": 0.0,
-            "shortage_pct": 0.0
+            "shortage_pct": 0.0,
+            "shortage_level": "surplus",
+            "shortage_level_label": "فائض جرد"
           },
           {
             "date": "2026-05-11 18:51:32.567000",
@@ -37347,7 +37590,9 @@
             "cycle_wared": 780.0,
             "cycle_sader": 782.75,
             "kg_per_ton": 0.0,
-            "shortage_pct": 0.0
+            "shortage_pct": 0.0,
+            "shortage_level": "surplus",
+            "shortage_level_label": "فائض جرد"
           },
           {
             "date": "2026-01-11 16:28:52.390000",
@@ -37363,7 +37608,9 @@
             "cycle_wared": 78.65,
             "cycle_sader": 78.0,
             "kg_per_ton": 0.0,
-            "shortage_pct": 0.0
+            "shortage_pct": 0.0,
+            "shortage_level": "surplus",
+            "shortage_level_label": "فائض جرد"
           }
         ],
         "current_stock_balance": 109.2
@@ -37386,6 +37633,13 @@
         "cycle_base": 5024.735,
         "kg_per_ton": 0.0,
         "shortage_pct": 0.0,
+        "threshold_safe": 2.0,
+        "threshold_high": 5.0,
+        "threshold_desc": "مضاد سموم",
+        "shortage_level": "surplus",
+        "shortage_level_label": "فائض جرد",
+        "avg_shortage_level": "matched",
+        "avg_shortage_label": "مطابق",
         "avg_kg_per_ton": 0.0,
         "avg_shortage_pct": 0.0,
         "total_shortage_qty": 0,
@@ -37410,7 +37664,9 @@
             "cycle_wared": 4314.735,
             "cycle_sader": 3712.8,
             "kg_per_ton": 0.0,
-            "shortage_pct": 0.0
+            "shortage_pct": 0.0,
+            "shortage_level": "surplus",
+            "shortage_level_label": "فائض جرد"
           }
         ],
         "current_stock_balance": 2119.585003
@@ -37433,6 +37689,13 @@
         "cycle_base": 22.0,
         "kg_per_ton": 0.0,
         "shortage_pct": 0.0,
+        "threshold_safe": 2.0,
+        "threshold_high": 5.0,
+        "threshold_desc": "فيتامينات دقيقة",
+        "shortage_level": "surplus",
+        "shortage_level_label": "فائض جرد",
+        "avg_shortage_level": "matched",
+        "avg_shortage_label": "مطابق",
         "avg_kg_per_ton": 0.0,
         "avg_shortage_pct": 0.0,
         "total_shortage_qty": 0,
@@ -37457,7 +37720,9 @@
             "cycle_wared": 60.0,
             "cycle_sader": 22.5,
             "kg_per_ton": 0.0,
-            "shortage_pct": 0.0
+            "shortage_pct": 0.0,
+            "shortage_level": "surplus",
+            "shortage_level_label": "فائض جرد"
           }
         ],
         "current_stock_balance": 2.5
@@ -37480,6 +37745,13 @@
         "cycle_base": 2900.0,
         "kg_per_ton": 0.0,
         "shortage_pct": 100.0,
+        "threshold_safe": 1.0,
+        "threshold_high": 2.0,
+        "threshold_desc": "شكاير تعبئة",
+        "shortage_level": "high",
+        "shortage_level_label": "عجز مرتفع",
+        "avg_shortage_level": "high",
+        "avg_shortage_label": "عجز مرتفع",
         "avg_kg_per_ton": 0.0,
         "avg_shortage_pct": 88.48,
         "total_shortage_qty": 36630.0,
@@ -37504,7 +37776,9 @@
             "cycle_wared": 5000.0,
             "cycle_sader": 0.0,
             "kg_per_ton": 0.0,
-            "shortage_pct": 100.0
+            "shortage_pct": 100.0,
+            "shortage_level": "high",
+            "shortage_level_label": "عجز مرتفع"
           },
           {
             "date": "2026-09-30 12:16:25.703000",
@@ -37520,7 +37794,9 @@
             "cycle_wared": 5000.0,
             "cycle_sader": 0.0,
             "kg_per_ton": 0.0,
-            "shortage_pct": 100.0
+            "shortage_pct": 100.0,
+            "shortage_level": "high",
+            "shortage_level_label": "عجز مرتفع"
           },
           {
             "date": "2026-08-31 15:13:57.017000",
@@ -37536,7 +37812,9 @@
             "cycle_wared": 5000.0,
             "cycle_sader": 220.0,
             "kg_per_ton": 0.0,
-            "shortage_pct": 95.42
+            "shortage_pct": 95.42,
+            "shortage_level": "high",
+            "shortage_level_label": "عجز مرتفع"
           },
           {
             "date": "2026-07-30 14:14:40.883000",
@@ -37552,7 +37830,9 @@
             "cycle_wared": 4000.0,
             "cycle_sader": 20.0,
             "kg_per_ton": 0.0,
-            "shortage_pct": 99.56
+            "shortage_pct": 99.56,
+            "shortage_level": "high",
+            "shortage_level_label": "عجز مرتفع"
           },
           {
             "date": "2026-06-30 19:59:18.003000",
@@ -37568,7 +37848,9 @@
             "cycle_wared": 4000.0,
             "cycle_sader": 0.0,
             "kg_per_ton": 0.0,
-            "shortage_pct": 100.0
+            "shortage_pct": 100.0,
+            "shortage_level": "high",
+            "shortage_level_label": "عجز مرتفع"
           },
           {
             "date": "2026-05-31 19:01:37.757000",
@@ -37584,7 +37866,9 @@
             "cycle_wared": 5000.0,
             "cycle_sader": 240.0,
             "kg_per_ton": 0.0,
-            "shortage_pct": 94.0
+            "shortage_pct": 94.0,
+            "shortage_level": "high",
+            "shortage_level_label": "عجز مرتفع"
           },
           {
             "date": "2026-04-30 19:14:42.927000",
@@ -37600,7 +37884,9 @@
             "cycle_wared": 0,
             "cycle_sader": 0,
             "kg_per_ton": 0.0,
-            "shortage_pct": 100.0
+            "shortage_pct": 100.0,
+            "shortage_level": "high",
+            "shortage_level_label": "عجز مرتفع"
           },
           {
             "date": "2026-03-31 21:47:57.193000",
@@ -37616,7 +37902,9 @@
             "cycle_wared": 5000.0,
             "cycle_sader": 2500.0,
             "kg_per_ton": 0.0,
-            "shortage_pct": 41.86
+            "shortage_pct": 41.86,
+            "shortage_level": "high",
+            "shortage_level_label": "عجز مرتفع"
           },
           {
             "date": "2026-02-28 15:48:18.847000",
@@ -37632,7 +37920,9 @@
             "cycle_wared": 0.0,
             "cycle_sader": 360.0,
             "kg_per_ton": 0.0,
-            "shortage_pct": 87.59
+            "shortage_pct": 87.59,
+            "shortage_level": "high",
+            "shortage_level_label": "عجز مرتفع"
           },
           {
             "date": "2026-01-31 19:42:53.193000",
@@ -37648,7 +37938,9 @@
             "cycle_wared": 11250.0,
             "cycle_sader": 180.0,
             "kg_per_ton": 0.0,
-            "shortage_pct": 73.02
+            "shortage_pct": 73.02,
+            "shortage_level": "high",
+            "shortage_level_label": "عجز مرتفع"
           }
         ],
         "current_stock_balance": 4100.0
@@ -37671,6 +37963,13 @@
         "cycle_base": 900.0,
         "kg_per_ton": 0.0,
         "shortage_pct": 66.67,
+        "threshold_safe": 1.0,
+        "threshold_high": 2.0,
+        "threshold_desc": "شكاير تعبئة",
+        "shortage_level": "high",
+        "shortage_level_label": "عجز مرتفع",
+        "avg_shortage_level": "high",
+        "avg_shortage_label": "عجز مرتفع",
         "avg_kg_per_ton": 0.0,
         "avg_shortage_pct": 65.95,
         "total_shortage_qty": 5888.0,
@@ -37695,7 +37994,9 @@
             "cycle_wared": 0.0,
             "cycle_sader": 300.0,
             "kg_per_ton": 0.0,
-            "shortage_pct": 66.67
+            "shortage_pct": 66.67,
+            "shortage_level": "high",
+            "shortage_level_label": "عجز مرتفع"
           },
           {
             "date": "2026-09-30 12:16:25.703000",
@@ -37711,7 +38012,9 @@
             "cycle_wared": 0.0,
             "cycle_sader": 260.0,
             "kg_per_ton": 0.0,
-            "shortage_pct": 67.5
+            "shortage_pct": 67.5,
+            "shortage_level": "high",
+            "shortage_level_label": "عجز مرتفع"
           },
           {
             "date": "2026-08-31 15:13:57.017000",
@@ -37727,7 +38030,9 @@
             "cycle_wared": 200.0,
             "cycle_sader": 250.0,
             "kg_per_ton": 0.0,
-            "shortage_pct": 74.75
+            "shortage_pct": 74.75,
+            "shortage_level": "high",
+            "shortage_level_label": "عجز مرتفع"
           },
           {
             "date": "2026-07-30 14:14:40.883000",
@@ -37743,7 +38048,9 @@
             "cycle_wared": 2000.0,
             "cycle_sader": 140.0,
             "kg_per_ton": 0.0,
-            "shortage_pct": 76.67
+            "shortage_pct": 76.67,
+            "shortage_level": "high",
+            "shortage_level_label": "عجز مرتفع"
           },
           {
             "date": "2026-06-30 19:59:18.003000",
@@ -37759,7 +38066,9 @@
             "cycle_wared": 0.0,
             "cycle_sader": 370.0,
             "kg_per_ton": 0.0,
-            "shortage_pct": 39.34
+            "shortage_pct": 39.34,
+            "shortage_level": "high",
+            "shortage_level_label": "عجز مرتفع"
           },
           {
             "date": "2026-05-31 19:01:37.757000",
@@ -37775,7 +38084,9 @@
             "cycle_wared": 0.0,
             "cycle_sader": 160.0,
             "kg_per_ton": 0.0,
-            "shortage_pct": 68.0
+            "shortage_pct": 68.0,
+            "shortage_level": "high",
+            "shortage_level_label": "عجز مرتفع"
           },
           {
             "date": "2026-04-30 19:14:42.927000",
@@ -37791,7 +38102,9 @@
             "cycle_wared": 2450.0,
             "cycle_sader": 160.0,
             "kg_per_ton": 0.0,
-            "shortage_pct": 83.16
+            "shortage_pct": 83.16,
+            "shortage_level": "high",
+            "shortage_level_label": "عجز مرتفع"
           },
           {
             "date": "2026-03-31 21:47:57.193000",
@@ -37807,7 +38120,9 @@
             "cycle_wared": 2000.0,
             "cycle_sader": 221.0,
             "kg_per_ton": 0.0,
-            "shortage_pct": 72.38
+            "shortage_pct": 72.38,
+            "shortage_level": "high",
+            "shortage_level_label": "عجز مرتفع"
           },
           {
             "date": "2026-02-28 15:48:18.847000",
@@ -37823,7 +38138,9 @@
             "cycle_wared": 0.0,
             "cycle_sader": 80.0,
             "kg_per_ton": 0.0,
-            "shortage_pct": 91.11
+            "shortage_pct": 91.11,
+            "shortage_level": "high",
+            "shortage_level_label": "عجز مرتفع"
           },
           {
             "date": "2026-01-31 19:42:53.193000",
@@ -37839,7 +38156,9 @@
             "cycle_wared": 2039.0,
             "cycle_sader": 60.0,
             "kg_per_ton": 0.0,
-            "shortage_pct": 41.48
+            "shortage_pct": 41.48,
+            "shortage_level": "high",
+            "shortage_level_label": "عجز مرتفع"
           }
         ],
         "current_stock_balance": 2720.0
@@ -37862,6 +38181,13 @@
         "cycle_base": 3200.0,
         "kg_per_ton": 0.0,
         "shortage_pct": 46.88,
+        "threshold_safe": 1.0,
+        "threshold_high": 2.0,
+        "threshold_desc": "شكاير تعبئة",
+        "shortage_level": "high",
+        "shortage_level_label": "عجز مرتفع",
+        "avg_shortage_level": "high",
+        "avg_shortage_label": "عجز مرتفع",
         "avg_kg_per_ton": 0.0,
         "avg_shortage_pct": 55.01,
         "total_shortage_qty": 20180.0,
@@ -37886,7 +38212,9 @@
             "cycle_wared": 5000.0,
             "cycle_sader": 1700.0,
             "kg_per_ton": 0.0,
-            "shortage_pct": 46.88
+            "shortage_pct": 46.88,
+            "shortage_level": "high",
+            "shortage_level_label": "عجز مرتفع"
           },
           {
             "date": "2026-09-30 12:16:25.703000",
@@ -37902,7 +38230,9 @@
             "cycle_wared": 3000.0,
             "cycle_sader": 1500.0,
             "kg_per_ton": 0.0,
-            "shortage_pct": 31.82
+            "shortage_pct": 31.82,
+            "shortage_level": "high",
+            "shortage_level_label": "عجز مرتفع"
           },
           {
             "date": "2026-08-31 15:13:57.017000",
@@ -37918,7 +38248,9 @@
             "cycle_wared": 5070.0,
             "cycle_sader": 1220.0,
             "kg_per_ton": 0.0,
-            "shortage_pct": 56.74
+            "shortage_pct": 56.74,
+            "shortage_level": "high",
+            "shortage_level_label": "عجز مرتفع"
           },
           {
             "date": "2026-07-30 14:14:40.883000",
@@ -37934,7 +38266,9 @@
             "cycle_wared": 0.0,
             "cycle_sader": 960.0,
             "kg_per_ton": 0.0,
-            "shortage_pct": 57.33
+            "shortage_pct": 57.33,
+            "shortage_level": "high",
+            "shortage_level_label": "عجز مرتفع"
           },
           {
             "date": "2026-06-30 19:59:18.003000",
@@ -37950,7 +38284,9 @@
             "cycle_wared": 4000.0,
             "cycle_sader": 1200.0,
             "kg_per_ton": 0.0,
-            "shortage_pct": 40.0
+            "shortage_pct": 40.0,
+            "shortage_level": "high",
+            "shortage_level_label": "عجز مرتفع"
           },
           {
             "date": "2026-05-31 19:01:37.757000",
@@ -37966,7 +38302,9 @@
             "cycle_wared": 3000.0,
             "cycle_sader": 3040.0,
             "kg_per_ton": 0.0,
-            "shortage_pct": 24.0
+            "shortage_pct": 24.0,
+            "shortage_level": "high",
+            "shortage_level_label": "عجز مرتفع"
           },
           {
             "date": "2026-04-30 19:14:42.927000",
@@ -37982,7 +38320,9 @@
             "cycle_wared": 5000.0,
             "cycle_sader": 3660.0,
             "kg_per_ton": 0.0,
-            "shortage_pct": 41.44
+            "shortage_pct": 41.44,
+            "shortage_level": "high",
+            "shortage_level_label": "عجز مرتفع"
           },
           {
             "date": "2026-03-31 21:47:57.193000",
@@ -37998,7 +38338,9 @@
             "cycle_wared": 2130.0,
             "cycle_sader": 680.0,
             "kg_per_ton": 0.0,
-            "shortage_pct": 82.01
+            "shortage_pct": 82.01,
+            "shortage_level": "high",
+            "shortage_level_label": "عجز مرتفع"
           },
           {
             "date": "2026-02-28 15:48:18.847000",
@@ -38014,7 +38356,9 @@
             "cycle_wared": 5000.0,
             "cycle_sader": 0.0,
             "kg_per_ton": 0.0,
-            "shortage_pct": 100.0
+            "shortage_pct": 100.0,
+            "shortage_level": "high",
+            "shortage_level_label": "عجز مرتفع"
           },
           {
             "date": "2026-01-31 19:42:53.193000",
@@ -38030,7 +38374,9 @@
             "cycle_wared": 7541.0,
             "cycle_sader": 1.0,
             "kg_per_ton": 0.0,
-            "shortage_pct": 60.78
+            "shortage_pct": 60.78,
+            "shortage_level": "high",
+            "shortage_level_label": "عجز مرتفع"
           }
         ],
         "current_stock_balance": 5140.0
@@ -38053,6 +38399,13 @@
         "cycle_base": -499.4,
         "kg_per_ton": 0.0,
         "shortage_pct": 0.0,
+        "threshold_safe": 1.0,
+        "threshold_high": 2.0,
+        "threshold_desc": "شكاير تعبئة",
+        "shortage_level": "surplus",
+        "shortage_level_label": "فائض جرد",
+        "avg_shortage_level": "high",
+        "avg_shortage_label": "عجز مرتفع",
         "avg_kg_per_ton": 0.0,
         "avg_shortage_pct": 35.21,
         "total_shortage_qty": 3246.4,
@@ -38077,7 +38430,9 @@
             "cycle_wared": 0,
             "cycle_sader": 0,
             "kg_per_ton": 0.0,
-            "shortage_pct": 0.0
+            "shortage_pct": 0.0,
+            "shortage_level": "surplus",
+            "shortage_level_label": "فائض جرد"
           },
           {
             "date": "2026-09-30 12:16:25.703000",
@@ -38093,7 +38448,9 @@
             "cycle_wared": 0.0,
             "cycle_sader": 185.6,
             "kg_per_ton": 0.0,
-            "shortage_pct": 62.85
+            "shortage_pct": 62.85,
+            "shortage_level": "high",
+            "shortage_level_label": "عجز مرتفع"
           },
           {
             "date": "2026-07-30 14:14:40.883000",
@@ -38109,7 +38466,9 @@
             "cycle_wared": 0,
             "cycle_sader": 0,
             "kg_per_ton": 0.0,
-            "shortage_pct": 0.0
+            "shortage_pct": 0.0,
+            "shortage_level": "surplus",
+            "shortage_level_label": "فائض جرد"
           },
           {
             "date": "2026-06-30 19:59:18.003000",
@@ -38125,7 +38484,9 @@
             "cycle_wared": 0.0,
             "cycle_sader": 184.8,
             "kg_per_ton": 0.0,
-            "shortage_pct": 38.36
+            "shortage_pct": 38.36,
+            "shortage_level": "high",
+            "shortage_level_label": "عجز مرتفع"
           },
           {
             "date": "2026-05-31 19:01:37.757000",
@@ -38141,7 +38502,9 @@
             "cycle_wared": 4400.0,
             "cycle_sader": 2159.3,
             "kg_per_ton": 0.0,
-            "shortage_pct": 40.03
+            "shortage_pct": 40.03,
+            "shortage_level": "high",
+            "shortage_level_label": "عجز مرتفع"
           },
           {
             "date": "2026-02-28 15:48:18.847000",
@@ -38157,7 +38520,9 @@
             "cycle_wared": 4759.9,
             "cycle_sader": 1183.2,
             "kg_per_ton": 0.0,
-            "shortage_pct": 28.55
+            "shortage_pct": 28.55,
+            "shortage_level": "high",
+            "shortage_level_label": "عجز مرتفع"
           }
         ],
         "current_stock_balance": 3000.0
@@ -38168,6 +38533,9 @@
       "total_tasweyat_count": 102,
       "shortage_items_count": 12,
       "surplus_items_count": 11,
+      "high_shortage_items_count": 6,
+      "moderate_shortage_items_count": 2,
+      "safe_shortage_items_count": 4,
       "total_shortage_feed_kg": 3261.2,
       "total_shortage_pieces": 5000,
       "total_surplus_feed_kg": 1647.98,

@@ -1685,6 +1685,11 @@ function getReconciliationBatches(data) {
         balance_before: balBefore,
         cycle_wared: h.cycle_wared || 0,
         cycle_sader: h.cycle_sader || 0,
+        shortage_level: h.shortage_level || item.shortage_level || 'safe',
+        shortage_level_label: h.shortage_level_label || item.shortage_level_label || 'عجز طبيعي',
+        threshold_safe: item.threshold_safe || (item.is_feed ? 5 : 1),
+        threshold_high: item.threshold_high || (item.is_feed ? 10 : 2),
+        threshold_desc: item.threshold_desc || '',
         kg_per_ton: h.kg_per_ton || 0,
         shortage_pct: h.shortage_pct || 0,
         prev_raw_diff: prevRawDiff,
@@ -1925,13 +1930,12 @@ function renderMinutesDocument(targetDate) {
 
     let statusBadge = '<span class="doc-badge-status info">مطابق</span>';
     if (isShortage) {
-      if (it.is_feed) {
-        if (it.kg_per_ton > 10) statusBadge = '<span class="doc-badge-status danger">عجز مرتفع</span>';
-        else if (it.kg_per_ton >= 3) statusBadge = '<span class="doc-badge-status warning">عجز متوسط</span>';
-        else statusBadge = '<span class="doc-badge-status success">عجز طبيعي آمن</span>';
+      if (it.shortage_level === 'high') {
+        statusBadge = '<span class="doc-badge-status danger">عجز مرتفع</span>';
+      } else if (it.shortage_level === 'moderate') {
+        statusBadge = '<span class="doc-badge-status warning">عجز متوسط</span>';
       } else {
-        if (it.shortage_pct > 20) statusBadge = '<span class="doc-badge-status danger">عجز مرتفع</span>';
-        else statusBadge = '<span class="doc-badge-status warning">عجز بالعدد</span>';
+        statusBadge = '<span class="doc-badge-status success">عجز طبيعي آمن</span>';
       }
     } else if (isSurplus) {
       statusBadge = '<span class="doc-badge-status success">زيادة مخزنية</span>';
@@ -2022,7 +2026,8 @@ function renderReconciliationTab(data) {
   const bagsCount = items.filter(i => !(i.is_feed || i.unit === 'كيلو')).length;
   const shortageCount = items.filter(i => i.raw_diff < 0).length;
   const surplusCount = items.filter(i => i.raw_diff > 0).length;
-  const highShortageCount = items.filter(i => (i.is_feed || i.unit === 'كيلو') ? i.kg_per_ton > 10 : i.shortage_pct > 20).length;
+  const highShortageCount = items.filter(i => i.shortage_level === 'high').length;
+  const moderateShortageCount = items.filter(i => i.shortage_level === 'moderate').length;
 
   let html = '<div class="rec-actions-bar">' +
                '<div class="rec-actions-info">' +
@@ -2051,8 +2056,9 @@ function renderReconciliationTab(data) {
   html += '<button class="chip rec-chip '+(recFilter==='feed'?'active':'')+'" data-recfilter="feed">🌾 خامات وأعلاف ('+feedCount+')</button>';
   html += '<button class="chip rec-chip '+(recFilter==='bags'?'active':'')+'" data-recfilter="bags">📦 مستلزمات وتعبئة ('+bagsCount+')</button>';
   html += '<button class="chip rec-chip '+(recFilter==='shortage'?'active':'')+'" data-recfilter="shortage">🔴 أصناف بها عجز ('+shortageCount+')</button>';
+  html += '<button class="chip rec-chip '+(recFilter==='high'?'active':'')+'" data-recfilter="high">🚨 عجز مرتفع قياسياً ('+highShortageCount+')</button>';
+  html += '<button class="chip rec-chip '+(recFilter==='moderate'?'active':'')+'" data-recfilter="moderate">⚠️ عجز متوسط ('+moderateShortageCount+')</button>';
   html += '<button class="chip rec-chip '+(recFilter==='surplus'?'active':'')+'" data-recfilter="surplus">🟢 أصناف بها زيادة ('+surplusCount+')</button>';
-  html += '<button class="chip rec-chip '+(recFilter==='high'?'active':'')+'" data-recfilter="high">⚠️ عجز مرتفع ('+highShortageCount+')</button>';
   html += '</div>';
 
   html += '<div class="search-box"><svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" class="search-input" id="recSearchInput" placeholder="ابحث باسم الصنف أو الكود في تسويات الجرد..." /></div>';
@@ -2060,9 +2066,9 @@ function renderReconciliationTab(data) {
   html += '<div class="rec-banner">' +
             '<div class="rec-banner-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>' +
             '<div class="rec-banner-text">' +
-              '<strong>دليل احتساب التسويات والمعدلات للمصنع:</strong> ' +
-              'تُحسب نسبة ومعدل العجز في الطن بمقارنة كمية العجز بإجمالي الوارد الفعلي خلال دورة الجرد (من التسوية السابقة حتى الحالية). ' +
-              '<strong>كسب النور:</strong> استثناء خاص محسوب تلقائياً من وارد بذرة القطن بنسبة 100%.' +
+              '<strong>دليل احتساب التسويات والمعايير القياسية العالمية (GAFTA / USDA / AFMA):</strong> ' +
+              'يتم تقييم كل صنف بمعياره الفني المخصص (حبوب صب: حتى 8 كجم/طن | كسب صويا 46%: حتى 9 كجم/طن | صويا فولفات مبثوقة: حتى 12 كجم/طن | رجيع ونخالة: حتى 15 كجم/طن | كسب قطن: حتى 25 كجم/طن). ' +
+              '<strong>معادلة العجز:</strong> العجز بالكيلو ÷ [(رصيد التسوية السابقة + الوارد) - الرصيد الحالي] × 1000.' +
             '</div>' +
           '</div>';
 
@@ -2072,7 +2078,8 @@ function renderReconciliationTab(data) {
     if (recFilter === 'bags') return !isKilo;
     if (recFilter === 'shortage') return item.raw_diff < 0;
     if (recFilter === 'surplus') return item.raw_diff > 0;
-    if (recFilter === 'high') return isKilo ? item.kg_per_ton > 10 : item.shortage_pct > 20;
+    if (recFilter === 'high') return item.shortage_level === 'high';
+    if (recFilter === 'moderate') return item.shortage_level === 'moderate';
     return true;
   });
 
@@ -2120,16 +2127,19 @@ function renderReconciliationTab(data) {
     // Bar fill styling & progress width calculation
     let fillClass = 'c4';
     let fillWidth = 10;
+    const highLim = item.threshold_high || (isKilo ? 10 : 2);
+    const safeLim = item.threshold_safe || (isKilo ? 5 : 1);
+    const metricVal = isKilo ? (item.kg_per_ton || 0) : (item.shortage_pct || 0);
+
     if (isShortage) {
-      if (isKilo) {
-        if (item.kg_per_ton > 10) fillClass = 'c5';
-        else if (item.kg_per_ton >= 3) fillClass = 'c3';
-        else fillClass = 'c2';
-        fillWidth = Math.min(Math.max((item.kg_per_ton / 15) * 100, 8), 100);
+      if (item.shortage_level === 'high') {
+        fillClass = 'c5';
+      } else if (item.shortage_level === 'moderate') {
+        fillClass = 'c3';
       } else {
-        fillClass = item.shortage_pct > 20 ? 'c5' : 'c3';
-        fillWidth = Math.min(Math.max(item.shortage_pct, 10), 100);
+        fillClass = 'c2';
       }
+      fillWidth = Math.min(Math.max((metricVal / highLim) * 85, 8), 100);
     } else if (isSurplus) {
       fillClass = 'c2';
       fillWidth = 35;
@@ -2139,28 +2149,15 @@ function renderReconciliationTab(data) {
     let badgeCls = 'ok';
     let badgeTxt = 'فائض جرد';
     if (isShortage) {
-      if (isKilo) {
-        if (item.kg_per_ton > 10) {
-          badgeCls = 'out';
-          badgeTxt = '⚠️ عجز مرتفع';
-        } else if (item.kg_per_ton >= 3) {
-          badgeCls = 'low';
-          badgeTxt = '⚠️ عجز متوسط';
-        } else {
-          badgeCls = 'ok';
-          badgeTxt = 'عجز طبيعي آمن';
-        }
+      if (item.shortage_level === 'high') {
+        badgeCls = 'out';
+        badgeTxt = '🚨 عجز مرتفع قياسياً';
+      } else if (item.shortage_level === 'moderate') {
+        badgeCls = 'low';
+        badgeTxt = '⚠️ عجز متوسط (مقبول)';
       } else {
-        if (item.shortage_pct > 20) {
-          badgeCls = 'out';
-          badgeTxt = 'عجز مرتفع بالقطع';
-        } else if (item.shortage_pct >= 5) {
-          badgeCls = 'low';
-          badgeTxt = 'عجز متوسط بالقطع';
-        } else {
-          badgeCls = 'ok';
-          badgeTxt = 'عجز طبيعي';
-        }
+        badgeCls = 'ok';
+        badgeTxt = '✅ عجز طبيعي آمن';
       }
     }
 
@@ -2201,10 +2198,11 @@ function renderReconciliationTab(data) {
     html += '  <div class="bar-item-balance">' + (item.is_cotton_based ? 'وارد البذرة بالدورة: ' : 'وارد الدورة: ') + '<strong>' + fmt(item.cycle_wared) + '</strong> ' + item.unit + (isKilo && item.cycle_wared >= 1000 ? ' <small style="color:var(--ink-3);">(' + fmt(Math.round(item.cycle_wared/10)/100) + ' طن)</small>' : '') + '</div>';
     
     if (isShortage) {
+      const uLbl = isKilo ? 'كجم/طن' : '%';
       if (isKilo) {
-        html += '  <div class="bar-item-balance">عجز آخر دورة: <strong style="color:var(--danger);">' + item.kg_per_ton + ' كجم/طن</strong> <small style="color:var(--ink-3);">(' + item.shortage_pct + '%)</small></div>';
+        html += '  <div class="bar-item-balance">عجز آخر دورة: <strong style="color:var(--danger);">' + item.kg_per_ton + ' كجم/طن</strong> <small style="color:var(--ink-3);">(' + item.shortage_pct + '%)</small> <span style="font-size:11px;color:var(--ink-2);background:var(--bg-soft);padding:2px 7px;border-radius:4px;border:1px solid var(--line);margin-inline-start:6px;">المعيار: آمن حتى ' + safeLim + ' | أقصى ' + highLim + ' ' + uLbl + '</span></div>';
       } else {
-        html += '  <div class="bar-item-balance">نسبة عجز آخر دورة: <strong style="color:var(--danger);">' + item.shortage_pct + '%</strong> <small style="color:var(--ink-3);">(بالعدد)</small></div>';
+        html += '  <div class="bar-item-balance">نسبة عجز آخر دورة: <strong style="color:var(--danger);">' + item.shortage_pct + '%</strong> <small style="color:var(--ink-3);">(بالقطع)</small> <span style="font-size:11px;color:var(--ink-2);background:var(--bg-soft);padding:2px 7px;border-radius:4px;border:1px solid var(--line);margin-inline-start:6px;">المعيار: آمن حتى ' + safeLim + '% | أقصى ' + highLim + '%</span></div>';
       }
     } else {
       html += '  <div class="bar-item-balance">الحالة: <strong style="color:var(--success);">زيادة في آخر جرد</strong></div>';
@@ -2264,7 +2262,13 @@ function renderReconciliationTab(data) {
       html += '  <td class="col-diff" style="' + hClass + '">' + hSign + fmt(h.diff) + ' ' + item.unit + ' (' + h.status + ')</td>';
       html += '  <td class="col-bal">' + fmt(h.balance) + ' ' + item.unit + '</td>';
       html += '  <td class="col-wared">' + (h.cycle_wared > 0 ? fmt(h.cycle_wared) + ' ' + item.unit : '—') + '</td>';
-      html += '  <td class="col-rate">' + (hIsShort && isKilo && h.kg_per_ton > 0 ? '<strong>' + h.kg_per_ton + '</strong> كجم/طن' : (hIsShort ? h.shortage_pct + '%' : '—')) + '</td>';
+      let hBadge = '';
+      if (hIsShort) {
+        if (h.shortage_level === 'high') hBadge = ' <span class="doc-badge-status danger" style="padding:1px 5px;font-size:9.5px;margin-inline-start:4px;">مرتفع</span>';
+        else if (h.shortage_level === 'moderate') hBadge = ' <span class="doc-badge-status warning" style="padding:1px 5px;font-size:9.5px;margin-inline-start:4px;">متوسط</span>';
+        else hBadge = ' <span class="doc-badge-status success" style="padding:1px 5px;font-size:9.5px;margin-inline-start:4px;">آمن</span>';
+      }
+      html += '  <td class="col-rate">' + (hIsShort && isKilo && h.kg_per_ton > 0 ? '<strong>' + h.kg_per_ton + '</strong> كجم/طن' + hBadge : (hIsShort ? h.shortage_pct + '%' + hBadge : '—')) + '</td>';
       html += '  <td class="col-user"><span dir="auto" style="display:inline-block;">' + (h.user || '—') + '</span> <button class="rec-item-minutes-btn" style="padding:1px 6px;font-size:10px;margin-inline-start:4px;" onclick="openMinutesModal(\'' + hDate.substring(0, 10) + '\')">📄 المحضر</button></td>';
       html += '</tr>';
     });
