@@ -298,7 +298,7 @@ def read_invoices():
         return {'items': [], 'top_customers': [], 'daily_totals': [], 'print_date': '', 'total_transactions': 0}
 
 
-def read_reconciliations(inv_items=None):
+def read_reconciliations(inv_items=None, force=False):
     """Read inventory reconciliation movements and calculate shrinkage/surplus statistics"""
     target_file = find_latest_file(INVENTORY_DIR, ['حركة', 'تفصيلي'], RECONCILIATION_FILES[0])
 
@@ -318,7 +318,7 @@ def read_reconciliations(inv_items=None):
     try:
         mtime = os.path.getmtime(target_file)
         mtime_str = datetime.fromtimestamp(mtime).strftime('%Y-%m-%d %H:%M:%S')
-        if os.path.exists(CACHE_REC_FILE):
+        if not force and os.path.exists(CACHE_REC_FILE):
             try:
                 with open(CACHE_REC_FILE, 'r', encoding='utf-8') as cf:
                     cached = json.load(cf)
@@ -415,8 +415,21 @@ def read_reconciliations(inv_items=None):
                 status = 'زيادة' if diff > 0 else 'عجز' if diff < 0 else 'مطابق'
                 abs_diff = round(abs(diff), 3)
 
-                kg_per_ton = round((abs_diff / (c_wared / 1000)), 2) if (is_kilo and c_wared > 0 and diff < 0) else 0
-                shortage_pct = round((abs_diff / c_wared * 100), 2) if (c_wared > 0 and diff < 0) else 0
+                if idx > 0:
+                    prev_bal = tasweyat[idx - 1]['balance']
+                else:
+                    first_m = movs[0] if movs else None
+                    prev_bal = first_m['balance'] if (first_m and 'افتتاح' in first_m.get('bayan', '')) else 0.0
+
+                cur_bal = t['balance']
+                cycle_base = round((prev_bal + c_wared) - cur_bal, 3)
+
+                if is_kilo and cycle_base > 0 and diff < 0:
+                    kg_per_ton = round((abs_diff / cycle_base) * 1000, 2)
+                else:
+                    kg_per_ton = 0.0
+
+                shortage_pct = round((abs_diff / cycle_base * 100), 2) if (cycle_base > 0 and diff < 0) else 0.0
 
                 history.append({
                     'date': t_date,
@@ -427,6 +440,8 @@ def read_reconciliations(inv_items=None):
                     'raw_diff': diff,
                     'balance': round(t['balance'], 3),
                     'prev_date': p_date,
+                    'prev_balance': round(prev_bal, 3),
+                    'cycle_base': cycle_base,
                     'cycle_wared': round(c_wared, 3),
                     'cycle_sader': round(c_sader, 3),
                     'kg_per_ton': kg_per_ton,
@@ -463,15 +478,17 @@ def read_reconciliations(inv_items=None):
             # Calculate item cumulative metrics and average shortage across all cycles
             shortage_cycles = [h for h in history if h['raw_diff'] < 0]
             total_item_shortage = sum(h['diff'] for h in shortage_cycles)
+            total_shortage_base = sum(h.get('cycle_base', 0) for h in shortage_cycles if h.get('cycle_base', 0) > 0)
+            total_all_base = sum(h.get('cycle_base', 0) for h in history if h.get('cycle_base', 0) > 0)
             total_shortage_wared = sum(h['cycle_wared'] for h in shortage_cycles)
             total_all_wared = sum(h['cycle_wared'] for h in history)
 
             if is_kilo:
-                item_avg_kg_per_ton = round(total_item_shortage / (total_shortage_wared / 1000), 2) if total_shortage_wared > 0 else 0
-                item_avg_shortage_pct = round(total_item_shortage / total_shortage_wared * 100, 2) if total_shortage_wared > 0 else 0
+                item_avg_kg_per_ton = round(total_item_shortage / (total_shortage_base / 1000), 2) if total_shortage_base > 0 else 0.0
+                item_avg_shortage_pct = round(total_item_shortage / total_shortage_base * 100, 2) if total_shortage_base > 0 else 0.0
             else:
-                item_avg_kg_per_ton = 0
-                item_avg_shortage_pct = round(total_item_shortage / total_shortage_wared * 100, 2) if total_shortage_wared > 0 else 0
+                item_avg_kg_per_ton = 0.0
+                item_avg_shortage_pct = round(total_item_shortage / total_shortage_base * 100, 2) if total_shortage_base > 0 else 0.0
 
             result_items.append({
                 'code': code,
@@ -488,12 +505,14 @@ def read_reconciliations(inv_items=None):
                 'cycle_prev_date': last_h['prev_date'],
                 'cycle_wared': last_h['cycle_wared'],
                 'cycle_sader': last_h['cycle_sader'],
+                'cycle_base': last_h.get('cycle_base', 0.0),
                 'kg_per_ton': last_h['kg_per_ton'],
                 'shortage_pct': last_h['shortage_pct'],
                 'avg_kg_per_ton': item_avg_kg_per_ton,
                 'avg_shortage_pct': item_avg_shortage_pct,
                 'total_shortage_qty': round(total_item_shortage, 3),
                 'total_cycle_wared': round(total_all_wared, 3),
+                'total_cycle_base': round(total_all_base, 3),
                 'shortage_cycles_count': len(shortage_cycles),
                 'post_wared': round(post_wared, 3),
                 'post_sader': round(post_sader, 3),
