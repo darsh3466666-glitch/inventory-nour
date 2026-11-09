@@ -534,7 +534,9 @@ def read_reconciliations(inv_items=None, force=False):
             -x['diff']
         ))
 
-        feed_shortages = [i['kg_per_ton'] for i in result_items if i['is_feed'] and i['kg_per_ton'] > 0]
+        feed_shortages = [i['kg_per_ton'] for i in result_items if i['is_feed'] and 0 < i['kg_per_ton'] < 500 and i.get('cycle_base', 0) >= 100]
+        if not feed_shortages:
+            feed_shortages = [i['kg_per_ton'] for i in result_items if i['is_feed'] and i['kg_per_ton'] > 0]
         avg_kg_per_ton = round(sum(feed_shortages) / len(feed_shortages), 2) if feed_shortages else 0
 
         reconciliation_data = {

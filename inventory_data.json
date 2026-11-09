@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-09T16:18:21.287683",
+  "generated_at": "2026-11-09T16:19:12.452264",
   "print_date": "2026-11-09 16:17:24",
   "invoices_print_date": "",
   "store_name": "النور لتجارة الأعلاف",
@@ -38174,7 +38174,7 @@
       "total_surplus_pieces": 499,
       "total_shortage_kg": 3261.2,
       "total_surplus_kg": 1647.98,
-      "avg_kg_per_ton": 229.14
+      "avg_kg_per_ton": 8.9
     }
   },
   "stats": {
