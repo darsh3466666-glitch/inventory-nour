@@ -27,6 +27,8 @@ RECONCILIATION_FILES = [
 ]
 REPO_DIR = r'C:\Users\GoldenTech\inventory-nour'
 HTML_FILE = os.path.join(REPO_DIR, 'index.html')
+TEMPLATE_FILE = os.path.join(REPO_DIR, 'index_template.html')
+FALLBACK_TEMPLATE = r'c:\Users\GoldenTech\.openclaw-autoclaw\workspace\.cluster\delivery\index.html'
 JSON_FILE = os.path.join(REPO_DIR, 'inventory_data.json')
 CACHE_REC_FILE = os.path.join(REPO_DIR, 'reconciliations_cache.json')
 LOG_FILE = os.path.join(REPO_DIR, 'watcher.log')
@@ -595,24 +597,60 @@ def generate_data():
     return data
 
 
+def get_valid_template():
+    """Retrieve clean, uncorrupted HTML template if HTML_FILE is missing or corrupted"""
+    marker_start = '/*__EMBEDDED_DATA__*/'
+    marker_end = '/*__END_EMBEDDED_DATA__*/'
+    for candidate in [TEMPLATE_FILE, FALLBACK_TEMPLATE, HTML_FILE]:
+        if os.path.exists(candidate) and os.path.getsize(candidate) > 50000:
+            try:
+                with open(candidate, 'r', encoding='utf-8') as f:
+                    content = f.read()
+                if '\x00' not in content and marker_start in content and marker_end in content:
+                    return content
+            except Exception:
+                continue
+    return None
+
+
 def embed_data_into_html(data, retries=3, delay=1.0):
-    """Embed full data into HTML with retry on file collisions"""
-    if not os.path.exists(HTML_FILE):
-        return False
+    """Embed full data into HTML with atomic write and auto-healing against power loss / crashes"""
+    marker_start = '/*__EMBEDDED_DATA__*/'
+    marker_end = '/*__END_EMBEDDED_DATA__*/'
+
     for attempt in range(retries):
         try:
-            with open(HTML_FILE, 'r', encoding='utf-8') as f:
-                html = f.read()
+            html = None
+            if os.path.exists(HTML_FILE) and os.path.getsize(HTML_FILE) > 50000:
+                try:
+                    with open(HTML_FILE, 'r', encoding='utf-8') as f:
+                        test_content = f.read()
+                    if '\x00' not in test_content and marker_start in test_content and marker_end in test_content:
+                        html = test_content
+                except Exception:
+                    pass
+
+            if html is None:
+                log('WARNING: HTML_FILE is missing or corrupted! Auto-restoring from template...')
+                html = get_valid_template()
+                if not html:
+                    log('ERROR: No valid template found to restore HTML_FILE!')
+                    return False
+
             json_str = json.dumps(data, ensure_ascii=False)
-            marker_start = '/*__EMBEDDED_DATA__*/'
-            marker_end = '/*__END_EMBEDDED_DATA__*/'
             start_idx = html.find(marker_start)
             end_idx = html.find(marker_end)
             if start_idx != -1 and end_idx != -1:
                 new_block = f'{marker_start}\nvar EMBEDDED_DATA = {json_str};\n{marker_end}'
                 html = html[:start_idx] + new_block + html[end_idx + len(marker_end):]
-                with open(HTML_FILE, 'w', encoding='utf-8') as f:
+
+                # ATOMIC WRITE: Write to .tmp first, flush, fsync, then replace to prevent 0x00 / 0-byte corruption
+                tmp_file = HTML_FILE + '.tmp'
+                with open(tmp_file, 'w', encoding='utf-8') as f:
                     f.write(html)
+                    f.flush()
+                    os.fsync(f.fileno())
+                os.replace(tmp_file, HTML_FILE)
                 return True
             return False
         except Exception as e:
@@ -674,6 +712,21 @@ def git_push():
     try:
         os.chdir(REPO_DIR)
         cleanup_stale_git_lock()
+
+        # Integrity guard: NEVER commit corrupted index.html (null bytes or truncated)
+        if os.path.exists(HTML_FILE):
+            try:
+                with open(HTML_FILE, 'rb') as f:
+                    content_bytes = f.read()
+                if len(content_bytes) < 50000 or b'\x00' in content_bytes or b'/*__EMBEDDED_DATA__*/' not in content_bytes:
+                    log('CRITICAL: Corrupted index.html detected before git commit! Auto-repairing from template...')
+                    tmpl = get_valid_template()
+                    if tmpl and os.path.exists(JSON_FILE):
+                        with open(JSON_FILE, 'r', encoding='utf-8') as jf:
+                            d = json.load(jf)
+                        embed_data_into_html(d)
+            except Exception as e:
+                log(f'Warning verifying HTML before push: {e}')
 
         startupinfo = None
         if sys.platform == 'win32':
