@@ -577,11 +577,11 @@ def read_reconciliations(inv_items=None, force=False):
         return {'items': [], 'summary': {}}
 
 
-def generate_data():
+def generate_data(force=False):
     log('Reading data...')
     inv_items, inv_print_date = read_inventory()
     invoices = read_invoices()
-    reconciliations = read_reconciliations(inv_items)
+    reconciliations = read_reconciliations(inv_items, force=force)
 
     total_items = len(inv_items)
     total_balance = sum(i['balance'] for i in inv_items)
@@ -825,7 +825,7 @@ def run_once(force=False):
             log('No changes in Excel files or code; skipping push')
             return True
 
-        data = generate_data()
+        data = generate_data(force=force)
         with open(JSON_FILE, 'w', encoding='utf-8') as f:
             json.dump(data, f, ensure_ascii=False, indent=2)
         embed_data_into_html(data)
