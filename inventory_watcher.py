@@ -618,6 +618,10 @@ def read_reconciliations(inv_items=None, force=False):
             feed_shortages = [i['kg_per_ton'] for i in result_items if i['is_feed'] and i['kg_per_ton'] > 0]
         avg_kg_per_ton = round(sum(feed_shortages) / len(feed_shortages), 2) if feed_shortages else 0
 
+        high_shortage_items_count = sum(1 for i in result_items if i.get('shortage_level') == 'high')
+        moderate_shortage_items_count = sum(1 for i in result_items if i.get('shortage_level') == 'moderate')
+        safe_shortage_items_count = sum(1 for i in result_items if i.get('shortage_level') == 'safe')
+
         reconciliation_data = {
             'items': result_items,
             'summary': {
@@ -625,6 +629,9 @@ def read_reconciliations(inv_items=None, force=False):
                 'total_tasweyat_count': total_tasweyat_count,
                 'shortage_items_count': shortage_items_count,
                 'surplus_items_count': surplus_items_count,
+                'high_shortage_items_count': high_shortage_items_count,
+                'moderate_shortage_items_count': moderate_shortage_items_count,
+                'safe_shortage_items_count': safe_shortage_items_count,
                 'total_shortage_feed_kg': round(total_shortage_feed_kg, 2),
                 'total_shortage_pieces': int(total_shortage_pieces),
                 'total_surplus_feed_kg': round(total_surplus_feed_kg, 2),
