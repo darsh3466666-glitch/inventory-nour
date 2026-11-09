@@ -495,6 +495,8 @@ def read_reconciliations(inv_items=None, force=False):
 
                 shortage_pct = round((abs_diff / cycle_base * 100), 2) if (cycle_base > 0 and diff < 0) else 0.0
 
+                shortage_level, shortage_label = get_shortage_evaluation(code, kg_per_ton, shortage_pct, is_kilo, diff)
+
                 history.append({
                     'date': t_date,
                     'bayan': t['bayan'],
@@ -509,7 +511,9 @@ def read_reconciliations(inv_items=None, force=False):
                     'cycle_wared': round(c_wared, 3),
                     'cycle_sader': round(c_sader, 3),
                     'kg_per_ton': kg_per_ton,
-                    'shortage_pct': shortage_pct
+                    'shortage_pct': shortage_pct,
+                    'shortage_level': shortage_level,
+                    'shortage_level_label': shortage_label
                 })
 
             last_h = history[-1]
@@ -554,6 +558,10 @@ def read_reconciliations(inv_items=None, force=False):
                 item_avg_kg_per_ton = 0.0
                 item_avg_shortage_pct = round(total_item_shortage / total_shortage_base * 100, 2) if total_shortage_base > 0 else 0.0
 
+            safe_lim, high_lim, item_desc = get_item_thresholds(code, is_kilo)
+            cur_shortage_level, cur_shortage_label = get_shortage_evaluation(code, last_h['kg_per_ton'], last_h['shortage_pct'], is_kilo, last_h['raw_diff'])
+            avg_shortage_level, avg_shortage_label = get_shortage_evaluation(code, item_avg_kg_per_ton, item_avg_shortage_pct, is_kilo, -1 if total_item_shortage > 0 else 0)
+
             result_items.append({
                 'code': code,
                 'name': name,
@@ -572,6 +580,13 @@ def read_reconciliations(inv_items=None, force=False):
                 'cycle_base': last_h.get('cycle_base', 0.0),
                 'kg_per_ton': last_h['kg_per_ton'],
                 'shortage_pct': last_h['shortage_pct'],
+                'threshold_safe': safe_lim,
+                'threshold_high': high_lim,
+                'threshold_desc': item_desc,
+                'shortage_level': cur_shortage_level,
+                'shortage_level_label': cur_shortage_label,
+                'avg_shortage_level': avg_shortage_level,
+                'avg_shortage_label': avg_shortage_label,
                 'avg_kg_per_ton': item_avg_kg_per_ton,
                 'avg_shortage_pct': item_avg_shortage_pct,
                 'total_shortage_qty': round(total_item_shortage, 3),
