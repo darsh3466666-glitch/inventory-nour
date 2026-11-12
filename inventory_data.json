@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-12T16:53:20.846409",
+  "generated_at": "2026-11-12T16:57:37.272530",
   "print_date": "2026-11-11 17:02:37",
   "invoices_print_date": "",
   "store_name": "النور لتجارة الأعلاف",
@@ -36703,7 +36703,7 @@
         "total_cycle_base": 284566.75,
         "shortage_cycles_count": 6,
         "post_wared": 36650.0,
-        "post_sader": 31443.5,
+        "post_sader": 32158.5,
         "is_cotton_based": true,
         "history": [
           {
@@ -36977,7 +36977,7 @@
         "total_cycle_base": 149668.5,
         "shortage_cycles_count": 6,
         "post_wared": 50985.0,
-        "post_sader": 57181.5,
+        "post_sader": 57671.5,
         "is_cotton_based": false,
         "history": [
           {
@@ -37123,7 +37123,7 @@
         "total_cycle_base": 4543973.62,
         "shortage_cycles_count": 3,
         "post_wared": 1245020.0,
-        "post_sader": 1196079.0,
+        "post_sader": 1209172.0,
         "is_cotton_based": false,
         "history": [
           {
@@ -37361,7 +37361,7 @@
         "total_cycle_base": 203992.26,
         "shortage_cycles_count": 9,
         "post_wared": 27479.0,
-        "post_sader": 20205.0,
+        "post_sader": 20805.0,
         "is_cotton_based": false,
         "history": [
           {
@@ -37560,8 +37560,8 @@
         "total_cycle_wared": 1263248.057,
         "total_cycle_base": 1284468.114,
         "shortage_cycles_count": 10,
-        "post_wared": 54310.0,
-        "post_sader": 52905.0,
+        "post_wared": 63080.0,
+        "post_sader": 55236.0,
         "is_cotton_based": false,
         "history": [
           {
@@ -37796,8 +37796,8 @@
         "total_cycle_wared": 859280.24,
         "total_cycle_base": 865521.29,
         "shortage_cycles_count": 0,
-        "post_wared": 573070.0,
-        "post_sader": 571260.05,
+        "post_wared": 581070.0,
+        "post_sader": 573948.55,
         "is_cotton_based": false,
         "history": [
           {
@@ -37853,7 +37853,7 @@
         "total_cycle_base": 21168.0,
         "shortage_cycles_count": 0,
         "post_wared": 2604.0,
-        "post_sader": 55829.0,
+        "post_sader": 56379.0,
         "is_cotton_based": false,
         "history": [
           {
@@ -37908,8 +37908,8 @@
         "total_cycle_wared": 175711.0,
         "total_cycle_base": 175385.0,
         "shortage_cycles_count": 0,
-        "post_wared": 34297.0,
-        "post_sader": 330701.0,
+        "post_wared": 34299.0,
+        "post_sader": 331851.0,
         "is_cotton_based": false,
         "history": [
           {
@@ -37965,7 +37965,7 @@
         "total_cycle_base": 22156.445,
         "shortage_cycles_count": 0,
         "post_wared": 13000.0,
-        "post_sader": 14280.95,
+        "post_sader": 14360.95,
         "is_cotton_based": false,
         "history": [
           {
@@ -38021,7 +38021,7 @@
         "total_cycle_base": 11068.905,
         "shortage_cycles_count": 0,
         "post_wared": 6450.0,
-        "post_sader": 7001.4,
+        "post_sader": 7044.9,
         "is_cotton_based": false,
         "history": [
           {
@@ -38113,7 +38113,7 @@
         "total_cycle_base": 10100.75,
         "shortage_cycles_count": 0,
         "post_wared": 5523.0,
-        "post_sader": 5138.65,
+        "post_sader": 5165.65,
         "is_cotton_based": false,
         "history": [
           {
@@ -38187,7 +38187,7 @@
         "total_cycle_base": 42.5,
         "shortage_cycles_count": 0,
         "post_wared": 0.0,
-        "post_sader": 62.0,
+        "post_sader": 56.0,
         "is_cotton_based": false,
         "history": [
           {
@@ -38243,7 +38243,7 @@
         "total_cycle_base": 1154.8,
         "shortage_cycles_count": 0,
         "post_wared": 0.0,
-        "post_sader": 777.8,
+        "post_sader": 782.8,
         "is_cotton_based": false,
         "history": [
           {
@@ -38335,7 +38335,7 @@
         "total_cycle_base": 5024.735,
         "shortage_cycles_count": 0,
         "post_wared": 3980.0,
-        "post_sader": 2559.15,
+        "post_sader": 2573.65,
         "is_cotton_based": false,
         "history": [
           {
@@ -38883,7 +38883,7 @@
         "total_cycle_base": 36682.0,
         "shortage_cycles_count": 10,
         "post_wared": 0.0,
-        "post_sader": 740.0,
+        "post_sader": 780.0,
         "is_cotton_based": false,
         "history": [
           {
