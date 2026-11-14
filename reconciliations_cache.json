@@ -1,5 +1,5 @@
 {
-  "mtime": 1794495397.8361404,
+  "mtime": 1794668523.8544366,
   "data": {
     "items": [
       {
@@ -200,7 +200,7 @@
         "total_cycle_base": 284566.75,
         "shortage_cycles_count": 6,
         "post_wared": 36650.0,
-        "post_sader": 32158.5,
+        "post_sader": 33583.5,
         "is_cotton_based": true,
         "history": [
           {
@@ -312,7 +312,7 @@
             "shortage_level_label": "عجز طبيعي آمن"
           }
         ],
-        "current_stock_balance": 5417.5
+        "current_stock_balance": 3577.5
       },
       {
         "code": "50018",
@@ -474,7 +474,7 @@
         "total_cycle_base": 149668.5,
         "shortage_cycles_count": 6,
         "post_wared": 50985.0,
-        "post_sader": 57671.5,
+        "post_sader": 58426.5,
         "is_cotton_based": false,
         "history": [
           {
@@ -586,7 +586,7 @@
             "shortage_level_label": "عجز طبيعي آمن"
           }
         ],
-        "current_stock_balance": 4347.5
+        "current_stock_balance": 3102.5
       },
       {
         "code": "50005",
@@ -620,7 +620,7 @@
         "total_cycle_base": 4543973.62,
         "shortage_cycles_count": 3,
         "post_wared": 1245020.0,
-        "post_sader": 1209172.0,
+        "post_sader": 1226478.0,
         "is_cotton_based": false,
         "history": [
           {
@@ -696,7 +696,7 @@
             "shortage_level_label": "عجز طبيعي آمن"
           }
         ],
-        "current_stock_balance": 51454.5
+        "current_stock_balance": 22855.5
       },
       {
         "code": "50013",
@@ -730,7 +730,7 @@
         "total_cycle_base": 19323.6,
         "shortage_cycles_count": 5,
         "post_wared": 9206.0,
-        "post_sader": 6127.5,
+        "post_sader": 6227.5,
         "is_cotton_based": false,
         "history": [
           {
@@ -824,7 +824,7 @@
             "shortage_level_label": "عجز طبيعي آمن"
           }
         ],
-        "current_stock_balance": 3174.5
+        "current_stock_balance": 3074.5
       },
       {
         "code": "50011",
@@ -858,7 +858,7 @@
         "total_cycle_base": 203992.26,
         "shortage_cycles_count": 9,
         "post_wared": 27479.0,
-        "post_sader": 20805.0,
+        "post_sader": 22505.4,
         "is_cotton_based": false,
         "history": [
           {
@@ -1024,7 +1024,7 @@
             "shortage_level_label": "عجز طبيعي آمن"
           }
         ],
-        "current_stock_balance": 8390.5
+        "current_stock_balance": 6090.100001
       },
       {
         "code": "50016",
@@ -1058,7 +1058,7 @@
         "total_cycle_base": 1284468.114,
         "shortage_cycles_count": 10,
         "post_wared": 63080.0,
-        "post_sader": 55236.0,
+        "post_sader": 59410.0,
         "is_cotton_based": false,
         "history": [
           {
@@ -1260,7 +1260,7 @@
             "shortage_level_label": "فائض جرد"
           }
         ],
-        "current_stock_balance": 1938.000001
+        "current_stock_balance": 4203.000001
       },
       {
         "code": "50008",
@@ -1294,7 +1294,7 @@
         "total_cycle_base": 865521.29,
         "shortage_cycles_count": 0,
         "post_wared": 581070.0,
-        "post_sader": 573948.55,
+        "post_sader": 579442.55,
         "is_cotton_based": false,
         "history": [
           {
@@ -1316,7 +1316,7 @@
             "shortage_level_label": "فائض جرد"
           }
         ],
-        "current_stock_balance": 5845.14
+        "current_stock_balance": 6502.64
       },
       {
         "code": "50046",
@@ -1349,8 +1349,8 @@
         "total_cycle_wared": 21289.0,
         "total_cycle_base": 21168.0,
         "shortage_cycles_count": 0,
-        "post_wared": 2604.0,
-        "post_sader": 56379.0,
+        "post_wared": 2607.0,
+        "post_sader": 59379.0,
         "is_cotton_based": false,
         "history": [
           {
@@ -1372,7 +1372,7 @@
             "shortage_level_label": "فائض جرد"
           }
         ],
-        "current_stock_balance": 1301.0
+        "current_stock_balance": -2249.0
       },
       {
         "code": "50010",
@@ -1405,8 +1405,8 @@
         "total_cycle_wared": 175711.0,
         "total_cycle_base": 175385.0,
         "shortage_cycles_count": 0,
-        "post_wared": 34299.0,
-        "post_sader": 331851.0,
+        "post_wared": 34308.0,
+        "post_sader": 340751.0,
         "is_cotton_based": false,
         "history": [
           {
@@ -1428,7 +1428,7 @@
             "shortage_level_label": "فائض جرد"
           }
         ],
-        "current_stock_balance": 1275.0
+        "current_stock_balance": 2225.0
       },
       {
         "code": "50038",
@@ -1462,7 +1462,7 @@
         "total_cycle_base": 22156.445,
         "shortage_cycles_count": 0,
         "post_wared": 13000.0,
-        "post_sader": 14360.95,
+        "post_sader": 14391.95,
         "is_cotton_based": false,
         "history": [
           {
@@ -1484,7 +1484,7 @@
             "shortage_level_label": "فائض جرد"
           }
         ],
-        "current_stock_balance": 410.105
+        "current_stock_balance": 299.105
       },
       {
         "code": "50039",
@@ -1518,7 +1518,7 @@
         "total_cycle_base": 11068.905,
         "shortage_cycles_count": 0,
         "post_wared": 6450.0,
-        "post_sader": 7044.9,
+        "post_sader": 7101.6,
         "is_cotton_based": false,
         "history": [
           {
@@ -1576,7 +1576,7 @@
             "shortage_level_label": "فائض جرد"
           }
         ],
-        "current_stock_balance": 1584.625
+        "current_stock_balance": 1484.425
       },
       {
         "code": "50033",
@@ -1610,7 +1610,7 @@
         "total_cycle_base": 10100.75,
         "shortage_cycles_count": 0,
         "post_wared": 5523.0,
-        "post_sader": 5165.65,
+        "post_sader": 5198.65,
         "is_cotton_based": false,
         "history": [
           {
@@ -1650,7 +1650,7 @@
             "shortage_level_label": "فائض جرد"
           }
         ],
-        "current_stock_balance": 934.350001
+        "current_stock_balance": 874.350001
       },
       {
         "code": "3500473",
@@ -1706,7 +1706,7 @@
             "shortage_level_label": "فائض جرد"
           }
         ],
-        "current_stock_balance": 15.5
+        "current_stock_balance": 21.5
       },
       {
         "code": "50024",
@@ -1740,7 +1740,7 @@
         "total_cycle_base": 1154.8,
         "shortage_cycles_count": 0,
         "post_wared": 0.0,
-        "post_sader": 782.8,
+        "post_sader": 787.05,
         "is_cotton_based": false,
         "history": [
           {
@@ -1798,7 +1798,7 @@
             "shortage_level_label": "فائض جرد"
           }
         ],
-        "current_stock_balance": 96.7
+        "current_stock_balance": 87.45
       },
       {
         "code": "50025",
@@ -1832,7 +1832,7 @@
         "total_cycle_base": 5024.735,
         "shortage_cycles_count": 0,
         "post_wared": 3980.0,
-        "post_sader": 2573.65,
+        "post_sader": 2589.4,
         "is_cotton_based": false,
         "history": [
           {
@@ -1854,7 +1854,7 @@
             "shortage_level_label": "فائض جرد"
           }
         ],
-        "current_stock_balance": 2024.985004
+        "current_stock_balance": 1994.735004
       },
       {
         "code": "3900354",
@@ -2162,7 +2162,7 @@
         "total_cycle_base": 8928.0,
         "shortage_cycles_count": 10,
         "post_wared": 2000.0,
-        "post_sader": 120.0,
+        "post_sader": 180.0,
         "is_cotton_based": false,
         "history": [
           {
@@ -2380,7 +2380,7 @@
         "total_cycle_base": 36682.0,
         "shortage_cycles_count": 10,
         "post_wared": 0.0,
-        "post_sader": 780.0,
+        "post_sader": 960.0,
         "is_cotton_based": false,
         "history": [
           {
@@ -2564,7 +2564,7 @@
             "shortage_level_label": "عجز مرتفع"
           }
         ],
-        "current_stock_balance": 4860.0
+        "current_stock_balance": 4640.0
       },
       {
         "code": "1941822",
