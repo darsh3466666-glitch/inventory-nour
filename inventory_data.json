@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-12T17:19:29.351616",
-  "print_date": "2026-11-12 17:17:33",
+  "generated_at": "2026-11-14T11:23:22.206682",
+  "print_date": "2026-11-14 11:22:46",
   "invoices_print_date": "",
   "store_name": "النور لتجارة الأعلاف",
   "inventory": [
@@ -20,8 +20,8 @@
       "code": "50010",
       "name": "علف تسمين النور",
       "unit": "كيلو",
-      "balance": 2125.0,
-      "detailed": "2 طن / 125 كيلو",
+      "balance": 775.0,
+      "detailed": "0 طن / 775 كيلو",
       "detained": 0.0,
       "group": "مجموعة أعلاف النور",
       "supplier": ""
@@ -37931,7 +37931,7 @@
             "shortage_level_label": "فائض جرد"
           }
         ],
-        "current_stock_balance": 2125.0
+        "current_stock_balance": 775.0
       },
       {
         "code": "50038",
@@ -39235,13 +39235,13 @@
   },
   "stats": {
     "total_items": 37,
-    "total_balance": 126144.53,
+    "total_balance": 124794.53,
     "low_stock": 10,
     "out_of_stock": 0,
     "groups": {
       "مجموعة أعلاف النور": {
         "count": 2,
-        "balance": 2876.0
+        "balance": 1526.0
       },
       "مجموعة إضافات الأعلاف": {
         "count": 17,
