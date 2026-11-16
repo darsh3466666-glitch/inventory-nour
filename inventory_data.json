@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-16T11:33:22.975994",
-  "print_date": "2026-11-16 11:31:46",
+  "generated_at": "2026-11-16T13:45:21.566543",
+  "print_date": "2026-11-16 13:44:31",
   "invoices_print_date": "",
   "store_name": "النور لتجارة الأعلاف",
   "inventory": [
@@ -306,8 +306,8 @@
       "code": "50016",
       "name": "فول صويا46%",
       "unit": "كيلو",
-      "balance": 28033.000001,
-      "detailed": "28033 كيلو",
+      "balance": 973.000001,
+      "detailed": "973 كيلو",
       "detained": 0.0,
       "group": "مجموعة خامات الأعلاف",
       "supplier": ""
@@ -38079,7 +38079,7 @@
             "shortage_level_label": "فائض جرد"
           }
         ],
-        "current_stock_balance": 28033.000001
+        "current_stock_balance": 973.000001
       },
       {
         "code": "50008",
@@ -39551,7 +39551,7 @@
   },
   "stats": {
     "total_items": 37,
-    "total_balance": 175816.43,
+    "total_balance": 148756.43,
     "low_stock": 10,
     "out_of_stock": 0,
     "groups": {
@@ -39565,7 +39565,7 @@
       },
       "مجموعة خامات الأعلاف": {
         "count": 14,
-        "balance": 131896.14000100002
+        "balance": 104836.14000099999
       },
       "مجموعة مستلزمات الإنتاج": {
         "count": 4,
