@@ -1,5 +1,5 @@
 {
-  "mtime": 1794929484.9630644,
+  "mtime": 1794930906.943935,
   "data": {
     "items": [
       {
@@ -876,7 +876,7 @@
         "total_cycle_base": 203992.26,
         "shortage_cycles_count": 9,
         "post_wared": 27479.0,
-        "post_sader": 24798.0,
+        "post_sader": 24298.0,
         "is_cotton_based": false,
         "history": [
           {
@@ -1042,7 +1042,7 @@
             "shortage_level_label": "عجز طبيعي آمن"
           }
         ],
-        "current_stock_balance": 3797.5
+        "current_stock_balance": 4297.5
       },
       {
         "code": "50016",
@@ -1352,7 +1352,7 @@
             "shortage_level_label": "فائض جرد"
           }
         ],
-        "current_stock_balance": -436.86
+        "current_stock_balance": 8563.14
       },
       {
         "code": "50046",

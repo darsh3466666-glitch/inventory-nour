@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-17T17:33:25.095278",
-  "print_date": "2026-11-17 17:30:45",
+  "generated_at": "2026-11-17T17:55:33.360737",
+  "print_date": "2026-11-17 17:54:23",
   "invoices_print_date": "",
   "store_name": "النور لتجارة الأعلاف",
   "inventory": [
@@ -273,8 +273,8 @@
       "code": "50011",
       "name": "رجيعه (رجيع كون)",
       "unit": "كيلو",
-      "balance": 3797.5,
-      "detailed": "3797 كيلو",
+      "balance": 4297.5,
+      "detailed": "4297 كيلو",
       "detained": 0.0,
       "group": "مجموعة خامات الأعلاف",
       "supplier": ""
@@ -350,8 +350,8 @@
       "code": "7362843",
       "name": "كسب مصنع",
       "unit": "كيلو",
-      "balance": 1075.0,
-      "detailed": "1075 كيلو",
+      "balance": 575.0,
+      "detailed": "575 كيلو",
       "detained": 0.0,
       "group": "مجموعة خامات الأعلاف",
       "supplier": ""
@@ -361,8 +361,8 @@
       "code": "50008",
       "name": "نخاله",
       "unit": "كيلو",
-      "balance": -436.86,
-      "detailed": "- 436 كيلو",
+      "balance": 8563.14,
+      "detailed": "8563 كيلو",
       "detained": 0.0,
       "group": "مجموعة خامات الأعلاف",
       "supplier": ""
@@ -37885,7 +37885,7 @@
         "total_cycle_base": 203992.26,
         "shortage_cycles_count": 9,
         "post_wared": 27479.0,
-        "post_sader": 24798.0,
+        "post_sader": 24298.0,
         "is_cotton_based": false,
         "history": [
           {
@@ -38051,7 +38051,7 @@
             "shortage_level_label": "عجز طبيعي آمن"
           }
         ],
-        "current_stock_balance": 3797.5
+        "current_stock_balance": 4297.5
       },
       {
         "code": "50016",
@@ -38361,7 +38361,7 @@
             "shortage_level_label": "فائض جرد"
           }
         ],
-        "current_stock_balance": -436.86
+        "current_stock_balance": 8563.14
       },
       {
         "code": "50046",
@@ -39777,9 +39777,9 @@
   },
   "stats": {
     "total_items": 37,
-    "total_balance": 108943.43,
+    "total_balance": 117943.43,
     "low_stock": 10,
-    "out_of_stock": 1,
+    "out_of_stock": 0,
     "groups": {
       "مجموعة أعلاف النور": {
         "count": 2,
@@ -39791,7 +39791,7 @@
       },
       "مجموعة خامات الأعلاف": {
         "count": 14,
-        "balance": 63661.140001
+        "balance": 72661.14000099999
       },
       "مجموعة مستلزمات الإنتاج": {
         "count": 4,
