@@ -1106,7 +1106,13 @@ let customDateStart = null;
 let customDateEnd = null;
 let salesSort = 'rate';
 let activeChartItemName = null;
+let balanceView = 'grid';
+try { balanceView = localStorage.getItem('balanceView') || 'grid'; } catch(e) {}
 const openRecHistories = new Set();
+
+function esc(s) {
+  return String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
 
 window.toggleRecHistory = function(id, btn) {
   const el = document.getElementById(id);
@@ -1387,6 +1393,25 @@ function renderDateFilters() {
   return html;
 }
 
+function renderBalanceGroupHeader(cat, items) {
+  const totalGrpBal = items.reduce((s, i) => s + (parseFloat(i.balance) || 0), 0);
+  const lowCnt = items.filter(i => { const b = parseFloat(i.balance) || 0; return b > 0 && b < 50; }).length;
+  const units = [...new Set(items.map(i => (i.unit || '').trim()).filter(Boolean))];
+  const unitLabel = units.length === 1 ? units[0] : '';
+  const isKilo = unitLabel.includes('كيلو');
+  const tonNote = isKilo && totalGrpBal >= 1000 ? ' (' + fmt(Math.round(totalGrpBal / 10) / 100) + ' طن)' : '';
+  const svgLayer = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>';
+
+  let h = '<div class="group-header">';
+  h += '<div class="group-title"><span class="group-icon">' + svgLayer + '</span><span>' + esc(cat) + '</span></div>';
+  h += '<div class="group-meta">';
+  if (lowCnt > 0) h += '<span class="group-low-pill">' + lowCnt + ' منخفض</span>';
+  if (totalGrpBal > 0) h += '<span class="group-total">الإجمالي: ' + fmt(totalGrpBal) + (unitLabel ? ' ' + esc(unitLabel) : '') + tonNote + '</span>';
+  h += '<span class="group-count" data-total="' + items.length + '">' + items.length + ' صنف</span>';
+  h += '</div></div>';
+  return h;
+}
+
 function renderBalanceTab(data) {
   const allItems = (data.inventory||[]).filter(i => (parseFloat(i.balance)||0) >= 1);
   const groups = data.stats && data.stats.groups;
@@ -1394,33 +1419,80 @@ function renderBalanceTab(data) {
   const totalBal = allItems.reduce((s,i)=>s+(parseFloat(i.balance)||0),0);
   const statusLowCount = allItems.filter(i => (parseFloat(i.balance)||0) > 0 && (parseFloat(i.balance)||0) < 50).length;
   const statusOkCount = allItems.filter(i => (parseFloat(i.balance)||0) >= 50).length;
+
   let chips = '<div class="filters"><button class="chip '+(activeFilter==='all'?'active':'')+'" data-filter="all">الكل ('+allItems.length+')</button>';
   if (statusOkCount > 0) chips += '<button class="chip '+(activeFilter==='status-ok'?'active':'')+'" data-filter="status-ok">متوفر ('+statusOkCount+')</button>';
   if (statusLowCount > 0) chips += '<button class="chip '+(activeFilter==='status-low'?'active':'')+'" data-filter="status-low">منخفض ('+statusLowCount+')</button>';
-  if (groups) { Object.keys(groups).sort().forEach(g=>{ const cnt = allItems.filter(i=>(i.group||'')===g).length; if(cnt>0) chips += '<button class="chip '+(activeFilter===g?'active':'')+'" data-filter="'+g+'">'+g+' ('+cnt+')</button>'; }); }
+  if (groups) { Object.keys(groups).sort().forEach(g=>{ const cnt = allItems.filter(i=>(i.group||'')===g).length; if(cnt>0) chips += '<button class="chip '+(activeFilter===g?'active':'')+'" data-filter="'+esc(g)+'">'+esc(g)+' ('+cnt+')</button>'; }); }
   chips += '</div>';
-  let html = chips + '<div class="search-box"><svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" class="search-input" id="searchInput" placeholder="ابحث عن صنف..." /></div>';
+
+  const svgGrid = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>';
+  const svgRows = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>';
+
+  let html = chips;
+  html += '<div class="inv-toolbar">';
+  html += '<div class="search-box"><svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" class="search-input" id="searchInput" placeholder="ابحث عن صنف..." aria-label="ابحث عن صنف" /></div>';
+  html += '<div class="view-toggle" role="group" aria-label="طريقة العرض">';
+  html += '<button type="button" class="view-btn '+(balanceView==='grid'?'active':'')+'" data-view="grid" aria-pressed="'+(balanceView==='grid')+'">'+svgGrid+' بطاقات</button>';
+  html += '<button type="button" class="view-btn '+(balanceView==='table'?'active':'')+'" data-view="table" aria-pressed="'+(balanceView==='table')+'">'+svgRows+' جدول</button>';
+  html += '</div></div>';
+
   let filtered = allItems;
   if (activeFilter === 'status-ok') filtered = allItems.filter(i=>(parseFloat(i.balance)||0)>=50);
   else if (activeFilter === 'status-low') filtered = allItems.filter(i=>(parseFloat(i.balance)||0)>0 && (parseFloat(i.balance)||0)<50);
   else if (activeFilter !== 'all') filtered = allItems.filter(i=>(i.group||'')===activeFilter);
+
   const grouped = {};
   filtered.forEach(i=>{ const c=i.group||'غير مصنف'; if(!grouped[c]) grouped[c]=[]; grouped[c].push(i); });
-  html += '<div class="bar-list" id="invList">';
-  let ci = 0;
+
+  html += '<div class="inv-groups" id="invList">';
   let globalIdx = 1;
   Object.keys(grouped).sort().forEach(cat=>{
-    html += '<div class="group-header">'+cat+' <span class="group-count">'+grouped[cat].length+'</span></div>';
-    grouped[cat].forEach(item=>{
-      const bal=parseFloat(item.balance)||0;
-      const p=totalBal>0?(bal/totalBal*100):0;
-      // Logarithmic scale for better visual distribution
-      const logP = totalBal>0 ? (Math.log(bal+1)/Math.log(totalBal+1))*100 : 0;
-      const bw=Math.max(logP, 8);
-      const b=badge(item.balance);
-      html += '<div class="bar-item" data-name="'+(item.name||'').toLowerCase()+'"><div class="bar-item-header"><div><div class="bar-item-name">'+(globalIdx++)+'. '+item.name+'</div></div><span class="bar-item-pct">'+pct(p)+'</span></div><div class="bar-track"><div class="bar-fill '+colorCls(ci++)+'" style="width:'+bw+'%"></div></div><div class="bar-item-footer"><div class="bar-item-balance">الرصيد: <strong>'+fmt(bal)+'</strong> '+(item.unit||'')+'</div><span class="bar-item-badge '+b.cls+'">'+b.t+'</span></div></div>';
-    });
+    const items = grouped[cat];
+    html += '<section class="inv-group">';
+    html += renderBalanceGroupHeader(cat, items);
+
+    if (balanceView === 'table') {
+      html += '<div class="inv-table-wrap"><table class="inv-table"><thead><tr><th class="col-num">#</th><th>الصنف</th><th>الرصيد</th><th class="col-share">النسبة</th><th>الحالة</th></tr></thead><tbody>';
+      items.forEach(item=>{
+        const bal = parseFloat(item.balance)||0;
+        const p = totalBal>0 ? (bal/totalBal*100) : 0;
+        const logP = totalBal>0 ? (Math.log(bal+1)/Math.log(totalBal+1))*100 : 0;
+        const bw = Math.max(logP, 8);
+        const b = badge(item.balance);
+        const isKilo = (item.unit||'').includes('كيلو');
+        const tonSub = isKilo && bal >= 1000 ? '<span class="bar-item-ton">(' + fmt(Math.round(bal/10)/100) + ' طن)</span>' : '';
+        html += '<tr class="inv-row" data-name="'+esc((item.name||'').toLowerCase())+'">';
+        html += '<td class="col-num">'+(globalIdx++)+'</td>';
+        html += '<td style="font-weight:800;">'+esc(item.name)+'</td>';
+        html += '<td class="col-bal">'+fmt(bal)+'<span class="col-unit">'+esc(item.unit||'')+'</span>'+tonSub+'</td>';
+        html += '<td class="col-share"><div class="inv-share-cell"><div class="bar-track"><div class="bar-fill '+b.cls+'" style="width:'+bw.toFixed(1)+'%"></div></div><span class="inv-share-val">'+pct(p)+'</span></div></td>';
+        html += '<td><span class="bar-item-badge '+b.cls+'">'+b.t+'</span></td>';
+        html += '</tr>';
+      });
+      html += '</tbody></table></div>';
+    } else {
+      html += '<div class="items-grid">';
+      items.forEach(item=>{
+        const bal = parseFloat(item.balance)||0;
+        const p = totalBal>0 ? (bal/totalBal*100) : 0;
+        const logP = totalBal>0 ? (Math.log(bal+1)/Math.log(totalBal+1))*100 : 0;
+        const bw = Math.max(logP, 8);
+        const b = badge(item.balance);
+        const isKilo = (item.unit||'').includes('كيلو');
+        const tonSub = isKilo && bal >= 1000 ? '<span class="bar-item-ton">(' + fmt(Math.round(bal/10)/100) + ' طن)</span>' : '';
+        const statusCls = b.cls === 'low' ? ' is-low' : (b.cls === 'out' ? ' is-out' : '');
+        html += '<div class="bar-item'+statusCls+'" data-name="'+esc((item.name||'').toLowerCase())+'">';
+        html += '<div class="bar-item-header"><div class="bar-item-title"><span class="bar-item-idx">'+(globalIdx++)+'</span><div class="bar-item-name">'+esc(item.name)+'</div></div><span class="bar-item-badge '+b.cls+'">'+b.t+'</span></div>';
+        html += '<div class="bar-item-metrics"><div class="bar-item-balance"><strong>'+fmt(bal)+'</strong> '+esc(item.unit||'')+tonSub+'</div><span class="bar-item-pct">'+pct(p)+'</span></div>';
+        html += '<div class="bar-track"><div class="bar-fill '+b.cls+'" style="width:'+bw.toFixed(1)+'%"></div></div>';
+        html += '</div>';
+      });
+      html += '</div>';
+    }
+    html += '</section>';
   });
+  html += '<div class="empty-state" id="invSearchEmpty" style="display:none;"><p>لا توجد أصناف مطابقة للبحث</p></div>';
   html += '</div>';
   return html;
 }
@@ -1471,37 +1543,33 @@ function renderCustomersTab(data) {
   const topCusts = Object.entries(custMap).sort((a,b)=>b[1]-a[1]).slice(0,10);
 
   html += '<div class="section-title">أكثر 10 عملاء سحباً <div class="line"></div></div>';
-  html += '<div class="bar-list">';
+  html += '<div class="items-grid cols-2">';
   const maxAllCust = Math.max(...topCusts.map(c=>c[1]), 1);
   topCusts.forEach((c,i)=>{
-    const logP = (Math.log(c[1]+1)/Math.log(maxAllCust+1))*100;
-    const bw = Math.max(logP, 8);
-    html += '<div class="cust-item"><span class="cust-name">'+(i+1)+'. '+c[0]+'</span><span class="cust-qty">'+fmt(Math.round(c[1]*1000)/1000)+'</span></div>';
+    html += '<div class="cust-item"><span class="cust-name"><span class="bar-item-idx">'+(i+1)+'</span> '+esc(c[0])+'</span><span class="cust-qty">'+fmt(Math.round(c[1]*1000)/1000)+'</span></div>';
   });
   html += '</div>';
 
   // Items ranked by top customer withdrawal
   html += '<div class="section-title" style="margin-top:20px">ترتيب الأصناف حسب أكثر عميل يسحب منها <div class="line"></div></div>';
   html += '<div class="search-box"><svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" class="search-input" id="searchInput" placeholder="ابحث عن صنف..." /></div>';
-  html += '<div class="bar-list" id="invList">';
+  html += '<div class="items-grid" id="invList">';
   let ci = 0;
   filtered.forEach((item, idx) => {
     if (!item.top_customers || !item.top_customers.length) return;
     const top = item.top_customers[0];
-    const p = (top.qty/maxCustQty)*100;
     const logP = (Math.log(top.qty+1)/Math.log(maxCustQty+1))*100;
     const bw = Math.max(logP, 8);
-    html += '<div class="bar-item" data-name="'+(item.name||'').toLowerCase()+'">';
-    html += '<div class="bar-item-header"><div><div class="bar-item-name">'+(idx+1)+'. '+item.name+'</div></div><span class="bar-item-pct">'+fmt(top.qty)+'</span></div>';
+    html += '<div class="bar-item" data-name="'+esc((item.name||'').toLowerCase())+'">';
+    html += '<div class="bar-item-header"><div class="bar-item-title"><span class="bar-item-idx">'+(idx+1)+'</span><div class="bar-item-name">'+esc(item.name)+'</div></div><span class="bar-item-pct">'+fmt(top.qty)+'</span></div>';
     html += '<div class="bar-track"><div class="bar-fill '+colorCls(ci++)+'" style="width:'+bw+'%"></div></div>';
-    html += '<div class="bar-item-footer"><div class="bar-item-balance">أكثر عميل: <strong>'+top.name+'</strong></div><div class="bar-item-balance">سحب: <strong>'+fmt(top.qty)+'</strong> '+(item.unit||'')+'</div></div>';
+    html += '<div class="bar-item-footer"><div class="bar-item-balance">أكثر عميل: <strong>'+esc(top.name)+'</strong></div><div class="bar-item-balance">سحب: <strong>'+fmt(top.qty)+'</strong> '+esc(item.unit||'')+'</div></div>';
     // Show top 3 customers for this item
     const top3 = item.top_customers.slice(0, 3);
     if (top3.length > 1) {
-      html += '<div style="margin-top:8px;display:flex;flex-direction:column;gap:4px;">';
+      html += '<div style="margin-top:2px;padding-top:6px;border-top:1px dashed var(--line-soft);display:flex;flex-direction:column;gap:3px;">';
       top3.forEach((c, i2) => {
-        const cPct = maxCustQty > 0 ? (c.qty/maxCustQty)*100 : 0;
-        html += '<div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ink-2);font-weight:600;"><span style="min-width:20px;color:var(--ink-3);">'+(i2+1)+'</span><span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">'+c.name+'</span><span style="font-weight:800;color:var(--ink);font-variant-numeric:tabular-nums;">'+fmt(c.qty)+'</span></div>';
+        html += '<div style="display:flex;align-items:center;gap:6px;font-size:12.5px;color:var(--ink-2);font-weight:600;"><span style="min-width:16px;color:var(--ink-3);">'+(i2+1)+'</span><span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">'+esc(c.name)+'</span><span style="font-weight:800;color:var(--ink);font-variant-numeric:tabular-nums;">'+fmt(c.qty)+'</span></div>';
       });
       html += '</div>';
     }
@@ -1559,7 +1627,7 @@ function renderSalesRateTab(data) {
 
   // Summary chart - bar chart of all items' rates
   html += '<div class="section-title">إحصائيات الأصناف <div class="line"></div></div>';
-  html += '<div class="bar-list" id="invList">';
+  html += '<div class="items-grid" id="invList">';
   let ci = 0;
   rateData.forEach((item, idx) => {
     let p, logP, bw;
@@ -1574,10 +1642,14 @@ function renderSalesRateTab(data) {
       bw = Math.max(logP, 8);
     }
     
-    html += '<div class="bar-item" data-name="'+(item.name||'').toLowerCase()+'" data-item-index="'+ci+'">';
-    html += '<div class="bar-item-header"><div><div class="bar-item-name">'+(idx+1)+'. '+item.name+'</div></div></div>';
+    html += '<div class="bar-item" data-name="'+esc((item.name||'').toLowerCase())+'" data-item-index="'+ci+'">';
+    html += '<div class="bar-item-header"><div class="bar-item-title"><span class="bar-item-idx">'+(idx+1)+'</span><div class="bar-item-name">'+esc(item.name)+'</div></div><span class="bar-item-pct">'+fmt(item.rate_per_day)+'/ي</span></div>';
     html += '<div class="bar-track"><div class="bar-fill '+colorCls(ci++)+'" style="width:'+bw+'%"></div></div>';
-    html += '<div class="bar-item-footer"><div class="bar-item-balance">مسحوب: <strong>'+fmt(item.total_out)+'</strong> '+(item.unit||'')+' ('+item.active_days+' يوم)</div><div class="bar-item-balance">إجمالي: <strong>'+fmt(item.total_revenue)+'</strong> جنيه</div><div class="bar-item-balance">المعدل: <strong>'+fmt(item.rate_per_day)+'</strong>/يوم</div></div>';
+    html += '<div class="rate-stats-row">';
+    html += '<div class="rate-stat"><div class="rate-stat-lbl">مسحوب ('+item.active_days+' يوم)</div><div class="rate-stat-val">'+fmt(item.total_out)+' '+esc(item.unit||'')+'</div></div>';
+    html += '<div class="rate-stat"><div class="rate-stat-lbl">إجمالي المبيعات</div><div class="rate-stat-val">'+fmt(item.total_revenue)+' ج</div></div>';
+    html += '<div class="rate-stat"><div class="rate-stat-lbl">المعدل اليومي</div><div class="rate-stat-val">'+fmt(item.rate_per_day)+'</div></div>';
+    html += '</div>';
     html += '</div>';
   });
   html += '</div>';
@@ -2173,10 +2245,10 @@ function renderReconciliationTab(data) {
     // Group dividers when viewing "all"
     if (recFilter === 'all') {
       if (isKilo && !shownFeedDivider) {
-        html += '<div class="group-header">🌾 خامات وأعلاف مصنع النور <span class="group-count">' + feedCount + ' صنف</span></div>';
+        html += '<div class="group-header"><span>🌾 خامات وأعلاف مصنع النور</span><span class="group-count">' + feedCount + ' صنف</span></div>';
         shownFeedDivider = true;
       } else if (!isKilo && !shownBagsDivider) {
-        html += '<div class="group-header" style="margin-top:16px;">📦 مستلزمات التعبئة والتغليف (الشكاير بالقطعة) <span class="group-count">' + bagsCount + ' صنف</span></div>';
+        html += '<div class="group-header" style="margin-top:6px;"><span>📦 مستلزمات التعبئة والتغليف (الشكاير بالقطعة)</span><span class="group-count">' + bagsCount + ' صنف</span></div>';
         shownBagsDivider = true;
       }
     }
@@ -2187,11 +2259,11 @@ function renderReconciliationTab(data) {
     let pillText = 'مطابق (0)';
     if (isShortage) {
       pillBg = 'var(--danger-bg)';
-      pillColor = 'var(--danger)';
+      pillColor = 'var(--danger-ink)';
       pillText = 'عجز: -' + fmt(item.diff) + ' ' + item.unit;
     } else if (isSurplus) {
       pillBg = 'var(--success-bg)';
-      pillColor = 'var(--success)';
+      pillColor = 'var(--success-ink)';
       pillText = 'زيادة: +' + fmt(item.diff) + ' ' + item.unit;
     }
 
@@ -2371,11 +2443,11 @@ function renderPricesTab(data) {
   const allItems = (data.invoices && data.invoices.items) || [];
   if (!allItems.length) return '<div class="empty-state"><p>لا توجد بيانات</p></div>';
   let html = '<div class="search-box"><svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" class="search-input" id="searchInput" placeholder="ابحث عن صنف..." /></div>';
-  html += '<div class="bar-list" id="invList">';
+  html += '<div class="items-grid" id="invList">';
   let pIdx = 1;
   allItems.forEach(item=>{
     if ((item.avg_price||0) <= 0) return;
-    html += '<div class="price-item" data-name="'+(item.name||'').toLowerCase()+'"><div class="price-item-header"><div><div class="price-name">'+(pIdx++)+'. '+item.name+'</div></div><div class="price-value"><span style="font-size:12px; font-weight:700; color:var(--ink-3); margin-left:6px; display:inline-block; vertical-align:middle;">متوسط:</span>'+fmt(item.avg_price)+'</div></div><div class="price-meta"><span>مسحوب: <strong>'+fmt(item.total_out)+'</strong> '+(item.unit||'')+'</span><span>فواتير: <strong>'+item.invoice_count+'</strong></span></div></div>';
+    html += '<div class="price-item" data-name="'+esc((item.name||'').toLowerCase())+'"><div class="price-item-header"><div class="bar-item-title"><span class="bar-item-idx">'+(pIdx++)+'</span><div class="price-name">'+esc(item.name)+'</div></div><div class="price-value"><span style="font-size:11px; font-weight:700; color:var(--ink-3); margin-left:4px; display:inline-block; vertical-align:middle;">متوسط:</span>'+fmt(item.avg_price)+'</div></div><div class="price-meta"><span>مسحوب: <strong>'+fmt(item.total_out)+'</strong> '+esc(item.unit||'')+'</span><span>فواتير: <strong>'+item.invoice_count+'</strong></span></div></div>';
   });
   html += '</div>';
   return html;
@@ -2405,7 +2477,41 @@ function renderContent() {
   c.innerHTML = html;
 
   const si = document.getElementById('searchInput');
-  if (si) { si.addEventListener('input', e=>{ const q=e.target.value.toLowerCase(); document.querySelectorAll('#invList .bar-item, #invList .price-item, #invList .cust-item').forEach(it=>{ it.style.display=(it.dataset.name||'').includes(q)?'':'none'; }); }); }
+  if (si) {
+    si.addEventListener('input', e => {
+      const q = e.target.value.toLowerCase().trim();
+      let totalVisible = 0;
+      document.querySelectorAll('#invList .bar-item, #invList .inv-row, #invList .price-item, #invList .cust-item').forEach(it => {
+        const match = (it.dataset.name || '').includes(q);
+        it.style.display = match ? '' : 'none';
+        if (match) totalVisible++;
+      });
+      document.querySelectorAll('#invList .inv-group').forEach(grp => {
+        const rows = grp.querySelectorAll('.bar-item, .inv-row');
+        let vis = 0;
+        rows.forEach(r => { if (r.style.display !== 'none') vis++; });
+        grp.style.display = vis > 0 ? '' : 'none';
+        const cntEl = grp.querySelector('.group-count');
+        if (cntEl) {
+          const total = cntEl.dataset.total || rows.length;
+          cntEl.textContent = q ? (vis + ' / ' + total + ' صنف') : (total + ' صنف');
+        }
+      });
+      const emptyEl = document.getElementById('invSearchEmpty');
+      if (emptyEl) emptyEl.style.display = totalVisible === 0 ? 'block' : 'none';
+    });
+  }
+
+  document.querySelectorAll('.view-btn[data-view]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const nextView = btn.dataset.view;
+      if (nextView && nextView !== balanceView) {
+        balanceView = nextView;
+        try { localStorage.setItem('balanceView', balanceView); } catch(e) {}
+        renderContent();
+      }
+    });
+  });
   
   const recSearch = document.getElementById('recSearchInput');
   if (recSearch) {
